@@ -1,0 +1,27 @@
+import type { SiteSettings } from "@/types/site";
+import type { Product } from "@/types/product";
+
+import ProductCard from "@/components/ui/ProductCard";
+
+type ProductGridProps = {
+  products: Product[];
+  siteSettings: Pick<SiteSettings, "brandName" | "whatsappNumber">;
+};
+
+export default function ProductGrid({ products, siteSettings }: ProductGridProps) {
+  if (!products.length) {
+    return (
+      <div className="rounded-soft border border-espresso/10 bg-bone p-8 text-center text-sm text-mutedBrown">
+        Belum ada produk yang tersedia saat ini.
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {products.map((p) => (
+        <ProductCard key={p.slug} product={p} siteSettings={siteSettings} showWhatsAppCta />
+      ))}
+    </div>
+  );
+}
