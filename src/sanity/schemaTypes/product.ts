@@ -29,8 +29,38 @@ export const product = defineType({
       title: "Price",
       type: "number",
       description:
-        "Harga produk dalam Rupiah. Gunakan angka saja, tanpa Rp atau titik. Gunakan 0 untuk harga custom.",
-      validation: (rule) => rule.required().min(0),
+        "Harga produk dalam Rupiah untuk tampilan lokal. Gunakan angka saja, tanpa Rp atau titik. Boleh dikosongkan jika produk memakai harga katalog internasional.",
+      validation: (rule) => rule.min(0),
+    }),
+    defineField({
+      name: "priceAmount",
+      title: "Catalogue price amount",
+      type: "number",
+      description:
+        "Harga numerik dari katalog atau source internasional, misalnya 75.",
+      validation: (rule) => rule.min(0),
+    }),
+    defineField({
+      name: "priceCurrency",
+      title: "Catalogue price currency",
+      type: "string",
+      description:
+        "Mata uang harga katalog, misalnya USD. Biarkan kosong jika hanya memakai harga IDR lokal.",
+    }),
+    defineField({
+      name: "priceNote",
+      title: "Price note",
+      type: "text",
+      rows: 3,
+      description:
+        "Catatan opsional untuk harga katalog, misalnya perubahan harga karena quantity, kurs, atau kondisi pasar.",
+    }),
+    defineField({
+      name: "material",
+      title: "Material",
+      type: "string",
+      description:
+        "Material utama produk seperti tertulis pada katalog atau source brand, misalnya Genuine Cow Leather.",
     }),
     defineField({
       name: "category",
@@ -93,6 +123,14 @@ export const product = defineType({
       type: "string",
       description:
         "Ukuran produk, label singkat, atau dimensi. Contoh: Medium, 14 inch, 28 x 20 x 10 cm.",
+    }),
+    defineField({
+      name: "sourcePdfPage",
+      title: "Source PDF page",
+      type: "number",
+      description:
+        "Nomor halaman PDF katalog yang menjadi sumber data dan gambar produk ini.",
+      validation: (rule) => rule.min(1),
     }),
     defineField({
       name: "isFeatured",

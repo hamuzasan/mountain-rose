@@ -16,6 +16,9 @@ export type Product = {
   name: string;
   slug: string;
   price?: number;
+  priceAmount?: number;
+  priceCurrency?: string;
+  priceNote?: string;
   category?: string;
   collection?: {
     title: string;
@@ -24,9 +27,11 @@ export type Product = {
   shortDescription?: string;
   description?: unknown[];
   images?: SanityImageAsset[];
+  material?: string;
   leatherType?: string;
   color?: string;
   size?: string;
+  sourcePdfPage?: number;
   isFeatured?: boolean;
   isAvailable?: boolean;
   whatsAppMessage?: string;
@@ -92,6 +97,9 @@ const productFields = groq`
   name,
   "slug": slug.current,
   price,
+  priceAmount,
+  priceCurrency,
+  priceNote,
   category,
   collection->{
     title,
@@ -100,9 +108,11 @@ const productFields = groq`
   shortDescription,
   description,
   images,
+  material,
   leatherType,
   color,
   size,
+  sourcePdfPage,
   isFeatured,
   isAvailable,
   whatsAppMessage

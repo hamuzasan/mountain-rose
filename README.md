@@ -26,6 +26,34 @@ NEXT_PUBLIC_SITE_URL=https://mountainrose.id
 
 Use `.env.local` for local values. Do not commit real secrets.
 
+## Importing Product Catalogue PDF
+
+Place the source PDFs here:
+
+- `data/source/mountain-rose-company-profile.pdf`
+- `data/source/mountain-rose-product-catalogue.pdf`
+
+Required environment variables:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=
+SUPABASE_SERVICE_ROLE_KEY=
+```
+
+Extract catalogue product pages:
+
+```bash
+npm run extract:catalogue
+```
+
+Import draft products into Supabase:
+
+```bash
+npm run import:catalogue
+```
+
+The import pipeline creates or updates draft products first. Review and publish them in `/admin` (to be built) before showing them on the public site.
+
 ## Managing Content with Sanity
 
 Open `http://localhost:3000/studio` after starting the dev server.
@@ -102,6 +130,14 @@ Use `npm run start` after `npm run build`.
 Deployment target: Vercel.
 
 Read `docs/DEPLOYMENT.md` before deploying and use `docs/LAUNCH_CHECKLIST.md` before launch.
+
+## Supabase CMS (Foundation)
+
+Supabase CMS foundation is prepared for incremental migration. Sanity remains active until public pages are migrated.
+
+- Schema: `supabase/schema.sql`
+- Setup: `docs/SUPABASE_SETUP.md`
+- Migration notes: `docs/CMS_MIGRATION_TO_SUPABASE.md`
 
 ## Project Rules
 

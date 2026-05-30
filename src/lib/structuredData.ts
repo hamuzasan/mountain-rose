@@ -27,10 +27,23 @@ export function createProductJsonLd(product: Product) {
   if (
     !product.name ||
     !product.slug ||
-    !product.shortDescription ||
-    typeof product.price !== "number" ||
-    product.price <= 0
+    !product.shortDescription
   ) {
+    return null;
+  }
+
+  const offerPrice =
+    typeof product.price === "number" && product.price > 0
+      ? product.price
+      : typeof product.priceAmount === "number" && product.priceAmount > 0
+        ? product.priceAmount
+        : null;
+  const offerCurrency =
+    typeof product.price === "number" && product.price > 0
+      ? "IDR"
+      : product.priceCurrency || null;
+
+  if (offerPrice === null || !offerCurrency) {
     return null;
   }
 
@@ -49,8 +62,8 @@ export function createProductJsonLd(product: Product) {
     url: absoluteUrl(`/collections/${product.slug}`),
     offers: {
       "@type": "Offer",
-      priceCurrency: "IDR",
-      price: product.price,
+      priceCurrency: offerCurrency,
+      price: offerPrice,
       availability:
         product.isAvailable ?? true
           ? "https://schema.org/InStock"

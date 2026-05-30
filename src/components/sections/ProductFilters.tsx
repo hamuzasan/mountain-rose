@@ -24,6 +24,10 @@ const CATEGORIES: Array<{ label: string; value: ProductCategory }> = [
   { label: "Laptop Bag", value: "Laptop Bag" },
   { label: "Wallet", value: "Wallet" },
   { label: "Custom Bag", value: "Custom Bag" },
+  { label: "Clutch & Sling Bag", value: "Clutch & Sling Bag" },
+  { label: "Pouch", value: "Pouch" },
+  { label: "Messenger Bag", value: "Messenger Bag" },
+  { label: "Backpack", value: "Backpack" },
 ];
 
 export default function ProductFilters({ value, onChange }: ProductFiltersProps) {
@@ -99,4 +103,3 @@ export default function ProductFilters({ value, onChange }: ProductFiltersProps)
     </div>
   );
 }
-

@@ -36,3 +36,4 @@ AI features must stay server-side, reviewed, and privacy-conscious.
 - AI-created CMS content must follow a draft-before-publish workflow.
 - Do not auto-publish AI-created products without explicit owner confirmation.
 - User-uploaded try-on images must not be stored permanently by default.
+- Imported PDF catalogue data must be normalized into typed product data before being rendered on the website. Do not parse PDFs dynamically at request time.

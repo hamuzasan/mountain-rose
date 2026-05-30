@@ -34,6 +34,17 @@ yarn-error.log*
 .env*
 !.env.example
 
+# local import assets / generated files
+/data/source/
+/data/generated/
+
+# codex agent workspace files
+/.agents/
+/skills-lock.json
+
+# supabase local temp files
+/supabase/.temp/
+
 # vercel
 .vercel
 

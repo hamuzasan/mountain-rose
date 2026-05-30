@@ -6,11 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "extract:catalogue": "tsx scripts/extract-catalogue-pages.ts",
+    "import:catalogue": "tsx scripts/import-catalogue-to-supabase.ts",
+    "import:catalogue:supabase": "tsx scripts/import-catalogue-to-supabase.ts",
+    "import:catalogue:sanity": "tsx scripts/import-catalogue-to-sanity.ts"
   },
   "dependencies": {
     "@sanity/image-url": "^2.1.1",
     "@sanity/vision": "^5.27.0",
+    "@supabase/supabase-js": "^2.106.2",
     "next": "16.2.6",
     "next-sanity": "^12.4.5",
     "react": "19.2.4",
@@ -25,7 +30,9 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
+    "supabase": "^2.102.0",
     "tailwindcss": "^4",
+    "tsx": "^4.22.3",
     "typescript": "^5"
   }
 }

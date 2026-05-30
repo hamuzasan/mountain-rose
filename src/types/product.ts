@@ -5,6 +5,10 @@ export type ProductCategory =
   | "Laptop Bag"
   | "Wallet"
   | "Custom Bag"
+  | "Clutch & Sling Bag"
+  | "Pouch"
+  | "Messenger Bag"
+  | "Backpack"
   | "All";
 
 export type Product = {
@@ -12,6 +16,9 @@ export type Product = {
   name: string;
   slug: string;
   price?: number;
+  priceAmount?: number;
+  priceCurrency?: string;
+  priceNote?: string;
   category?: string;
   shortDescription?: string;
   description?: unknown[];
@@ -19,9 +26,11 @@ export type Product = {
     asset?: { _ref: string; _type: "reference" };
     alt?: string;
   }>;
+  material?: string;
   leatherType?: string;
   color?: string;
   size?: string;
+  sourcePdfPage?: number;
   isFeatured?: boolean;
   isAvailable?: boolean;
   whatsAppMessage?: string;

@@ -18,11 +18,17 @@ function normalizeProduct(p: {
   name: string;
   slug: string;
   price?: number;
+  priceAmount?: number;
+  priceCurrency?: string;
+  priceNote?: string;
   category?: string;
   shortDescription?: string;
   images?: Product["images"];
+  material?: string;
   leatherType?: string;
   color?: string;
+  size?: string;
+  sourcePdfPage?: number;
   isFeatured?: boolean;
   isAvailable?: boolean;
   whatsAppMessage?: string;
@@ -32,11 +38,17 @@ function normalizeProduct(p: {
     name: p.name,
     slug: p.slug,
     price: p.price,
+    priceAmount: p.priceAmount,
+    priceCurrency: p.priceCurrency,
+    priceNote: p.priceNote,
     category: p.category,
     shortDescription: p.shortDescription,
     images: p.images,
+    material: p.material,
     leatherType: p.leatherType,
     color: p.color,
+    size: p.size,
+    sourcePdfPage: p.sourcePdfPage,
     isFeatured: p.isFeatured,
     isAvailable: p.isAvailable,
     whatsAppMessage: p.whatsAppMessage,

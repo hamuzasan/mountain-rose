@@ -4,36 +4,31 @@ import Image from "next/image";
 import Link from "next/link";
 
 import type { SiteSettings } from "@/types/site";
+import type { Product } from "@/types/product";
 
 import { urlFor } from "@/sanity/lib/image";
 import { buildDefaultProductWhatsAppMessage } from "@/data/fallbackHomepage";
-import { formatCurrencyIDR } from "@/lib/format";
+import { formatProductPrice } from "@/lib/format";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 
-type ProductLike = {
-  name: string;
-  slug: string;
-  price?: number;
-  category?: string;
-  shortDescription?: string;
-  leatherType?: string;
-  isAvailable?: boolean;
-  images?: Array<{
-    asset?: { _ref: string; _type: "reference" };
-    alt?: string;
-  }>;
-  whatsAppMessage?: string;
-};
-
 type ProductCardProps = {
-  product: ProductLike;
+  product: Pick<
+    Product,
+    | "name"
+    | "slug"
+    | "price"
+    | "priceAmount"
+    | "priceCurrency"
+    | "category"
+    | "shortDescription"
+    | "leatherType"
+    | "isAvailable"
+    | "images"
+    | "whatsAppMessage"
+  >;
   siteSettings: Pick<SiteSettings, "brandName" | "whatsappNumber">;
   showWhatsAppCta?: boolean;
 };
-
-function formatIdr(amount: number) {
-  return formatCurrencyIDR(amount);
-}
 
 export default function ProductCard({
   product,
@@ -54,8 +49,7 @@ export default function ProductCard({
     primaryImage?.alt || `${product.name} - tas kulit sapi (Mountain Rose)`;
 
   const subLabel = product.category || product.leatherType || "Kulit sapi asli";
-  const priceLabel =
-    typeof product.price === "number" ? formatIdr(product.price) : null;
+  const priceLabel = formatProductPrice(product);
 
   const waMessage =
     product.whatsAppMessage ||

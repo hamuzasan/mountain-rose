@@ -1,6 +1,6 @@
 import type { Product } from "@/types/product";
 
-import { formatCurrencyIDR } from "@/lib/format";
+import { formatProductPrice } from "@/lib/format";
 
 type ProductInfoProps = {
   product: Product;
@@ -24,8 +24,7 @@ function portableTextToPlainText(value: unknown): string {
 }
 
 export default function ProductInfo({ product }: ProductInfoProps) {
-  const price =
-    typeof product.price === "number" ? formatCurrencyIDR(product.price) : null;
+  const price = formatProductPrice(product);
 
   const longDesc = portableTextToPlainText(product.description);
 
@@ -45,8 +44,13 @@ export default function ProductInfo({ product }: ProductInfoProps) {
             Harga
           </div>
           <div className="mt-2 text-lg font-semibold text-espresso">
-            {price || "Hubungi untuk harga"}
+            {price}
           </div>
+          {product.priceNote ? (
+            <div className="mt-2 max-w-[16rem] text-xs leading-5 text-mutedBrown">
+              {product.priceNote}
+            </div>
+          ) : null}
           <div className="mt-2 text-xs font-semibold uppercase text-mutedBrown">
             {(product.isAvailable ?? true) ? "Available" : "Not Available"}
           </div>
@@ -59,7 +63,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
             Leather
           </div>
           <div className="mt-2 text-sm font-medium text-espresso">
-            {product.leatherType || "Kulit sapi asli"}
+            {product.material || product.leatherType || "Kulit sapi asli"}
           </div>
         </div>
         <div className="rounded-soft border border-espresso/10 bg-warmIvory px-4 py-3">
@@ -77,6 +81,16 @@ export default function ProductInfo({ product }: ProductInfoProps) {
             </div>
             <div className="mt-2 text-sm font-medium text-espresso">
               {product.size}
+            </div>
+          </div>
+        ) : null}
+        {product.sourcePdfPage ? (
+          <div className="rounded-soft border border-espresso/10 bg-warmIvory px-4 py-3">
+            <div className="text-xs font-semibold uppercase text-mutedBrown">
+              Source
+            </div>
+            <div className="mt-2 text-sm font-medium text-espresso">
+              Katalog PDF halaman {product.sourcePdfPage}
             </div>
           </div>
         ) : null}
@@ -101,4 +115,3 @@ export default function ProductInfo({ product }: ProductInfoProps) {
     </div>
   );
 }
-

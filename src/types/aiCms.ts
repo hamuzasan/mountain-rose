@@ -16,12 +16,17 @@ export type AiProductDraft = {
   name?: string;
   slug?: string;
   price?: number;
+  priceAmount?: number;
+  priceCurrency?: string;
+  priceNote?: string;
   category?: string;
   shortDescription?: string;
   description?: string;
+  material?: string;
   leatherType?: string;
   color?: string;
   size?: string;
+  sourcePdfPage?: number;
   isFeatured?: boolean;
   isAvailable?: boolean;
   whatsAppMessage?: string;
