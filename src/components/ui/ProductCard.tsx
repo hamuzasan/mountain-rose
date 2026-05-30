@@ -6,9 +6,9 @@ import Link from "next/link";
 import type { SiteSettings } from "@/types/site";
 import type { Product } from "@/types/product";
 
-import { urlFor } from "@/sanity/lib/image";
 import { buildDefaultProductWhatsAppMessage } from "@/data/fallbackHomepage";
 import { formatProductPrice } from "@/lib/format";
+import { getDisplayProductImage, getProductImageUrl } from "@/lib/product-images";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 
 type ProductCardProps = {
@@ -28,22 +28,21 @@ type ProductCardProps = {
   >;
   siteSettings: Pick<SiteSettings, "brandName" | "whatsappNumber">;
   showWhatsAppCta?: boolean;
+  variant?: "default" | "feature";
+  className?: string;
+  priority?: boolean;
 };
 
 export default function ProductCard({
   product,
   siteSettings,
   showWhatsAppCta = true,
+  variant = "default",
+  className = "",
+  priority = false,
 }: ProductCardProps) {
-  const primaryImage = product.images?.[0];
-  const imgUrl = primaryImage?.asset
-    ? urlFor(primaryImage)
-        ?.width(900)
-        .height(900)
-        .fit("crop")
-        .quality(80)
-        .url()
-    : null;
+  const primaryImage = getDisplayProductImage(product.images);
+  const imgUrl = getProductImageUrl(primaryImage);
 
   const alt =
     primaryImage?.alt || `${product.name} - tas kulit sapi (Mountain Rose)`;
@@ -56,37 +55,70 @@ export default function ProductCard({
     buildDefaultProductWhatsAppMessage(siteSettings, product.name);
   const waHref = buildWhatsAppLink(siteSettings.whatsappNumber, waMessage);
 
+  const isFeature = variant === "feature";
+
   return (
-    <article className="group overflow-hidden rounded-soft border border-espresso/10 bg-bone">
+    <article
+      className={[
+        "group overflow-hidden rounded-soft border border-espresso/10 bg-bone transition-all duration-300 hover:-translate-y-1 hover:border-antiqueGold/50 hover:shadow-soft",
+        isFeature ? "lg:grid lg:grid-cols-2 lg:items-stretch" : "",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
       <Link href={`/collections/${product.slug}`} className="block">
-        <div className="relative aspect-[4/5] w-full overflow-hidden bg-warmIvory">
+        <div
+          className={[
+            "relative w-full overflow-hidden bg-warmIvory",
+            isFeature ? "aspect-[5/4] lg:h-full lg:min-h-[28rem]" : "aspect-[4/5]",
+          ].join(" ")}
+        >
           {imgUrl ? (
-            <Image
-              src={imgUrl}
-              alt={alt}
-              fill
-              sizes="(min-width: 1024px) 320px, (min-width: 640px) 50vw, 100vw"
-              className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-            />
+            <div className="absolute inset-5 sm:inset-7">
+              <Image
+                src={imgUrl}
+                alt={alt}
+                fill
+                sizes={
+                  isFeature
+                    ? "(min-width: 1024px) 520px, 100vw"
+                    : "(min-width: 1024px) 320px, (min-width: 640px) 50vw, 100vw"
+                }
+                className="object-contain transition-transform duration-700 ease-out group-hover:scale-[1.045]"
+                priority={priority}
+              />
+            </div>
           ) : (
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="h-16 w-16 rounded-full border border-espresso/10 bg-bone" />
             </div>
           )}
+          <div className="absolute left-4 top-4 rounded-soft border border-espresso/10 bg-bone/90 px-3 py-2 text-xs font-semibold uppercase text-mutedRose">
+            {subLabel}
+          </div>
         </div>
       </Link>
 
-      <div className="flex flex-col gap-3 px-4 py-4">
+      <div
+        className={[
+          "flex flex-col gap-3 px-4 py-4",
+          isFeature ? "justify-between sm:px-6 sm:py-6" : "",
+        ].join(" ")}
+      >
         <div className="flex items-start justify-between gap-4">
           <div>
             <Link
               href={`/collections/${product.slug}`}
-              className="font-heading text-base leading-6 text-espresso transition-colors hover:text-darkLeather"
+              className={[
+                "font-heading leading-6 text-espresso transition-colors hover:text-darkLeather",
+                isFeature ? "text-2xl sm:text-3xl" : "text-base",
+              ].join(" ")}
             >
               {product.name}
             </Link>
-            <div className="mt-1 text-xs font-medium text-mutedRose uppercase">
-              {subLabel}
+            <div className="mt-2 text-xs font-medium uppercase text-mutedRose">
+              {product.leatherType || "Genuine cow leather"}
             </div>
             {(product.isAvailable ?? true) ? null : (
               <div className="mt-2 inline-flex items-center rounded-soft border border-espresso/10 bg-warmIvory px-2 py-1 text-[11px] font-semibold uppercase text-mutedBrown">
@@ -95,7 +127,7 @@ export default function ProductCard({
             )}
           </div>
           {priceLabel ? (
-            <div className="text-sm font-semibold text-espresso">
+            <div className="whitespace-nowrap text-sm font-semibold text-espresso">
               {priceLabel}
             </div>
           ) : (
@@ -106,7 +138,12 @@ export default function ProductCard({
         </div>
 
         {product.shortDescription ? (
-          <p className="text-sm leading-7 text-mutedBrown">
+          <p
+            className={[
+              "text-sm leading-7 text-mutedBrown",
+              isFeature ? "max-w-md sm:text-base sm:leading-8" : "",
+            ].join(" ")}
+          >
             {product.shortDescription}
           </p>
         ) : null}

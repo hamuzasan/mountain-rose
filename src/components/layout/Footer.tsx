@@ -24,7 +24,7 @@ export default function Footer({ siteSettings }: FooterProps) {
 
   return (
     <footer className="border-t border-warmIvory/10 bg-darkLeather text-warmIvory">
-      <div className="mx-auto w-full max-w-6xl px-5 py-12 sm:px-6">
+      <div className="mx-auto w-full max-w-7xl px-5 py-12 sm:px-6">
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-5">
             <div className="font-heading text-xl text-bone">{settings.brandName}</div>
@@ -93,4 +93,3 @@ export default function Footer({ siteSettings }: FooterProps) {
     </footer>
   );
 }
-

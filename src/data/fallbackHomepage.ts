@@ -28,15 +28,15 @@ export type FeaturedProductFallback = {
 };
 
 export const FALLBACK_HOMEPAGE: HomepageFallback = {
-  heroTitle: "Elegansi Tas Kulit Sapi dalam Sentuhan Mawar",
+  heroTitle: "Carry Your Story",
   heroSubtitle:
-    "Mountain Rose menghadirkan tas kulit sapi asli dengan karakter hangat, kuat, dan anggun untuk perjalanan sehari-hari.",
-  storySectionTitle: "Dibuat untuk Menemani Perjalanan Panjang",
+    "Mountain Rose menghadirkan tas kulit sapi asli handmade dari Indonesia, dibuat untuk ketahanan, estetika, dan perjalanan yang penuh cerita.",
+  storySectionTitle: "Authenticity, Durability, and Aesthetics",
   storySectionText:
-    "Setiap tas Mountain Rose dirancang dengan keseimbangan antara ketahanan kulit sapi asli dan kelembutan detail yang terinspirasi dari mawar.",
-  ctaTitle: "Temukan Tas Kulit yang Mewakili Karaktermu",
+    "Berakar pada semangat alam dan keindahan pegunungan, setiap tas dibuat dari genuine cowhide dengan proses handmade oleh pengrajin lokal.",
+  ctaTitle: "Temukan Tas Kulit yang Siap Menemani Perjalananmu",
   ctaText:
-    "Konsultasikan pilihan model, warna, dan kebutuhanmu langsung melalui WhatsApp.",
+    "Konsultasikan pilihan model, ukuran, dan karakter tas langsung melalui WhatsApp.",
 };
 
 export const FALLBACK_FEATURED_PRODUCTS: FeaturedProductFallback[] = [
@@ -98,4 +98,3 @@ export function buildDefaultProductWhatsAppMessage(
   if (!productName) return `Halo ${brand}, saya tertarik dengan produk tas kulit sapi.`;
   return `Halo ${brand}, saya tertarik dengan ${productName}. Boleh info detailnya?`;
 }
-

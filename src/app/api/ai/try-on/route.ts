@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { generateTryOnImageWithAI } from "@/lib/ai/gemini";
-import { getFallbackProductBySlug } from "@/lib/products";
-import { getProductBySlug } from "@/sanity/lib/queries";
-import { urlFor } from "@/sanity/lib/image";
+import { getPrimaryProductImage, getProductImageUrl } from "@/lib/product-images";
+import { getProductBySlug } from "@/data-access/products";
 
 export const runtime = "nodejs";
 
@@ -58,17 +57,14 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const cmsProduct = await getProductBySlug(slug);
-  const product = cmsProduct || getFallbackProductBySlug(slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) {
     return NextResponse.json({ ok: false, error: "Product was not found." }, { status: 404 });
   }
 
-  const primaryImage = product.images?.[0];
-  const productImageUrl = primaryImage?.asset
-    ? urlFor(primaryImage)?.width(1200).height(1500).fit("crop").quality(85).url()
-    : undefined;
+  const primaryImage = getPrimaryProductImage(product.images);
+  const productImageUrl = getProductImageUrl(primaryImage) || undefined;
 
   const result = await generateTryOnImageWithAI({
     productSlug: slug,

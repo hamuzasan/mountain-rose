@@ -11,6 +11,14 @@ export type ProductCategory =
   | "Backpack"
   | "All";
 
+export type ProductImage = {
+  publicUrl?: string;
+  storagePath?: string;
+  alt?: string;
+  sortOrder?: number;
+  asset?: { _ref: string; _type: "reference" };
+};
+
 export type Product = {
   _id: string;
   name: string;
@@ -21,11 +29,8 @@ export type Product = {
   priceNote?: string;
   category?: string;
   shortDescription?: string;
-  description?: unknown[];
-  images?: Array<{
-    asset?: { _ref: string; _type: "reference" };
-    alt?: string;
-  }>;
+  description?: string | unknown[];
+  images?: ProductImage[];
   material?: string;
   leatherType?: string;
   color?: string;

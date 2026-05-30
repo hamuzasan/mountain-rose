@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useMemo, useState } from "react";
 
-import { urlFor } from "@/sanity/lib/image";
+import { getOrderedProductImages, getProductImageUrl } from "@/lib/product-images";
 import type { Product } from "@/types/product";
 
 type ProductGalleryProps = {
@@ -12,36 +12,30 @@ type ProductGalleryProps = {
 };
 
 export default function ProductGallery({ images, productName }: ProductGalleryProps) {
-  const list = images || [];
-  const [activeIndex, setActiveIndex] = useState(0);
+  const list = useMemo(() => getOrderedProductImages(images), [images]);
+  const [activeIndex, setActiveIndex] = useState(() => (list.length > 1 ? 1 : 0));
 
   const active = list[activeIndex] || list[0] || null;
 
-  const activeUrl = useMemo(() => {
-    if (!active?.asset) return null;
-    return urlFor(active)
-      ?.width(1600)
-      .height(1600)
-      .fit("crop")
-      .quality(85)
-      .url();
-  }, [active]);
+  const activeUrl = useMemo(() => getProductImageUrl(active), [active]);
 
   const alt =
     active?.alt || `${productName} - tas kulit sapi (Mountain Rose)`;
 
   return (
-    <div className="rounded-soft border border-espresso/10 bg-bone">
+    <div className="rounded-soft border border-espresso/10 bg-bone p-3 shadow-soft">
       <div className="relative aspect-[4/5] w-full overflow-hidden rounded-soft bg-warmIvory">
         {activeUrl ? (
-          <Image
-            src={activeUrl}
-            alt={alt}
-            fill
-            sizes="(min-width: 1024px) 520px, 100vw"
-            className="object-cover"
-            priority
-          />
+          <div className="absolute inset-6 sm:inset-10">
+            <Image
+              src={activeUrl}
+              alt={alt}
+              fill
+              sizes="(min-width: 1024px) 520px, 100vw"
+              className="object-contain"
+              priority
+            />
+          </div>
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
@@ -52,19 +46,15 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
             </div>
           </div>
         )}
+        <div className="absolute left-4 top-4 rounded-soft border border-espresso/10 bg-bone/90 px-3 py-2 text-xs font-semibold uppercase text-mutedRose">
+          Product view {activeIndex + 1}
+        </div>
       </div>
 
       {list.length > 1 ? (
-        <div className="grid grid-cols-5 gap-3 p-4">
+        <div className="grid grid-cols-4 gap-3 pt-3 sm:grid-cols-5">
           {list.slice(0, 5).map((img, idx) => {
-            const thumbUrl = img.asset
-              ? urlFor(img)
-                  ?.width(320)
-                  .height(320)
-                  .fit("crop")
-                  .quality(75)
-                  .url()
-              : null;
+            const thumbUrl = getProductImageUrl(img);
 
             const isActive = idx === activeIndex;
             return (
@@ -84,7 +74,7 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
                     alt={img.alt || `${productName} thumbnail ${idx + 1}`}
                     fill
                     sizes="64px"
-                    className="object-cover"
+                    className="object-contain p-2"
                   />
                 ) : (
                   <div className="absolute inset-0 bg-warmIvory" />
@@ -97,4 +87,3 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
     </div>
   );
 }
-

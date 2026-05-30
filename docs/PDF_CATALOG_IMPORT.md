@@ -1,119 +1,83 @@
 # PDF Catalogue Import
 
-Mountain Rose uses a prepared import pipeline to normalize catalogue data into typed product entries before uploading draft products to Sanity CMS.
+Mountain Rose keeps catalogue product data normalized in typed files before it is upserted into Supabase. Product images are now handled manually and synced separately.
 
-## Source PDF Locations
+## Source Files
 
-Place the source files here:
+Place the reference PDFs here:
 
 - `data/source/mountain-rose-company-profile.pdf`
 - `data/source/mountain-rose-product-catalogue.pdf`
 
-The company profile provides brand context such as authenticity, durability, aesthetics, handmade production, and 100% high-quality genuine cowhide. The product catalogue provides product pages and images.
+The company profile is used as brand reference only. The product catalogue is used to map product names, categories, sizes, prices, and source PDF pages into structured product data.
 
-If `mountain-rose-product-catalogue.pdf` is missing, the extraction script will stop with a clear message and explain where the file should be placed.
+If the PDFs are missing, the import scripts will stop with a clear message.
 
-## Product Mapping
+## Product Metadata Import
 
-Each catalogue product is mapped manually into typed data inside:
+The typed product catalogue lives here:
 
 - `data/import/mountainRoseCatalogueProducts.ts`
 
-This file stores:
+It contains the normalized fields needed for Supabase import, such as:
 
 - product name
 - slug
 - category
-- material and leather type
+- material
+- leather type
 - size
-- catalogue price amount and currency
-- inferred color
+- price amount and currency
 - source PDF page
 - short description
-- editorial description
+- long description
+- availability
+- featured flag
 - WhatsApp message
 
-This keeps the catalogue import deterministic and reviewable. The website does not parse PDFs dynamically at request time.
-
-## Image Extraction
-
-The extraction script reads:
-
-- `data/source/mountain-rose-product-catalogue.pdf`
-
-And renders product pages 2 through 10 into:
-
-- `data/generated/catalogue-pages/`
-
-Expected output files:
-
-- `sundaland-beauty-rose.png`
-- `sundaland-beauty-moon.png`
-- `sundaland-beauty-pouch.png`
-- `papandayan-messenger.png`
-- `papandayan-backpack.png`
-- `guntur-backpack.png`
-- `schatzi.png`
-- `panjalu-messenger.png`
-- `adler.png`
-
-The script first looks for `pdftoppm`, then `magick` / ImageMagick. If no renderer is available, it prints a manual export fallback.
-
-## Product Data Creation
-
-Product data is created from:
-
-- the typed import file
-- the catalogue PDF page mapping
-- the Mountain Rose brand context from the company profile
-
-Descriptions and colors are normalized carefully and kept conservative. If a catalogue color is uncertain, a general leather color such as Brown, Black, Olive, Cognac, or Dark Brown is used.
-
-## Supabase Upload
-
-The import script:
-
-1. Reads typed product data from `data/import/mountainRoseCatalogueProducts.ts`
-2. Reads matching PNG files from `data/generated/catalogue-pages/`
-3. Uploads product images to Supabase Storage (`product-images` bucket)
-4. Creates or updates draft product rows in Supabase Postgres
-5. Creates or updates `product_images` rows and links them to products
-
-The script uses:
-
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `SUPABASE_SERVICE_ROLE_KEY` (server-only)
-
-## Draft-First Workflow
-
-Imported products are created as drafts first because:
-
-- PDF extraction can contain visual ambiguity
-- catalogue pricing may need local review
-- product copy should be checked before going live
-- owners may want to add local IDR pricing, better alt text, or more images
-
-Do not auto-publish imported products.
-
-## Review In Admin CMS
-
-After import:
-
-1. Open `/admin` (future task)
-2. Review newly created drafts
-3. Check image crop, title, size, price note, and descriptions
-4. Publish only after owner review
-
-## Commands
-
-Extract product page images:
-
-```bash
-npm run extract:catalogue
-```
-
-Import draft products into Supabase:
+Import metadata only with:
 
 ```bash
 npm run import:catalogue
 ```
+
+This script upserts product rows into Supabase and keeps products as drafts by default unless they are already published.
+
+## Manual Product Image Workflow
+
+Product images are no longer extracted automatically from the PDF. The new workflow is manual:
+
+1. Crop the bag images manually from the PDF or catalogue files.
+2. Save the crops as PNG files, preferably with transparent backgrounds.
+3. Name them consistently:
+   - `01.png`
+   - `02.png`
+   - `03.png`
+   - `04.png`
+4. Upload the files to Supabase Storage bucket `product-images`.
+5. Use this folder convention:
+   - `products/[product-slug]/01.png`
+   - `products/[product-slug]/02.png`
+   - `products/[product-slug]/03.png`
+6. Sync the uploaded files into the `product_images` table:
+
+```bash
+npm run sync:product-images
+```
+
+The sync script reads the files already stored in Supabase Storage, gets their public URLs, and upserts `product_images` rows in the database.
+
+## Review Workflow
+
+After importing metadata and syncing images:
+
+1. Open the custom admin area at `/admin` when it is available.
+2. Review each draft product.
+3. Check the product title, price, description, image order, and availability.
+4. Publish only after owner review.
+
+## Notes
+
+- The website should not depend on local generated image folders anymore.
+- The catalogue PDF remains a source reference, not a runtime image pipeline.
+- Supabase stays the source of truth for product content and product images.

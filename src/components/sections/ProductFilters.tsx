@@ -14,23 +14,19 @@ export type ProductFiltersValue = {
 type ProductFiltersProps = {
   value: ProductFiltersValue;
   onChange: (next: ProductFiltersValue) => void;
+  categories?: string[];
 };
 
-const CATEGORIES: Array<{ label: string; value: ProductCategory }> = [
-  { label: "All", value: "All" },
-  { label: "Tote Bag", value: "Tote Bag" },
-  { label: "Sling Bag", value: "Sling Bag" },
-  { label: "Handbag", value: "Handbag" },
-  { label: "Laptop Bag", value: "Laptop Bag" },
-  { label: "Wallet", value: "Wallet" },
-  { label: "Custom Bag", value: "Custom Bag" },
-  { label: "Clutch & Sling Bag", value: "Clutch & Sling Bag" },
-  { label: "Pouch", value: "Pouch" },
-  { label: "Messenger Bag", value: "Messenger Bag" },
-  { label: "Backpack", value: "Backpack" },
-];
+export default function ProductFilters({
+  value,
+  onChange,
+  categories = [],
+}: ProductFiltersProps) {
+  const categoryOptions = ["All", ...categories].map((category) => ({
+    label: category,
+    value: category as ProductCategory,
+  }));
 
-export default function ProductFilters({ value, onChange }: ProductFiltersProps) {
   return (
     <div className="rounded-soft border border-espresso/10 bg-bone p-4 sm:p-5">
       <div className="grid gap-4 sm:grid-cols-3">
@@ -49,7 +45,7 @@ export default function ProductFilters({ value, onChange }: ProductFiltersProps)
             }
             className="mt-2 h-10 w-full rounded-soft border border-espresso/15 bg-warmIvory px-3 text-sm text-espresso outline-none transition-colors focus:border-antiqueGold/70"
           >
-            {CATEGORIES.map((c) => (
+            {categoryOptions.map((c) => (
               <option key={c.value} value={c.value}>
                 {c.label}
               </option>

@@ -5,7 +5,7 @@ import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import { absoluteUrl, siteConfig } from "@/config/site";
 import { FALLBACK_SITE_SETTINGS } from "@/data/fallbackSiteSettings";
-import { getSiteSettings } from "@/sanity/lib/queries";
+import { getSiteSettings } from "@/data-access/siteSettings";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -57,7 +57,7 @@ export default async function RootLayout({
     : FALLBACK_SITE_SETTINGS;
 
   return (
-    <html lang="id" className="h-full">
+    <html lang="id" className="h-full" data-scroll-behavior="smooth">
       <body className="flex min-h-full flex-col">
         <Navbar siteSettings={siteSettings} />
         <main className="flex-1">{children}</main>

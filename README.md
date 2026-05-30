@@ -8,20 +8,29 @@ Mountain Rose is a premium website for genuine cow leather bags with an elegant 
 - TypeScript
 - Tailwind CSS
 - ESLint
+- Supabase CMS foundation
 - Sanity CMS
 
 ## CMS Setup
 
-Sanity is the source of truth for editable product, collection, homepage, brand story, leather care, and site settings content. The embedded Studio is available at `/studio`.
+Supabase is the source of truth for product data and product images. Sanity remains available for editorial content during the migration. The embedded Studio is available at `/studio`.
 
 Required environment variables:
+
+```env
+NEXT_PUBLIC_SITE_URL=https://mountainrose.id
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+```
+
+Sanity is still used for editorial content during the migration:
 
 ```env
 NEXT_PUBLIC_SANITY_PROJECT_ID=
 NEXT_PUBLIC_SANITY_DATASET=production
 NEXT_PUBLIC_SANITY_API_VERSION=
 SANITY_API_READ_TOKEN=
-NEXT_PUBLIC_SITE_URL=https://mountainrose.id
 ```
 
 Use `.env.local` for local values. Do not commit real secrets.
@@ -40,19 +49,27 @@ NEXT_PUBLIC_SUPABASE_URL=
 SUPABASE_SERVICE_ROLE_KEY=
 ```
 
-Extract catalogue product pages:
-
-```bash
-npm run extract:catalogue
-```
-
-Import draft products into Supabase:
+Import product metadata into Supabase:
 
 ```bash
 npm run import:catalogue
 ```
 
-The import pipeline creates or updates draft products first. Review and publish them in `/admin` (to be built) before showing them on the public site.
+Manual product images should be uploaded to Supabase Storage at:
+
+```text
+product-images/products/[product-slug]/01.png
+```
+
+After uploading product images, sync them into the database:
+
+```bash
+npm run sync:product-images
+```
+
+The manual workflow is documented in `docs/MANUAL_PRODUCT_IMAGE_WORKFLOW.md`.
+
+The metadata import creates or updates draft products first. Review and publish them in `/admin` before showing them on the public site.
 
 ## Managing Content with Sanity
 

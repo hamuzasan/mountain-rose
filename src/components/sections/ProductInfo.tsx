@@ -7,6 +7,7 @@ type ProductInfoProps = {
 };
 
 function portableTextToPlainText(value: unknown): string {
+  if (typeof value === "string") return value.trim();
   if (!Array.isArray(value)) return "";
 
   const blocks = value.filter((v) => v && typeof v === "object") as Array<{

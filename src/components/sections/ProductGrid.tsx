@@ -19,8 +19,16 @@ export default function ProductGrid({ products, siteSettings }: ProductGridProps
 
   return (
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {products.map((p) => (
-        <ProductCard key={p.slug} product={p} siteSettings={siteSettings} showWhatsAppCta />
+      {products.map((p, index) => (
+        <ProductCard
+          key={p.slug}
+          product={p}
+          siteSettings={siteSettings}
+          showWhatsAppCta
+          className={index === 0 ? "lg:col-span-2" : ""}
+          variant={index === 0 ? "feature" : "default"}
+          priority={index === 0}
+        />
       ))}
     </div>
   );

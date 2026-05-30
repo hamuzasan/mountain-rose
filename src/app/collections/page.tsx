@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 
 import CollectionsHero from "@/components/sections/CollectionsHero";
 import CollectionsCatalog from "@/components/sections/CollectionsCatalog";
-import { FALLBACK_PRODUCTS } from "@/data/fallbackProducts";
 import { FALLBACK_SITE_SETTINGS } from "@/data/fallbackSiteSettings";
-import { getAllCollections, getAllProducts, getSiteSettings } from "@/sanity/lib/queries";
-import type { Product } from "@/types/product";
+import { getAllProducts } from "@/data-access/products";
+import { getSiteSettings } from "@/data-access/siteSettings";
 
 export const metadata: Metadata = {
   title: "Mountain Rose Collections | Tas Kulit Sapi Premium",
@@ -13,63 +12,17 @@ export const metadata: Metadata = {
     "Jelajahi koleksi tas kulit sapi Mountain Rose dengan desain elegan, material asli, dan karakter timeless.",
 };
 
-function normalizeProduct(p: {
-  _id: string;
-  name: string;
-  slug: string;
-  price?: number;
-  priceAmount?: number;
-  priceCurrency?: string;
-  priceNote?: string;
-  category?: string;
-  shortDescription?: string;
-  images?: Product["images"];
-  material?: string;
-  leatherType?: string;
-  color?: string;
-  size?: string;
-  sourcePdfPage?: number;
-  isFeatured?: boolean;
-  isAvailable?: boolean;
-  whatsAppMessage?: string;
-}): Product {
-  return {
-    _id: p._id,
-    name: p.name,
-    slug: p.slug,
-    price: p.price,
-    priceAmount: p.priceAmount,
-    priceCurrency: p.priceCurrency,
-    priceNote: p.priceNote,
-    category: p.category,
-    shortDescription: p.shortDescription,
-    images: p.images,
-    material: p.material,
-    leatherType: p.leatherType,
-    color: p.color,
-    size: p.size,
-    sourcePdfPage: p.sourcePdfPage,
-    isFeatured: p.isFeatured,
-    isAvailable: p.isAvailable,
-    whatsAppMessage: p.whatsAppMessage,
-  };
-}
-
 export default async function CollectionsPage() {
   const [cmsProducts, cmsSiteSettings] = await Promise.all([
     getAllProducts(),
     getSiteSettings(),
-    getAllCollections(),
   ]);
 
   const siteSettings = cmsSiteSettings
     ? { ...FALLBACK_SITE_SETTINGS, ...cmsSiteSettings }
     : FALLBACK_SITE_SETTINGS;
 
-  const products: Product[] =
-    cmsProducts && cmsProducts.length > 0
-      ? cmsProducts.map((p) => normalizeProduct(p as unknown as Product))
-      : FALLBACK_PRODUCTS;
+  const products = cmsProducts && cmsProducts.length > 0 ? cmsProducts : [];
 
   return (
     <div className="bg-warmIvory">

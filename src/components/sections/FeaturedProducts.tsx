@@ -14,6 +14,7 @@ type FeaturedProductsProps = {
 
 export default function FeaturedProducts({ products, siteSettings }: FeaturedProductsProps) {
   const limited = products.slice(0, 4);
+  const [heroProduct, ...rest] = limited;
 
   return (
     <section className="bg-warmIvory">
@@ -21,8 +22,8 @@ export default function FeaturedProducts({ products, siteSettings }: FeaturedPro
         <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading
             eyebrow="Featured"
-            title="Pilihan Tas untuk Gaya yang Tenang"
-            description="Kurasi singkat dari tas kulit sapi asli dengan karakter hangat, detail rapi, dan siluet yang matang."
+            title="Produk Katalog yang Siap Menjadi Sorotan"
+            description="Tas kulit sapi asli dari katalog Mountain Rose, ditampilkan dengan ruang visual yang lebih besar agar detail bentuk, tekstur, dan karakter material terasa jelas."
           />
           <Link
             href="/collections"
@@ -32,18 +33,31 @@ export default function FeaturedProducts({ products, siteSettings }: FeaturedPro
           </Link>
         </div>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {limited.map((p) => (
+        <div className="mt-10 grid gap-6">
+          {heroProduct ? (
             <ProductCard
-              key={p.slug}
-              product={p}
+              product={heroProduct}
               siteSettings={siteSettings}
               showWhatsAppCta
+              variant="feature"
+              priority
             />
-          ))}
+          ) : null}
+
+          {rest.length ? (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {rest.map((p) => (
+                <ProductCard
+                  key={p.slug}
+                  product={p}
+                  siteSettings={siteSettings}
+                  showWhatsAppCta
+                />
+              ))}
+            </div>
+          ) : null}
         </div>
       </div>
     </section>
   );
 }
-

@@ -19,9 +19,10 @@ export default function BrandStoryPreview({ title, text }: BrandStoryPreviewProp
               description={text}
             />
             <p className="mt-6 max-w-2xl text-sm leading-7 text-mutedBrown sm:text-base">
-              Mountain Rose memadukan ketahanan kulit sapi asli, nuansa hangat pegunungan,
-              dan elegansi yang terinspirasi dari mawar. Hasilnya adalah tas yang terasa
-              tenang, matang, dan layak menemani bertahun-tahun.
+              Mountain Rose adalah brand lokal yang mengutamakan authenticity, durability,
+              dan aesthetics. Setiap tas dibuat dari 100% high-quality genuine cowhide
+              melalui proses handmade agar fungsional, berkarakter, dan tahan menemani
+              perjalanan panjang.
             </p>
           </div>
           <div className="lg:col-span-5">
@@ -33,7 +34,8 @@ export default function BrandStoryPreview({ title, text }: BrandStoryPreviewProp
                 Elegansi yang tidak perlu berteriak.
               </div>
               <p className="mt-4 text-sm leading-7 text-mutedBrown">
-                Detail yang rapi, proporsi yang seimbang, dan material yang semakin indah seiring waktu.
+                Seperti mawar yang tumbuh di tengah tebing, Mountain Rose membawa
+                karakter kuat yang tetap elegan dan penuh cerita.
               </p>
               <div className="mt-6">
                 <Link
@@ -50,4 +52,3 @@ export default function BrandStoryPreview({ title, text }: BrandStoryPreviewProp
     </section>
   );
 }
-

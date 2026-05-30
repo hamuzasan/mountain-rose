@@ -52,6 +52,13 @@ export default function CollectionsCatalog({
   products,
   siteSettings,
 }: CollectionsCatalogProps) {
+  const categories = useMemo(
+    () =>
+      [...new Set(products.map((product) => product.category).filter(Boolean) as string[])]
+        .sort((a, b) => a.localeCompare(b)),
+    [products],
+  );
+
   const [filters, setFilters] = useState<ProductFiltersValue>({
     category: "All",
     availability: "All",
@@ -62,11 +69,10 @@ export default function CollectionsCatalog({
 
   return (
     <div className="mt-8">
-      <ProductFilters value={filters} onChange={setFilters} />
+      <ProductFilters value={filters} onChange={setFilters} categories={categories} />
       <div className="mt-8">
         <ProductGrid products={filtered} siteSettings={siteSettings} />
       </div>
     </div>
   );
 }
-

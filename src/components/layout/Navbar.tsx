@@ -30,7 +30,7 @@ export default function Navbar({ siteSettings }: NavbarProps) {
   return (
     <header className="sticky top-0 z-40 border-b border-espresso/10 bg-bone/95 backdrop-blur-[2px]">
       <nav
-        className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-4 sm:px-6"
+        className="mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-4 sm:px-6"
         aria-label="Primary"
       >
         <Link
@@ -47,12 +47,12 @@ export default function Navbar({ siteSettings }: NavbarProps) {
         </Link>
 
         <div className="hidden items-center gap-8 md:flex">
-          <div className="flex items-center gap-6">
+          <div className="flex items-center rounded-soft border border-espresso/10 bg-warmIvory px-2 py-1">
             {NAVIGATION.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm font-medium text-mutedBrown transition-colors hover:text-espresso"
+                className="rounded-soft px-3 py-2 text-sm font-medium text-mutedBrown transition-colors hover:bg-bone hover:text-espresso"
               >
                 {item.label}
               </Link>
@@ -61,7 +61,7 @@ export default function Navbar({ siteSettings }: NavbarProps) {
           <WhatsAppButton phoneNumber={settings.whatsappNumber} />
         </div>
 
-        <div className="flex items-center gap-3 md:hidden">
+        <div className="mobile-menu-shell fixed top-4 z-50 items-center gap-3">
           <button
             type="button"
             className="inline-flex h-10 items-center justify-center rounded-soft border border-espresso/15 bg-warmIvory px-3 text-sm font-medium text-espresso transition-colors hover:bg-bone focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
@@ -103,4 +103,3 @@ export default function Navbar({ siteSettings }: NavbarProps) {
     </header>
   );
 }
-

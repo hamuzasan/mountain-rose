@@ -2,20 +2,20 @@ import SectionHeading from "./SectionHeading";
 
 const ITEMS = [
   {
-    title: "Tahan untuk pemakaian harian",
-    text: "Kulit sapi asli membantu tas tetap terasa kokoh, nyaman dipakai, dan siap menemani rutinitas.",
+    title: "High quality genuine cowhide",
+    text: "Material kulit sapi asli dipilih untuk struktur, ketahanan, dan karakter alami yang terasa matang.",
   },
   {
-    title: "Tekstur alami yang berkarakter",
-    text: "Setiap lembar kulit memiliki grain dan nuansa unik yang membuat tas terasa lebih personal.",
+    title: "Handmade by local craftsmen",
+    text: "Proses handmade menjaga detail jahitan, finishing, dan proporsi tas agar terasa lebih personal.",
   },
   {
-    title: "Semakin indah seiring waktu",
-    text: "Dengan perawatan yang tepat, warna dan kilau kulit berkembang menjadi patina yang lebih kaya.",
+    title: "Exclusive and durable design",
+    text: "Siluet dibuat timeless, tidak mengikuti tren sesaat, dan tetap relevan untuk rutinitas maupun perjalanan.",
   },
   {
-    title: "Elegan tanpa berlebihan",
-    text: "Kesan premium hadir lewat bentuk yang matang, detail rapi, dan warna hangat yang timeless.",
+    title: "Quality and after-sales support",
+    text: "Mountain Rose membangun hubungan jangka panjang melalui kualitas produk dan layanan yang dapat dipercaya.",
   },
 ];
 
@@ -25,8 +25,8 @@ export default function LeatherHighlight() {
       <div className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-6 sm:py-16">
         <SectionHeading
           eyebrow="Material"
-          title="Kulit Sapi Asli, Dipilih dengan Tenang"
-          description="Kami memilih material untuk ketahanan dan karakter, bukan untuk kesan yang berlebihan."
+          title="Material yang Kuat, Proses yang Manusiawi"
+          description="Dari company profile Mountain Rose: genuine cowhide, proses handmade, dan produksi yang menghargai pengrajin lokal menjadi fondasi setiap produk."
         />
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -49,4 +49,3 @@ export default function LeatherHighlight() {
     </section>
   );
 }
-

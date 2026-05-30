@@ -7,10 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "extract:catalogue": "tsx scripts/extract-catalogue-pages.ts",
     "import:catalogue": "tsx scripts/import-catalogue-to-supabase.ts",
-    "import:catalogue:supabase": "tsx scripts/import-catalogue-to-supabase.ts",
-    "import:catalogue:sanity": "tsx scripts/import-catalogue-to-sanity.ts"
+    "migrate:product-image-folders": "tsx scripts/migrate-product-image-folders.ts",
+    "sync:product-images": "tsx scripts/sync-supabase-product-images.ts"
   },
   "dependencies": {
     "@sanity/image-url": "^2.1.1",
@@ -30,6 +29,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
+    "sharp": "^0.34.5",
     "supabase": "^2.102.0",
     "tailwindcss": "^4",
     "tsx": "^4.22.3",

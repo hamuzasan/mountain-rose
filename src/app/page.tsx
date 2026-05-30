@@ -2,14 +2,18 @@ import type { Metadata } from "next";
 
 import BrandStoryPreview from "@/components/sections/BrandStoryPreview";
 import FeaturedProducts from "@/components/sections/FeaturedProducts";
+import HomeCategoryShowcase from "@/components/sections/HomeCategoryShowcase";
 import HeroSection from "@/components/sections/HeroSection";
 import HomeCTASection from "@/components/sections/HomeCTASection";
+import HomeLookbookSection from "@/components/sections/HomeLookbookSection";
 import LeatherHighlight from "@/components/sections/LeatherHighlight";
 import RoseEditorialSection from "@/components/sections/RoseEditorialSection";
 import { FALLBACK_HOMEPAGE, FALLBACK_FEATURED_PRODUCTS } from "@/data/fallbackHomepage";
 import { FALLBACK_SITE_SETTINGS } from "@/data/fallbackSiteSettings";
+import { getHomepage } from "@/data-access/homepage";
+import { getAllProducts, getFeaturedProducts } from "@/data-access/products";
+import { getSiteSettings } from "@/data-access/siteSettings";
 import { createOrganizationJsonLd, createWebsiteJsonLd } from "@/lib/structuredData";
-import { getFeaturedProducts, getHomepage, getSiteSettings } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
   title: "Mountain Rose | Tas Kulit Sapi Premium",
@@ -17,27 +21,11 @@ export const metadata: Metadata = {
     "Tas kulit sapi asli dengan desain elegan terinspirasi dari mawar, dibuat untuk menemani perjalanan panjang.",
 };
 
-function portableTextToPlainText(value: unknown): string {
-  if (!Array.isArray(value)) return "";
-
-  const blocks = value.filter((v) => v && typeof v === "object") as Array<{
-    _type?: string;
-    children?: Array<{ text?: string }>;
-  }>;
-
-  const text = blocks
-    .filter((b) => b._type === "block" && Array.isArray(b.children))
-    .map((b) => (b.children || []).map((c) => c.text || "").join(""))
-    .join("\n")
-    .trim();
-
-  return text;
-}
-
 export default async function Home() {
-  const [cmsHomepage, cmsFeatured, cmsSiteSettings] = await Promise.all([
+  const [cmsHomepage, cmsFeatured, allProducts, cmsSiteSettings] = await Promise.all([
     getHomepage(),
     getFeaturedProducts(),
+    getAllProducts(),
     getSiteSettings(),
   ]);
 
@@ -47,18 +35,16 @@ export default async function Home() {
 
   const heroTitle = cmsHomepage?.heroTitle || FALLBACK_HOMEPAGE.heroTitle;
   const heroSubtitle = cmsHomepage?.heroSubtitle || FALLBACK_HOMEPAGE.heroSubtitle;
-  const heroImage = cmsHomepage?.heroImage || null;
 
   const storyTitle = cmsHomepage?.storySectionTitle || FALLBACK_HOMEPAGE.storySectionTitle;
-  const storyText =
-    portableTextToPlainText(cmsHomepage?.storySectionText) ||
-    FALLBACK_HOMEPAGE.storySectionText;
+  const storyText = cmsHomepage?.storySectionText || FALLBACK_HOMEPAGE.storySectionText;
 
   const ctaTitle = cmsHomepage?.ctaTitle || FALLBACK_HOMEPAGE.ctaTitle;
   const ctaText = cmsHomepage?.ctaText || FALLBACK_HOMEPAGE.ctaText;
 
   const featuredProducts =
     cmsFeatured && cmsFeatured.length > 0 ? cmsFeatured : FALLBACK_FEATURED_PRODUCTS;
+  const visualProducts = allProducts && allProducts.length > 0 ? allProducts : featuredProducts;
   const jsonLd = [createOrganizationJsonLd(), createWebsiteJsonLd()];
 
   return (
@@ -70,12 +56,14 @@ export default async function Home() {
       <HeroSection
         title={heroTitle}
         subtitle={heroSubtitle}
-        heroImage={heroImage}
         siteSettings={siteSettings}
+        products={featuredProducts}
       />
       <FeaturedProducts products={featuredProducts} siteSettings={siteSettings} />
+      <HomeCategoryShowcase products={visualProducts} />
       <BrandStoryPreview title={storyTitle} text={storyText} />
       <LeatherHighlight />
+      <HomeLookbookSection products={visualProducts} />
       <RoseEditorialSection />
       <HomeCTASection title={ctaTitle} text={ctaText} siteSettings={siteSettings} />
     </>

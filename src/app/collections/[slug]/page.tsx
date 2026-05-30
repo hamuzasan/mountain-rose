@@ -8,64 +8,17 @@ import ProductMaterialDetails from "@/components/sections/ProductMaterialDetails
 import ProductOrderCTA from "@/components/sections/ProductOrderCTA";
 import ProductTryOnSection from "@/components/sections/ProductTryOnSection";
 import { FALLBACK_SITE_SETTINGS } from "@/data/fallbackSiteSettings";
-import { getFallbackProductBySlug, getFallbackProducts } from "@/lib/products";
 import { createProductJsonLd } from "@/lib/structuredData";
-import { getAllProducts, getProductBySlug, getSiteSettings } from "@/sanity/lib/queries";
-import type { Product } from "@/types/product";
+import { getAllProducts, getProductBySlug } from "@/data-access/products";
+import { getSiteSettings } from "@/data-access/siteSettings";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
-function toProduct(p: {
-  _id: string;
-  name: string;
-  slug: string;
-  price?: number;
-  priceAmount?: number;
-  priceCurrency?: string;
-  priceNote?: string;
-  category?: string;
-  shortDescription?: string;
-  description?: unknown[];
-  images?: Product["images"];
-  material?: string;
-  leatherType?: string;
-  color?: string;
-  size?: string;
-  sourcePdfPage?: number;
-  isFeatured?: boolean;
-  isAvailable?: boolean;
-  whatsAppMessage?: string;
-}): Product {
-  return {
-    _id: p._id,
-    name: p.name,
-    slug: p.slug,
-    price: p.price,
-    priceAmount: p.priceAmount,
-    priceCurrency: p.priceCurrency,
-    priceNote: p.priceNote,
-    category: p.category,
-    shortDescription: p.shortDescription,
-    description: p.description,
-    images: p.images,
-    material: p.material,
-    leatherType: p.leatherType,
-    color: p.color,
-    size: p.size,
-    sourcePdfPage: p.sourcePdfPage,
-    isFeatured: p.isFeatured,
-    isAvailable: p.isAvailable,
-    whatsAppMessage: p.whatsAppMessage,
-  };
-}
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const fallback = getFallbackProductBySlug(slug);
-  const cmsProduct = fallback ? null : await getProductBySlug(slug);
-  const product = cmsProduct ? toProduct(cmsProduct as unknown as Product) : fallback;
+  const product = await getProductBySlug(slug);
 
   if (!product) {
     return {
@@ -82,7 +35,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export async function generateStaticParams() {
-  const fallback = getFallbackProducts().map((p) => ({ slug: p.slug }));
   const cms = await getAllProducts();
   const cmsSlugs = (cms || [])
     .map((p) => p.slug)
@@ -90,16 +42,15 @@ export async function generateStaticParams() {
     .map((slug) => ({ slug }));
 
   const map = new Map<string, { slug: string }>();
-  [...fallback, ...cmsSlugs].forEach((p) => map.set(p.slug, p));
+  [...cmsSlugs].forEach((p) => map.set(p.slug, p));
   return [...map.values()];
 }
 
 export default async function ProductDetailPage({ params }: PageProps) {
   const { slug } = await params;
 
-  const [cmsSiteSettings, fallbackProduct, cmsProduct] = await Promise.all([
+  const [cmsSiteSettings, cmsProduct] = await Promise.all([
     getSiteSettings(),
-    Promise.resolve(getFallbackProductBySlug(slug)),
     getProductBySlug(slug),
   ]);
 
@@ -107,11 +58,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
     ? { ...FALLBACK_SITE_SETTINGS, ...cmsSiteSettings }
     : FALLBACK_SITE_SETTINGS;
 
-  const product: Product | null = fallbackProduct
-    ? fallbackProduct
-    : cmsProduct
-      ? toProduct(cmsProduct as unknown as Product)
-      : null;
+  const product = cmsProduct;
 
   if (!product) notFound();
   const productJsonLd = createProductJsonLd(product);

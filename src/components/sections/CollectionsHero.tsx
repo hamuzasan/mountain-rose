@@ -9,7 +9,7 @@ export default function CollectionsHero() {
             <SectionHeading
               eyebrow="Collections"
               title="Koleksi Mountain Rose"
-              description="Jelajahi tas kulit sapi asli dengan karakter hangat, detail rapi, dan sentuhan elegan yang terinspirasi dari mawar."
+              description="Jelajahi tas kulit sapi asli handmade dari Indonesia, dibuat dengan material genuine cowhide, jahitan kokoh, dan karakter desain yang timeless."
             />
           </div>
           <div className="lg:col-span-4">
@@ -21,7 +21,7 @@ export default function CollectionsHero() {
                 <div className="h-2 w-20 rounded-full bg-antiqueGold/40" />
               </div>
               <p className="mt-3 text-sm leading-7 text-mutedBrown">
-                Proporsi yang matang dan warna kulit yang tenang, untuk gaya yang terasa premium tanpa berlebihan.
+                Dari sling bag, messenger, backpack, hingga clutch, setiap produk dirancang untuk fungsi harian dengan kesan boutique yang tetap tenang.
               </p>
             </div>
           </div>
@@ -31,4 +31,3 @@ export default function CollectionsHero() {
     </section>
   );
 }
-
