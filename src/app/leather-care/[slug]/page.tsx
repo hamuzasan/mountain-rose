@@ -6,7 +6,8 @@ import LeatherCareArticleHeader from "@/components/sections/LeatherCareArticleHe
 import LeatherCareCTASection from "@/components/sections/LeatherCareCTASection";
 import { FALLBACK_SITE_SETTINGS } from "@/data/fallbackSiteSettings";
 import { getFallbackLeatherCareArticleBySlug, getFallbackLeatherCareArticles } from "@/lib/leatherCare";
-import { getLeatherCareArticleBySlug, getLeatherCareArticles, getSiteSettings } from "@/sanity/lib/queries";
+import { getLeatherCareArticleBySlug, getLeatherCareArticles } from "@/data-access/leatherCare";
+import { getSiteSettings } from "@/data-access/siteSettings";
 import type { LeatherCareArticle } from "@/types/leatherCare";
 
 type PageProps = {
@@ -20,6 +21,7 @@ type CmsLeatherCareArticle = {
   excerpt?: string;
   content?: unknown[];
   coverImage?: LeatherCareArticle["coverImage"];
+  coverImageUrl?: string;
   publishedAt?: string;
 };
 
@@ -30,6 +32,7 @@ function toArticle(a: {
   excerpt?: string;
   content?: unknown[];
   coverImage?: LeatherCareArticle["coverImage"];
+  coverImageUrl?: string;
   publishedAt?: string;
 }): LeatherCareArticle {
   return {
@@ -39,6 +42,7 @@ function toArticle(a: {
     excerpt: a.excerpt,
     content: a.content,
     coverImage: a.coverImage,
+    coverImageUrl: a.coverImageUrl,
     publishedAt: a.publishedAt,
   };
 }
@@ -49,10 +53,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const cms = fallback ? null : await getLeatherCareArticleBySlug(slug);
   const article = cms ? toArticle(cms as unknown as CmsLeatherCareArticle) : fallback;
 
-  if (!article) return { title: "Leather Care | Mountain Rose" };
+  if (!article) return { title: "Perawatan Kulit | Mountain Rose" };
 
   return {
-    title: `${article.title} | Mountain Rose Leather Care`,
+    title: `${article.title} | Perawatan Kulit Mountain Rose`,
     description:
       article.excerpt ||
       "Panduan merawat tas kulit sapi asli agar tetap elegan, kuat, dan memiliki karakter yang indah seiring waktu.",

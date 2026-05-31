@@ -53,23 +53,23 @@ export default function ProductInfo({ product }: ProductInfoProps) {
             </div>
           ) : null}
           <div className="mt-2 text-xs font-semibold uppercase text-mutedBrown">
-            {(product.isAvailable ?? true) ? "Available" : "Not Available"}
+            {(product.isAvailable ?? true) ? "Tersedia" : "Belum tersedia"}
           </div>
         </div>
       </div>
 
       <div className="mt-6 grid gap-3 sm:grid-cols-2">
         <div className="rounded-soft border border-espresso/10 bg-warmIvory px-4 py-3">
-          <div className="text-xs font-semibold uppercase text-mutedBrown">
-            Leather
+            <div className="text-xs font-semibold uppercase text-mutedBrown">
+            Material
           </div>
           <div className="mt-2 text-sm font-medium text-espresso">
             {product.material || product.leatherType || "Kulit sapi asli"}
           </div>
         </div>
         <div className="rounded-soft border border-espresso/10 bg-warmIvory px-4 py-3">
-          <div className="text-xs font-semibold uppercase text-mutedBrown">
-            Color
+            <div className="text-xs font-semibold uppercase text-mutedBrown">
+            Warna
           </div>
           <div className="mt-2 text-sm font-medium text-espresso">
             {product.color || "Warm tone"}
@@ -78,7 +78,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         {product.size ? (
           <div className="rounded-soft border border-espresso/10 bg-warmIvory px-4 py-3">
             <div className="text-xs font-semibold uppercase text-mutedBrown">
-              Size
+              Ukuran
             </div>
             <div className="mt-2 text-sm font-medium text-espresso">
               {product.size}
@@ -88,7 +88,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         {product.sourcePdfPage ? (
           <div className="rounded-soft border border-espresso/10 bg-warmIvory px-4 py-3">
             <div className="text-xs font-semibold uppercase text-mutedBrown">
-              Source
+              Sumber
             </div>
             <div className="mt-2 text-sm font-medium text-espresso">
               Katalog PDF halaman {product.sourcePdfPage}
@@ -106,7 +106,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       {longDesc ? (
         <div className="mt-6 rounded-soft border border-espresso/10 bg-warmIvory p-4">
           <div className="text-xs font-semibold uppercase text-mutedRose">
-            Description
+            Deskripsi
           </div>
           <p className="mt-3 whitespace-pre-line text-sm leading-7 text-mutedBrown">
             {longDesc}

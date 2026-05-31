@@ -24,25 +24,26 @@ export default function Footer({ siteSettings }: FooterProps) {
 
   return (
     <footer className="border-t border-warmIvory/10 bg-darkLeather text-warmIvory">
-      <div className="mx-auto w-full max-w-7xl px-5 py-12 sm:px-6">
+      <div className="mx-auto w-full max-w-7xl px-5 py-12 sm:px-6 lg:py-14">
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-5">
-            <div className="font-heading text-xl text-bone">{settings.brandName}</div>
+            <div className="font-heading text-2xl text-bone">{settings.brandName}</div>
             <p className="mt-3 max-w-md text-sm leading-7 text-bone/80">
               {settings.tagline}
             </p>
+            <div className="mt-6 h-px w-32 bg-antiqueGold/45" />
           </div>
 
           <div className="md:col-span-3">
             <div className="text-xs font-semibold uppercase text-dustyRose">
-              Navigation
+              Navigasi
             </div>
             <ul className="mt-4 flex flex-col gap-2">
               {NAVIGATION.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-sm text-bone/85 transition-colors hover:text-warmIvory"
+                    className="text-sm text-bone/85 transition-colors hover:text-warmIvory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
                   >
                     {item.label}
                   </Link>
@@ -53,28 +54,28 @@ export default function Footer({ siteSettings }: FooterProps) {
 
           <div className="md:col-span-4">
             <div className="text-xs font-semibold uppercase text-dustyRose">
-              Contact
+              Kontak
             </div>
             <div className="mt-4 flex flex-col gap-2 text-sm text-bone/85">
               <a
                 href={waHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="transition-colors hover:text-warmIvory"
+                className="transition-colors hover:text-warmIvory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
               >
-                WhatsApp
+                Konsultasi via WhatsApp
               </a>
               <a
                 href={settings.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="transition-colors hover:text-warmIvory"
+                className="transition-colors hover:text-warmIvory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
               >
                 Instagram
               </a>
               <a
                 href={`mailto:${settings.email}`}
-                className="transition-colors hover:text-warmIvory"
+                className="transition-colors hover:text-warmIvory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
               >
                 {settings.email}
               </a>
@@ -87,7 +88,7 @@ export default function Footer({ siteSettings }: FooterProps) {
 
         <div className="mt-12 flex flex-col gap-3 border-t border-warmIvory/10 pt-6 text-xs text-bone/70 sm:flex-row sm:items-center sm:justify-between">
           <div>© 2026 {settings.brandName}. All rights reserved.</div>
-          <div className="text-bone/60">Premium genuine cow leather bags.</div>
+          <div className="text-bone/60">Tas kulit sapi premium handmade dari Indonesia.</div>
         </div>
       </div>
     </footer>

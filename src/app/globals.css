@@ -73,17 +73,6 @@ body {
   animation: hero-product-in 700ms ease-out both;
 }
 
-.mobile-menu-shell {
-  display: flex;
-  left: min(18.5rem, calc(100vw - 5rem));
-}
-
-@media (min-width: 768px) {
-  .mobile-menu-shell {
-    display: none;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .hero-product-in {
     animation: none;

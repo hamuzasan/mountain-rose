@@ -86,18 +86,125 @@ function safeBoolean(value: unknown) {
   return undefined;
 }
 
+function normalizeSlug(value: string) {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/['"]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function parseNumber(value: string) {
+  const cleaned = value.replace(/[^\d.,]/g, "").replace(/\./g, "").replace(",", ".");
+  const parsed = Number(cleaned);
+  return Number.isFinite(parsed) ? parsed : undefined;
+}
+
+function parseBoolean(value: string) {
+  const normalized = value.trim().toLowerCase();
+  if (["true", "yes", "ya", "y", "available", "tersedia", "1"].includes(normalized)) {
+    return true;
+  }
+  if (["false", "no", "tidak", "n", "not available", "habis", "0"].includes(normalized)) {
+    return false;
+  }
+  return undefined;
+}
+
+function parseProductMessageLocally(input: GeminiProductParseInput): AiTextParseResult {
+  const draft: AiProductDraft = {
+    imageUrls: input.imageUrls,
+    attachmentReferences: input.attachmentReferences,
+  };
+  const lines = input.rawText.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+
+  for (const line of lines) {
+    const separatorIndex = line.indexOf(":");
+    if (separatorIndex <= 0) continue;
+
+    const rawKey = line.slice(0, separatorIndex).trim().toLowerCase();
+    const value = line.slice(separatorIndex + 1).trim();
+    if (!value) continue;
+
+    if (["nama", "name", "product", "produk"].includes(rawKey)) draft.name = value;
+    if (["slug", "url"].includes(rawKey)) draft.slug = normalizeSlug(value);
+    if (["kategori", "category"].includes(rawKey)) draft.category = value;
+    if (["warna", "color"].includes(rawKey)) draft.color = value;
+    if (["ukuran", "size"].includes(rawKey)) draft.size = value;
+    if (["material", "bahan"].includes(rawKey)) draft.material = value;
+    if (["jenis kulit", "leather type", "leathertype"].includes(rawKey)) {
+      draft.leatherType = value;
+    }
+    if (["deskripsi singkat", "short description", "shortdescription"].includes(rawKey)) {
+      draft.shortDescription = value;
+    }
+    if (["deskripsi", "description"].includes(rawKey)) draft.description = value;
+    if (["whatsapp", "whatsapp message", "pesan whatsapp"].includes(rawKey)) {
+      draft.whatsAppMessage = value;
+    }
+    if (["featured", "is featured", "isfeatured"].includes(rawKey)) {
+      draft.isFeatured = parseBoolean(value);
+    }
+    if (["available", "is available", "isavailable", "tersedia"].includes(rawKey)) {
+      draft.isAvailable = parseBoolean(value);
+    }
+    if (["source pdf page", "sourcepdfpage", "halaman pdf"].includes(rawKey)) {
+      draft.sourcePdfPage = parseNumber(value);
+    }
+    if (["harga", "price"].includes(rawKey)) {
+      const amount = parseNumber(value);
+      const upper = value.toUpperCase();
+      if (upper.includes("USD") || upper.includes("US$") || upper.includes("$")) {
+        draft.priceAmount = amount;
+        draft.priceCurrency = "USD";
+      } else if (upper.includes("IDR") || upper.includes("RP") || (amount ?? 0) > 10000) {
+        draft.price = amount;
+      } else {
+        draft.priceAmount = amount;
+        draft.priceCurrency = draft.priceCurrency || "USD";
+      }
+    }
+    if (["price amount", "priceamount"].includes(rawKey)) draft.priceAmount = parseNumber(value);
+    if (["price currency", "pricecurrency", "mata uang"].includes(rawKey)) {
+      draft.priceCurrency = value.toUpperCase();
+    }
+    if (["price note", "pricenote", "catatan harga"].includes(rawKey)) draft.priceNote = value;
+  }
+
+  if (!draft.slug && draft.name) draft.slug = normalizeSlug(draft.name);
+  if (!draft.material && draft.leatherType) draft.material = draft.leatherType;
+  if (!draft.leatherType && draft.material) draft.leatherType = draft.material;
+
+  if (!draft.name && !draft.slug) {
+    return {
+      ok: false,
+      error:
+        "GEMINI_API_KEY is not configured and the message does not contain labeled product fields.",
+    };
+  }
+
+  return { ok: true, data: draft };
+}
+
 function normalizeProductDraft(input: Record<string, unknown>): AiProductDraft {
   return {
     name: typeof input.name === "string" ? input.name : undefined,
     slug: typeof input.slug === "string" ? input.slug : undefined,
     price: typeof input.price === "number" ? input.price : undefined,
+    priceAmount: typeof input.priceAmount === "number" ? input.priceAmount : undefined,
+    priceCurrency:
+      typeof input.priceCurrency === "string" ? input.priceCurrency.toUpperCase() : undefined,
+    priceNote: typeof input.priceNote === "string" ? input.priceNote : undefined,
     category: typeof input.category === "string" ? input.category : undefined,
     shortDescription:
       typeof input.shortDescription === "string" ? input.shortDescription : undefined,
     description: typeof input.description === "string" ? input.description : undefined,
+    material: typeof input.material === "string" ? input.material : undefined,
     leatherType: typeof input.leatherType === "string" ? input.leatherType : undefined,
     color: typeof input.color === "string" ? input.color : undefined,
     size: typeof input.size === "string" ? input.size : undefined,
+    sourcePdfPage: typeof input.sourcePdfPage === "number" ? input.sourcePdfPage : undefined,
     isFeatured: safeBoolean(input.isFeatured),
     isAvailable: safeBoolean(input.isAvailable),
     whatsAppMessage:
@@ -109,9 +216,7 @@ export async function parseProductMessageWithAI(
   input: GeminiProductParseInput,
 ): Promise<AiTextParseResult> {
   if (!getGeminiApiKey()) {
-    return missingGeminiKeyResult<AiProductDraft>(
-      "Configure Gemini before enabling WhatsApp AI CMS parsing.",
-    );
+    return parseProductMessageLocally(input);
   }
 
   try {

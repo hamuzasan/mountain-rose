@@ -5,7 +5,7 @@ export default function ContactHero() {
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
             <div className="text-xs font-semibold uppercase text-mutedRose">
-              Contact
+              Kontak
             </div>
             <h1 className="mt-4 font-heading text-4xl leading-tight text-espresso sm:text-5xl">
               Hubungi Mountain Rose
@@ -19,7 +19,7 @@ export default function ContactHero() {
             <div className="rounded-soft border border-espresso/10 bg-bone p-5">
               <div className="flex items-center justify-between">
                 <div className="text-xs font-semibold uppercase text-mutedRose">
-                  Notes
+                  Catatan
                 </div>
                 <div className="h-2 w-20 rounded-full bg-antiqueGold/40" />
               </div>
@@ -34,4 +34,3 @@ export default function ContactHero() {
     </section>
   );
 }
-

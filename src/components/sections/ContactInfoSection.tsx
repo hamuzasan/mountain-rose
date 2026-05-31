@@ -89,7 +89,7 @@ export default function ContactInfoSection({ siteSettings }: ContactInfoSectionP
 
               <div className="rounded-soft border border-espresso/10 bg-bone p-5">
                 <div className="text-xs font-semibold uppercase text-mutedRose">
-                  Address
+                  Alamat
                 </div>
                 <div className="mt-3 text-sm font-medium text-espresso">Indonesia</div>
                 <div className="mt-2 text-sm text-mutedBrown">{siteSettings.address}</div>
@@ -101,4 +101,3 @@ export default function ContactInfoSection({ siteSettings }: ContactInfoSectionP
     </section>
   );
 }
-

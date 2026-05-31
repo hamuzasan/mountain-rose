@@ -21,6 +21,7 @@ type ProductCardProps = {
     | "priceCurrency"
     | "category"
     | "shortDescription"
+    | "material"
     | "leatherType"
     | "isAvailable"
     | "images"
@@ -90,8 +91,14 @@ export default function ProductCard({
               />
             </div>
           ) : (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="h-16 w-16 rounded-full border border-espresso/10 bg-bone" />
+            <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+              <div className="absolute inset-8 rotate-[-5deg] border border-antiqueGold/20 bg-sand/35" />
+              <div className="relative text-center">
+                <div className="mx-auto h-14 w-14 rounded-full border border-espresso/10 bg-bone" />
+                <div className="mt-4 text-xs font-semibold uppercase text-mutedBrown">
+                  Mountain Rose Leather Goods
+                </div>
+              </div>
             </div>
           )}
           <div className="absolute left-4 top-4 rounded-soft border border-espresso/10 bg-bone/90 px-3 py-2 text-xs font-semibold uppercase text-mutedRose">
@@ -118,11 +125,11 @@ export default function ProductCard({
               {product.name}
             </Link>
             <div className="mt-2 text-xs font-medium uppercase text-mutedRose">
-              {product.leatherType || "Genuine cow leather"}
+              {product.material || product.leatherType || "Kulit sapi asli"}
             </div>
             {(product.isAvailable ?? true) ? null : (
               <div className="mt-2 inline-flex items-center rounded-soft border border-espresso/10 bg-warmIvory px-2 py-1 text-[11px] font-semibold uppercase text-mutedBrown">
-                Not Available
+                Belum tersedia
               </div>
             )}
           </div>
@@ -160,7 +167,7 @@ export default function ProductCard({
               href={waHref}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`Order ${product.name} via WhatsApp`}
+              aria-label={`Konsultasi ${product.name} via WhatsApp`}
               className="inline-flex h-10 items-center justify-center rounded-soft border border-brass/40 bg-espresso px-4 text-sm font-medium text-warmIvory transition-colors hover:bg-darkLeather focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
             >
               WhatsApp

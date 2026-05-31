@@ -5,10 +5,10 @@ import ContactHero from "@/components/sections/ContactHero";
 import ContactInfoSection from "@/components/sections/ContactInfoSection";
 import WhatsAppOrderSection from "@/components/sections/WhatsAppOrderSection";
 import { FALLBACK_SITE_SETTINGS } from "@/data/fallbackSiteSettings";
-import { getSiteSettings } from "@/sanity/lib/queries";
+import { getSiteSettings } from "@/data-access/siteSettings";
 
 export const metadata: Metadata = {
-  title: "Contact Mountain Rose | Tas Kulit Sapi Premium",
+  title: "Kontak Mountain Rose | Tas Kulit Sapi Premium",
   description:
     "Hubungi Mountain Rose untuk konsultasi tas kulit sapi, pilihan model, warna, dan pemesanan melalui WhatsApp.",
 };
@@ -28,4 +28,3 @@ export default async function ContactPage() {
     </div>
   );
 }
-

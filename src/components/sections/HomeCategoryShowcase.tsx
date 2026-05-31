@@ -39,11 +39,51 @@ export default function HomeCategoryShowcase({ products }: HomeCategoryShowcaseP
 
   return (
     <section className="bg-warmIvory">
-      <div className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-6 sm:py-16">
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
+      <div className="mx-auto w-full max-w-6xl px-4 py-9 sm:px-6 sm:py-16">
+        <div className="mb-6 flex items-center gap-4 lg:hidden">
+          <div className="h-px flex-1 bg-mutedRose/70" />
+          <h2 className="text-center text-sm font-semibold uppercase text-deepRose">
+            Produk Kategori
+          </h2>
+          <div className="h-px flex-1 bg-mutedRose/70" />
+        </div>
+
+        <div className="grid grid-cols-2 gap-4 lg:hidden">
+          {categories.slice(0, 4).map((item) => (
+            <Link
+              key={item.product.slug}
+              href={`/collections/${item.product.slug}`}
+              className="group overflow-hidden border border-espresso/10 bg-bone shadow-soft"
+            >
+              <div className="relative aspect-square bg-warmIvory">
+                {item.imageUrl ? (
+                  <Image
+                    src={item.imageUrl}
+                    alt={`${item.product.name} - ${item.category} Mountain Rose`}
+                    fill
+                    sizes="50vw"
+                    className="object-contain p-5 transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  />
+                ) : (
+                  <div className="absolute inset-4 border border-antiqueGold/25 bg-sand/25" />
+                )}
+              </div>
+              <div className="border-t border-espresso/10 bg-bone px-3 py-3 text-center">
+                <div className="text-[11px] font-semibold uppercase text-mutedRose">
+                  {item.category}
+                </div>
+                <div className="mt-1 line-clamp-2 font-heading text-base leading-tight text-espresso">
+                  {item.product.name}
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        <div className="hidden gap-10 lg:grid lg:grid-cols-12 lg:items-start">
           <div className="lg:col-span-4">
             <div className="text-xs font-semibold uppercase text-mutedRose">
-              Shop by Categories
+              Pilih Berdasarkan Kategori
             </div>
             <h2 className="mt-3 font-heading text-4xl leading-tight text-espresso sm:text-5xl">
               Pilih bentuk yang paling dekat dengan ritmemu.
@@ -106,7 +146,7 @@ export default function HomeCategoryShowcase({ products }: HomeCategoryShowcaseP
                       {item.product.name}
                     </div>
                     <div className="mt-3 text-xs font-semibold uppercase text-mutedBrown">
-                      Grab It
+                      Lihat Detail
                     </div>
                   </div>
                 </Link>

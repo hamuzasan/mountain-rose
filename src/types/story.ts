@@ -7,6 +7,7 @@ export type BrandStory = {
     asset?: { _ref: string; _type: "reference" };
     alt?: string;
   };
+  imageUrl?: string;
   craftsmanshipTitle?: string;
   craftsmanshipText?: string;
   leatherTitle?: string;
@@ -16,4 +17,3 @@ export type BrandStory = {
   ctaTitle?: string;
   ctaText?: string;
 };
-

@@ -22,6 +22,7 @@ export async function getLeatherCareArticles(): Promise<LeatherCareArticle[]> {
     content: a.content
       ? [{ _type: "block", children: [{ _type: "span", text: a.content }] }]
       : undefined,
+    coverImageUrl: a.cover_image_url ?? undefined,
     coverImage: a.cover_image_url ? { alt: `${a.title} cover` } : undefined,
     publishedAt: a.published_at ?? undefined,
   }));
@@ -52,6 +53,7 @@ export async function getLeatherCareArticleBySlug(
     content: data.content
       ? [{ _type: "block", children: [{ _type: "span", text: data.content }] }]
       : undefined,
+    coverImageUrl: data.cover_image_url ?? undefined,
     coverImage: data.cover_image_url ? { alt: `${data.title} cover` } : undefined,
     publishedAt: data.published_at ?? undefined,
   };

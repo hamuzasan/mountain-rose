@@ -5,21 +5,13 @@ import Link from "next/link";
 
 import type { LeatherCareArticle } from "@/types/leatherCare";
 import { formatDateID } from "@/lib/format";
-import { urlFor } from "@/sanity/lib/image";
 
 type LeatherCareCardProps = {
   article: LeatherCareArticle;
 };
 
 export default function LeatherCareCard({ article }: LeatherCareCardProps) {
-  const imgUrl = article.coverImage?.asset
-    ? urlFor(article.coverImage)
-        ?.width(900)
-        .height(700)
-        .fit("crop")
-        .quality(80)
-        .url()
-    : null;
+  const imgUrl = article.coverImageUrl || null;
 
   const date = formatDateID(article.publishedAt);
 
@@ -32,7 +24,7 @@ export default function LeatherCareCard({ article }: LeatherCareCardProps) {
               src={imgUrl}
               alt={
                 article.coverImage?.alt ||
-                `${article.title} - Leather Care (Mountain Rose)`
+                `${article.title} - perawatan kulit Mountain Rose`
               }
               fill
               sizes="(min-width: 1024px) 320px, (min-width: 640px) 50vw, 100vw"
@@ -43,7 +35,7 @@ export default function LeatherCareCard({ article }: LeatherCareCardProps) {
               <div className="text-center">
                 <div className="mx-auto h-12 w-12 rounded-full border border-espresso/10 bg-bone" />
                 <div className="mt-3 text-xs font-semibold uppercase text-mutedBrown">
-                  Mountain Rose
+                  Mountain Rose Leather Care
                 </div>
               </div>
             </div>
@@ -75,4 +67,3 @@ export default function LeatherCareCard({ article }: LeatherCareCardProps) {
     </article>
   );
 }
-

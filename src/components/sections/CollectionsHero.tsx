@@ -7,7 +7,7 @@ export default function CollectionsHero() {
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
             <SectionHeading
-              eyebrow="Collections"
+              eyebrow="Koleksi"
               title="Koleksi Mountain Rose"
               description="Jelajahi tas kulit sapi asli handmade dari Indonesia, dibuat dengan material genuine cowhide, jahitan kokoh, dan karakter desain yang timeless."
             />
@@ -16,7 +16,7 @@ export default function CollectionsHero() {
             <div className="rounded-soft border border-espresso/10 bg-bone p-5">
               <div className="flex items-center justify-between">
                 <div className="text-xs font-semibold uppercase text-mutedRose">
-                  Curated
+                  Terpilih
                 </div>
                 <div className="h-2 w-20 rounded-full bg-antiqueGold/40" />
               </div>

@@ -1,7 +1,10 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import type { SiteSettings } from "@/types/site";
 
+import { formatProductPrice } from "@/lib/format";
+import { getDisplayProductImage, getProductImageUrl } from "@/lib/product-images";
 import SectionHeading from "./SectionHeading";
 import ProductCard from "../ui/ProductCard";
 
@@ -18,10 +21,65 @@ export default function FeaturedProducts({ products, siteSettings }: FeaturedPro
 
   return (
     <section className="bg-warmIvory">
-      <div className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-6 sm:py-16">
-        <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+      <div className="mx-auto w-full max-w-6xl px-4 py-9 sm:px-6 sm:py-16">
+        <div className="mb-6 flex items-center gap-4 lg:hidden">
+          <div className="h-px flex-1 bg-mutedRose/70" />
+          <h2 className="text-center text-sm font-semibold uppercase text-deepRose">
+            Produk Pilihan
+          </h2>
+          <div className="h-px flex-1 bg-mutedRose/70" />
+        </div>
+
+        <div className="grid grid-cols-2 gap-4 lg:hidden">
+          {limited.map((product) => {
+            const image = getDisplayProductImage(product.images);
+            const imageUrl = getProductImageUrl(image);
+
+            return (
+              <Link
+                key={product.slug}
+                href={`/collections/${product.slug}`}
+                className="group overflow-hidden border border-espresso/10 bg-bone shadow-soft"
+              >
+                <div className="relative aspect-[4/5] bg-warmIvory">
+                  {imageUrl ? (
+                    <Image
+                      src={imageUrl}
+                      alt={image?.alt || `${product.name} - tas kulit sapi Mountain Rose`}
+                      fill
+                      sizes="50vw"
+                      className="object-contain p-4 transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    />
+                  ) : (
+                    <div className="absolute inset-4 border border-antiqueGold/25 bg-sand/25" />
+                  )}
+                </div>
+                <div className="border-t border-espresso/10 bg-bone px-3 py-3 text-center">
+                  <div className="line-clamp-2 min-h-10 font-semibold leading-5 text-espresso">
+                    {product.name}
+                  </div>
+                  <div className="mt-2 text-sm font-medium text-mutedBrown">
+                    {formatProductPrice(product)}
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+
+        <div className="mt-6 text-center lg:hidden">
+          <Link
+            href="/collections"
+            className="inline-flex h-11 items-center justify-center rounded-full bg-espresso px-6 text-sm font-semibold text-warmIvory transition-colors hover:bg-darkLeather focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
+          >
+            Lihat Semua Koleksi
+          </Link>
+        </div>
+
+        <div className="hidden lg:block">
+          <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading
-            eyebrow="Featured"
+            eyebrow="Pilihan Katalog"
             title="Produk Katalog yang Siap Menjadi Sorotan"
             description="Tas kulit sapi asli dari katalog Mountain Rose, ditampilkan dengan ruang visual yang lebih besar agar detail bentuk, tekstur, dan karakter material terasa jelas."
           />
@@ -31,9 +89,9 @@ export default function FeaturedProducts({ products, siteSettings }: FeaturedPro
           >
             Lihat Semua Koleksi
           </Link>
-        </div>
+          </div>
 
-        <div className="mt-10 grid gap-6">
+          <div className="mt-10 grid gap-6">
           {heroProduct ? (
             <ProductCard
               product={heroProduct}
@@ -56,6 +114,7 @@ export default function FeaturedProducts({ products, siteSettings }: FeaturedPro
               ))}
             </div>
           ) : null}
+          </div>
         </div>
       </div>
     </section>

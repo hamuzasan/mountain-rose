@@ -3,7 +3,6 @@ import Link from "next/link";
 
 import type { LeatherCareArticle } from "@/types/leatherCare";
 import { formatDateID } from "@/lib/format";
-import { urlFor } from "@/sanity/lib/image";
 
 type LeatherCareArticleHeaderProps = {
   article: LeatherCareArticle;
@@ -13,14 +12,7 @@ export default function LeatherCareArticleHeader({
   article,
 }: LeatherCareArticleHeaderProps) {
   const date = formatDateID(article.publishedAt);
-  const imgUrl = article.coverImage?.asset
-    ? urlFor(article.coverImage)
-        ?.width(1600)
-        .height(1000)
-        .fit("crop")
-        .quality(85)
-        .url()
-    : null;
+  const imgUrl = article.coverImageUrl || null;
 
   return (
     <section className="bg-warmIvory">
@@ -32,7 +24,7 @@ export default function LeatherCareArticleHeader({
           <ol className="flex flex-wrap items-center gap-2">
             <li>
               <Link href="/" className="transition-colors hover:text-espresso">
-                Home
+                Beranda
               </Link>
             </li>
             <li className="text-mutedBrown/60">/</li>
@@ -41,7 +33,7 @@ export default function LeatherCareArticleHeader({
                 href="/leather-care"
                 className="transition-colors hover:text-espresso"
               >
-                Leather Care
+                Perawatan Kulit
               </Link>
             </li>
             <li className="text-mutedBrown/60">/</li>
@@ -73,7 +65,7 @@ export default function LeatherCareArticleHeader({
                   src={imgUrl}
                   alt={
                     article.coverImage?.alt ||
-                    `${article.title} cover - Leather Care (Mountain Rose)`
+                    `${article.title} - perawatan kulit Mountain Rose`
                   }
                   fill
                   sizes="(min-width: 1024px) 960px, 100vw"
@@ -87,7 +79,7 @@ export default function LeatherCareArticleHeader({
                   <div className="text-center">
                     <div className="mx-auto h-12 w-12 rounded-full border border-espresso/10 bg-warmIvory" />
                     <div className="mt-4 text-xs font-semibold uppercase text-mutedBrown">
-                      Mountain Rose
+                      Mountain Rose Leather Care
                     </div>
                   </div>
                 </div>
@@ -99,4 +91,3 @@ export default function LeatherCareArticleHeader({
     </section>
   );
 }
-

@@ -16,7 +16,7 @@ import {
   createDraftProductFromAi,
   publishDraftProductBySlug,
   updateDraftProductFromAi,
-} from "@/sanity/lib/productMutations";
+} from "@/lib/supabase/productMutations";
 import type { AiCmsAction } from "@/types/aiCms";
 
 export const runtime = "nodejs";
@@ -96,7 +96,7 @@ export async function POST(request: Request) {
     if (!created.ok || !created.data) {
       await reply(
         inbound.sender,
-        `Draft produk belum berhasil dibuat. ${created.error || "Cek konfigurasi Sanity."}`,
+        `Draft produk belum berhasil dibuat. ${created.error || "Cek konfigurasi Supabase."}`,
       );
       return jsonResponse({ ok: false, action: command.action, error: created.error });
     }
@@ -109,11 +109,14 @@ export async function POST(request: Request) {
         `Nama: ${parsed.data.name || "-"}`,
         `Slug: ${created.data.slug}`,
         `Kategori: ${parsed.data.category || "-"}`,
-        `Harga: ${parsed.data.price ?? "-"}`,
+        `Harga: ${parsed.data.price ?? parsed.data.priceAmount ?? "-"}`,
+        created.data.imageUploads ? `Gambar terunggah: ${created.data.imageUploads}` : "",
         "",
-        "Review di Sanity Studio sebelum publish.",
+        "Review di /admin/products sebelum publish.",
         `Jika sudah disetujui, kirim: PUBLISH_PRODUCT ${created.data.slug}`,
-      ].join("\n"),
+      ]
+        .filter(Boolean)
+        .join("\n"),
     );
 
     return jsonResponse({
@@ -138,7 +141,7 @@ export async function POST(request: Request) {
       inbound.sender,
       published.ok
         ? `Produk ${command.arg} berhasil dipublish setelah konfirmasi owner.`
-        : `Produk belum bisa dipublish. ${published.error || "Cek Sanity Studio."}`,
+        : `Produk belum bisa dipublish. ${published.error || "Cek /admin/products."}`,
     );
 
     return jsonResponse({
@@ -150,14 +153,44 @@ export async function POST(request: Request) {
   }
 
   if (command.action === "UPDATE_PRODUCT") {
-    const updated = await updateDraftProductFromAi();
+    if (!command.arg) {
+      await reply(inbound.sender, "Gunakan format: UPDATE_PRODUCT slug-produk");
+      return jsonResponse({
+        ok: false,
+        action: command.action,
+        error: "Product slug is missing.",
+      });
+    }
+
+    const imageUrls = inbound.attachments
+      .map((attachment) => attachment.url)
+      .filter((url): url is string => Boolean(url));
+
+    const parsed = await parseProductMessageWithAI({
+      rawText: inbound.text,
+      sender: inbound.sender,
+      imageUrls,
+    });
+
+    if (!parsed.ok || !parsed.data) {
+      await reply(
+        inbound.sender,
+        `Produk belum bisa diupdate. ${parsed.error || "AI parser belum siap."}`,
+      );
+      return jsonResponse({ ok: false, action: command.action, error: parsed.error });
+    }
+
+    const updated = await updateDraftProductFromAi(command.arg, parsed.data);
     await reply(
       inbound.sender,
-      "UPDATE_PRODUCT sudah dikenali, tetapi workflow update masih menunggu diff dan konfirmasi manual.",
+      updated.ok
+        ? `Draft produk ${command.arg} berhasil diupdate. Review di /admin/products sebelum publish.`
+        : `Produk belum bisa diupdate. ${updated.error || "Cek /admin/products."}`,
     );
     return jsonResponse({
       ok: updated.ok,
       action: command.action,
+      data: updated.data,
       error: updated.error,
     });
   }

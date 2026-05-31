@@ -8,6 +8,6 @@ export type LeatherCareArticle = {
     asset?: { _ref: string; _type: "reference" };
     alt?: string;
   };
+  coverImageUrl?: string;
   publishedAt?: string;
 };
-

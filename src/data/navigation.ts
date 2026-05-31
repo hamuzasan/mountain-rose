@@ -1,9 +1,9 @@
 import type { NavigationItem } from "@/types/site";
 
 export const NAVIGATION: NavigationItem[] = [
-  { label: "Home", href: "/" },
-  { label: "Collections", href: "/collections" },
-  { label: "Story", href: "/story" },
-  { label: "Leather Care", href: "/leather-care" },
-  { label: "Contact", href: "/contact" },
+  { label: "Beranda", href: "/" },
+  { label: "Koleksi", href: "/collections" },
+  { label: "Cerita", href: "/story" },
+  { label: "Perawatan Kulit", href: "/leather-care" },
+  { label: "Kontak", href: "/contact" },
 ];

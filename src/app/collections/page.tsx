@@ -7,7 +7,7 @@ import { getAllProducts } from "@/data-access/products";
 import { getSiteSettings } from "@/data-access/siteSettings";
 
 export const metadata: Metadata = {
-  title: "Mountain Rose Collections | Tas Kulit Sapi Premium",
+  title: "Koleksi Mountain Rose | Tas Kulit Sapi Premium",
   description:
     "Jelajahi koleksi tas kulit sapi Mountain Rose dengan desain elegan, material asli, dan karakter timeless.",
 };

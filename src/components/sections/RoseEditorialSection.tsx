@@ -21,28 +21,28 @@ export default function RoseEditorialSection() {
             <div className="rounded-soft border border-espresso/10 bg-warmIvory p-6">
               <div className="flex items-center justify-between">
                 <div className="text-xs font-semibold uppercase text-mutedRose">
-                  Editorial Note
+                  Catatan Editorial
                 </div>
                 <div className="h-2 w-20 rounded-full bg-antiqueGold/40" />
               </div>
               <div className="mt-4 font-heading text-2xl leading-snug text-espresso">
-                Subtle. Warm. Timeless.
+                Halus, hangat, dan tidak lekang waktu.
               </div>
               <div className="mt-5 grid gap-3">
                 <div className="rounded-soft border border-espresso/10 bg-bone px-4 py-3">
-                  <div className="text-sm font-medium text-espresso">Elegance</div>
+                  <div className="text-sm font-medium text-espresso">Elegansi</div>
                   <div className="mt-1 text-sm text-mutedBrown">
                     Siluet bersih dan proporsi yang seimbang.
                   </div>
                 </div>
                 <div className="rounded-soft border border-espresso/10 bg-bone px-4 py-3">
-                  <div className="text-sm font-medium text-espresso">Softness</div>
+                  <div className="text-sm font-medium text-espresso">Kelembutan</div>
                   <div className="mt-1 text-sm text-mutedBrown">
                     Aksen rose yang tidak mencolok, tetapi terasa.
                   </div>
                 </div>
                 <div className="rounded-soft border border-espresso/10 bg-bone px-4 py-3">
-                  <div className="text-sm font-medium text-espresso">Character</div>
+                  <div className="text-sm font-medium text-espresso">Karakter</div>
                   <div className="mt-1 text-sm text-mutedBrown">
                     Kulit yang semakin hidup seiring waktu.
                   </div>
@@ -50,7 +50,7 @@ export default function RoseEditorialSection() {
               </div>
               <div className="mt-6 h-px w-full bg-espresso/10" />
               <div className="mt-4 text-xs font-semibold uppercase text-mutedBrown">
-                Muted rose accent only
+                Aksen muted rose secukupnya
               </div>
             </div>
           </div>
@@ -59,4 +59,3 @@ export default function RoseEditorialSection() {
     </section>
   );
 }
-

@@ -13,7 +13,7 @@ type ProductGalleryProps = {
 
 export default function ProductGallery({ images, productName }: ProductGalleryProps) {
   const list = useMemo(() => getOrderedProductImages(images), [images]);
-  const [activeIndex, setActiveIndex] = useState(() => (list.length > 1 ? 1 : 0));
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const active = list[activeIndex] || list[0] || null;
 
@@ -41,13 +41,13 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
             <div className="text-center">
               <div className="mx-auto h-14 w-14 rounded-full border border-espresso/10 bg-bone" />
               <div className="mt-4 text-xs font-semibold uppercase text-mutedBrown">
-                Mountain Rose
+                Mountain Rose Leather Goods
               </div>
             </div>
           </div>
         )}
         <div className="absolute left-4 top-4 rounded-soft border border-espresso/10 bg-bone/90 px-3 py-2 text-xs font-semibold uppercase text-mutedRose">
-          Product view {activeIndex + 1}
+          Tampilan {activeIndex + 1}
         </div>
       </div>
 
@@ -66,7 +66,7 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
                   "relative aspect-square overflow-hidden rounded-soft border transition-colors",
                   isActive ? "border-antiqueGold/70" : "border-espresso/10 hover:border-espresso/20",
                 ].join(" ")}
-                aria-label={`View image ${idx + 1}`}
+                aria-label={`Tampilkan gambar ${idx + 1}`}
               >
                 {thumbUrl ? (
                   <Image

@@ -23,7 +23,7 @@ export default function ProductOrderCTA({ product, siteSettings }: ProductOrderC
         <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-7">
             <div className="text-xs font-semibold uppercase text-dustyRose">
-              Order
+              Konsultasi
             </div>
             <h2 className="mt-3 font-heading text-3xl leading-tight text-bone sm:text-4xl">
               Tertarik dengan {product.name}?
@@ -41,7 +41,7 @@ export default function ProductOrderCTA({ product, siteSettings }: ProductOrderC
                 <WhatsAppButton
                   phoneNumber={siteSettings.whatsappNumber}
                   message={message}
-                  label="Order via WhatsApp"
+                  label="Konsultasi via WhatsApp"
                 />
                 <Link
                   href="/collections"
@@ -52,7 +52,7 @@ export default function ProductOrderCTA({ product, siteSettings }: ProductOrderC
               </div>
               <div className="mt-6 flex items-center gap-3 text-xs font-semibold uppercase text-bone/70">
                 <span className="h-1.5 w-1.5 rounded-full bg-antiqueGold" />
-                Boutique consultation
+                Konsultasi boutique
               </div>
             </div>
           </div>
@@ -61,4 +61,3 @@ export default function ProductOrderCTA({ product, siteSettings }: ProductOrderC
     </section>
   );
 }
-

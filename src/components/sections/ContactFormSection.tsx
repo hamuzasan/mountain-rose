@@ -51,7 +51,7 @@ export default function ContactFormSection({ siteSettings }: ContactFormSectionP
         <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
           <div className="lg:col-span-5">
             <div className="text-xs font-semibold uppercase text-mutedRose">
-              Inquiry
+              Pertanyaan
             </div>
             <h2 className="mt-3 font-heading text-3xl leading-tight text-espresso">
               Form Konsultasi Singkat
@@ -75,7 +75,7 @@ export default function ContactFormSection({ siteSettings }: ContactFormSectionP
                     htmlFor="contact-name"
                     className="block text-xs font-semibold uppercase text-mutedRose"
                   >
-                    Name
+                    Nama
                   </label>
                   <input
                     id="contact-name"
@@ -92,7 +92,7 @@ export default function ContactFormSection({ siteSettings }: ContactFormSectionP
                     htmlFor="contact-wa"
                     className="block text-xs font-semibold uppercase text-mutedRose"
                   >
-                    WhatsApp number
+                    Nomor WhatsApp
                   </label>
                   <input
                     id="contact-wa"
@@ -111,7 +111,7 @@ export default function ContactFormSection({ siteSettings }: ContactFormSectionP
                   htmlFor="contact-interest"
                   className="block text-xs font-semibold uppercase text-mutedRose"
                 >
-                  Product interest
+                  Produk yang diminati
                 </label>
                 <input
                   id="contact-interest"
@@ -130,7 +130,7 @@ export default function ContactFormSection({ siteSettings }: ContactFormSectionP
                   htmlFor="contact-message"
                   className="block text-xs font-semibold uppercase text-mutedRose"
                 >
-                  Message
+                  Pesan
                 </label>
                 <textarea
                   id="contact-message"
@@ -150,7 +150,7 @@ export default function ContactFormSection({ siteSettings }: ContactFormSectionP
                   Kirim via WhatsApp
                 </button>
                 <div className="text-xs font-semibold uppercase text-mutedBrown">
-                  No data stored
+                  Data tidak disimpan
                 </div>
               </div>
             </form>
@@ -160,4 +160,3 @@ export default function ContactFormSection({ siteSettings }: ContactFormSectionP
     </section>
   );
 }
-

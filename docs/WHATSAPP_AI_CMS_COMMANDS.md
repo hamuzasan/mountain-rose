@@ -1,6 +1,6 @@
 # WhatsApp AI CMS Commands
 
-Only allowlisted admin numbers can use these commands. Products are created as drafts first. Review drafts in Sanity Studio before publishing.
+Only allowlisted admin numbers can use these commands. Products are created as drafts first in Supabase. Review drafts in `/admin/products` before publishing.
 
 ## HELP
 
@@ -25,7 +25,9 @@ Available: true
 Deskripsi singkat: Tas tote kulit sapi dengan karakter hangat dan elegan.
 ```
 
-Attach product photos when adding a product. The webhook will create a Sanity draft and reply with a summary. The owner should review the draft in Sanity Studio before publishing.
+Attach product photos when adding a product. The webhook will create or update a Supabase draft and reply with a summary. The owner should review the draft in `/admin/products` before publishing.
+
+If `GEMINI_API_KEY` is not configured yet, the endpoint can still read labeled fields such as `Nama:`, `Harga:`, `Kategori:`, and `Deskripsi singkat:`. Gemini can later improve free-form parsing and copy suggestions.
 
 ## PUBLISH_PRODUCT
 
@@ -33,7 +35,7 @@ Attach product photos when adding a product. The webhook will create a Sanity dr
 PUBLISH_PRODUCT rosewood-tote
 ```
 
-Publishes a reviewed draft product. Use only after checking content and images in Sanity Studio.
+Publishes a reviewed draft product. Use only after checking content and images in `/admin/products`.
 
 ## UPDATE_PRODUCT
 
@@ -51,5 +53,5 @@ Updates should be reviewed carefully. The current foundation recognizes the comm
 - Products are created as drafts first.
 - Publishing requires an explicit command.
 - Attach product photos when adding a product.
-- Review in Sanity Studio before publishing.
+- Review in `/admin/products` before publishing.
 - Do not send private customer data through this workflow.

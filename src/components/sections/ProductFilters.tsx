@@ -23,7 +23,7 @@ export default function ProductFilters({
   categories = [],
 }: ProductFiltersProps) {
   const categoryOptions = ["All", ...categories].map((category) => ({
-    label: category,
+    label: category === "All" ? "Semua" : category,
     value: category as ProductCategory,
   }));
 
@@ -35,7 +35,7 @@ export default function ProductFilters({
             htmlFor="filter-category"
             className="block text-xs font-semibold uppercase text-mutedRose"
           >
-            Category
+            Kategori
           </label>
           <select
             id="filter-category"
@@ -43,7 +43,7 @@ export default function ProductFilters({
             onChange={(e) =>
               onChange({ ...value, category: e.target.value as ProductCategory })
             }
-            className="mt-2 h-10 w-full rounded-soft border border-espresso/15 bg-warmIvory px-3 text-sm text-espresso outline-none transition-colors focus:border-antiqueGold/70"
+            className="mt-2 h-11 w-full rounded-soft border border-espresso/15 bg-warmIvory px-3 text-sm font-medium text-espresso outline-none transition-colors focus:border-antiqueGold/70 focus:ring-2 focus:ring-antiqueGold/20"
           >
             {categoryOptions.map((c) => (
               <option key={c.value} value={c.value}>
@@ -58,7 +58,7 @@ export default function ProductFilters({
             htmlFor="filter-availability"
             className="block text-xs font-semibold uppercase text-mutedRose"
           >
-            Availability
+            Ketersediaan
           </label>
           <select
             id="filter-availability"
@@ -69,11 +69,11 @@ export default function ProductFilters({
                 availability: e.target.value as AvailabilityFilter,
               })
             }
-            className="mt-2 h-10 w-full rounded-soft border border-espresso/15 bg-warmIvory px-3 text-sm text-espresso outline-none transition-colors focus:border-antiqueGold/70"
+            className="mt-2 h-11 w-full rounded-soft border border-espresso/15 bg-warmIvory px-3 text-sm font-medium text-espresso outline-none transition-colors focus:border-antiqueGold/70 focus:ring-2 focus:ring-antiqueGold/20"
           >
-            <option value="All">All</option>
-            <option value="Available">Available</option>
-            <option value="Not Available">Not Available</option>
+            <option value="All">Semua</option>
+            <option value="Available">Tersedia</option>
+            <option value="Not Available">Belum tersedia</option>
           </select>
         </div>
 
@@ -82,17 +82,17 @@ export default function ProductFilters({
             htmlFor="filter-sort"
             className="block text-xs font-semibold uppercase text-mutedRose"
           >
-            Sort
+            Urutan
           </label>
           <select
             id="filter-sort"
             value={value.sort}
             onChange={(e) => onChange({ ...value, sort: e.target.value as SortKey })}
-            className="mt-2 h-10 w-full rounded-soft border border-espresso/15 bg-warmIvory px-3 text-sm text-espresso outline-none transition-colors focus:border-antiqueGold/70"
+            className="mt-2 h-11 w-full rounded-soft border border-espresso/15 bg-warmIvory px-3 text-sm font-medium text-espresso outline-none transition-colors focus:border-antiqueGold/70 focus:ring-2 focus:ring-antiqueGold/20"
           >
-            <option value="Featured">Featured</option>
-            <option value="PriceLow">Price: Low to High</option>
-            <option value="PriceHigh">Price: High to Low</option>
+            <option value="Featured">Sorotan</option>
+            <option value="PriceLow">Harga: rendah ke tinggi</option>
+            <option value="PriceHigh">Harga: tinggi ke rendah</option>
           </select>
         </div>
       </div>

@@ -2,16 +2,12 @@ import Image from "next/image";
 
 import type { BrandStory } from "@/types/story";
 
-import { urlFor } from "@/sanity/lib/image";
-
 type StoryHeroProps = {
-  story: Pick<BrandStory, "title" | "subtitle" | "image">;
+  story: Pick<BrandStory, "title" | "subtitle" | "image" | "imageUrl">;
 };
 
 export default function StoryHero({ story }: StoryHeroProps) {
-  const imgUrl = story.image?.asset
-    ? urlFor(story.image)?.width(1600).height(1000).fit("crop").quality(85).url()
-    : null;
+  const imgUrl = story.imageUrl || null;
 
   return (
     <section className="bg-warmIvory">
@@ -74,20 +70,29 @@ export default function StoryHero({ story }: StoryHeroProps) {
                 />
               </div>
             ) : (
-              <div className="aspect-[4/3] w-full">
-                <div className="flex h-full w-full items-center justify-center">
-                  <div className="text-center">
-                    <div className="mx-auto h-12 w-12 rounded-full border border-espresso/10 bg-warmIvory" />
-                    <div className="mt-4 text-xs font-semibold uppercase text-mutedBrown">
-                      Editorial image placeholder
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-warmIvory">
+                <div className="absolute inset-x-8 bottom-10 top-10 rotate-[-5deg] border border-antiqueGold/25 bg-sand/35" />
+                <div className="absolute left-10 top-12 h-36 w-36 rounded-full border border-mutedRose/25" />
+                <div className="absolute bottom-12 right-12 h-44 w-44 rounded-full border border-espresso/10" />
+                <div className="absolute inset-x-12 bottom-16 h-24 rounded-t-full border-t border-cognac/35" />
+                <div className="relative flex h-full items-center justify-center">
+                  <div className="max-w-xs text-center">
+                    <div className="text-xs font-semibold uppercase text-mutedRose">
+                      Mountain Rose
                     </div>
+                    <div className="mt-3 font-heading text-3xl leading-tight text-espresso">
+                      Kulit, mawar, dan perjalanan panjang
+                    </div>
+                    <p className="mt-4 text-sm leading-7 text-mutedBrown">
+                      Visual editorial yang tenang untuk menceritakan karakter material dan detail handmade.
+                    </p>
                   </div>
                 </div>
               </div>
             )}
             <div className="absolute left-5 top-5 inline-flex items-center gap-2 rounded-soft border border-espresso/10 bg-warmIvory/80 px-3 py-2 text-xs font-semibold text-espresso">
               <span className="h-1.5 w-1.5 rounded-full bg-antiqueGold" />
-              Rose-inspired elegance
+              Elegansi terinspirasi mawar
             </div>
           </div>
         </div>
@@ -95,4 +100,3 @@ export default function StoryHero({ story }: StoryHeroProps) {
     </section>
   );
 }
-

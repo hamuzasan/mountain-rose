@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useId, useMemo, useState } from "react";
 
 import { FALLBACK_SITE_SETTINGS } from "@/data/fallbackSiteSettings";
@@ -26,23 +27,39 @@ export default function Navbar({ siteSettings }: NavbarProps) {
   const settings = useMemo(() => resolveSiteSettings(siteSettings), [siteSettings]);
   const [isOpen, setIsOpen] = useState(false);
   const menuId = useId();
+  const pathname = usePathname();
 
   return (
     <header className="sticky top-0 z-40 border-b border-espresso/10 bg-bone/95 backdrop-blur-[2px]">
       <nav
-        className="mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-4 sm:px-6"
+        className="relative mx-auto flex w-full max-w-7xl items-center justify-center px-5 py-4 sm:px-6 md:justify-between md:py-4"
         aria-label="Primary"
       >
+        <button
+          type="button"
+          className="fixed left-5 top-4 z-50 inline-flex h-10 w-10 items-center justify-center rounded-soft text-espresso transition-colors hover:bg-warmIvory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70 md:hidden"
+          aria-controls={menuId}
+          aria-expanded={isOpen}
+          aria-label={isOpen ? "Tutup menu" : "Buka menu"}
+          onClick={() => setIsOpen((v) => !v)}
+        >
+          <span className="relative block h-3.5 w-5" aria-hidden="true">
+            <span className="absolute left-0 top-0 h-px w-5 bg-espresso" />
+            <span className="absolute left-0 top-1.5 h-px w-5 bg-espresso" />
+            <span className="absolute left-0 top-3 h-px w-5 bg-espresso" />
+          </span>
+        </button>
+
         <Link
           href="/"
-          className="flex items-baseline gap-3 text-espresso hover:text-darkLeather"
+          className="flex flex-col items-center text-center text-espresso hover:text-darkLeather md:flex-row md:items-baseline md:gap-3 md:text-left"
           onClick={() => setIsOpen(false)}
         >
-          <span className="font-heading text-lg leading-none">
+          <span className="font-heading text-xl leading-none md:text-lg">
             {settings.brandName}
           </span>
-          <span className="hidden text-xs font-medium text-mutedBrown sm:inline">
-            Genuine Cow Leather
+          <span className="hidden text-xs font-medium text-mutedBrown sm:inline md:inline">
+            Kulit Sapi Handmade
           </span>
         </Link>
 
@@ -52,7 +69,12 @@ export default function Navbar({ siteSettings }: NavbarProps) {
               <Link
                 key={item.href}
                 href={item.href}
-                className="rounded-soft px-3 py-2 text-sm font-medium text-mutedBrown transition-colors hover:bg-bone hover:text-espresso"
+                className={[
+                  "rounded-soft px-3 py-2 text-sm font-medium transition-colors",
+                  pathname === item.href
+                    ? "bg-bone text-espresso"
+                    : "text-mutedBrown hover:bg-bone hover:text-espresso",
+                ].join(" ")}
               >
                 {item.label}
               </Link>
@@ -61,18 +83,6 @@ export default function Navbar({ siteSettings }: NavbarProps) {
           <WhatsAppButton phoneNumber={settings.whatsappNumber} />
         </div>
 
-        <div className="mobile-menu-shell fixed top-4 z-50 items-center gap-3">
-          <button
-            type="button"
-            className="inline-flex h-10 items-center justify-center rounded-soft border border-espresso/15 bg-warmIvory px-3 text-sm font-medium text-espresso transition-colors hover:bg-bone focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
-            aria-controls={menuId}
-            aria-expanded={isOpen}
-            aria-label={isOpen ? "Close menu" : "Open menu"}
-            onClick={() => setIsOpen((v) => !v)}
-          >
-            {isOpen ? "Close" : "Menu"}
-          </button>
-        </div>
       </nav>
 
       <div
@@ -88,7 +98,12 @@ export default function Navbar({ siteSettings }: NavbarProps) {
               <Link
                 key={item.href}
                 href={item.href}
-                className="rounded-soft px-2 py-2 text-sm font-medium text-mutedBrown transition-colors hover:bg-bone hover:text-espresso"
+                className={[
+                  "rounded-soft px-2 py-2 text-sm font-medium transition-colors",
+                  pathname === item.href
+                    ? "bg-bone text-espresso"
+                    : "text-mutedBrown hover:bg-bone hover:text-espresso",
+                ].join(" ")}
                 onClick={() => setIsOpen(false)}
               >
                 {item.label}

@@ -27,7 +27,8 @@ WHATSAPP_AI_CMS_ENABLED=false
 ```
 
 9. Test with `WHATSAPP_AI_CMS_ENABLED=false` first to confirm the endpoint responds safely.
-10. Set `WHATSAPP_AI_CMS_ENABLED=true` only after admin number allowlist, Sanity write token, and Gemini API are configured.
+10. Set `WHATSAPP_AI_CMS_ENABLED=true` only after admin number allowlist, Supabase service role key, and Fonnte token are configured.
+11. Gemini is recommended for free-form product messages, but labeled field messages can still create Supabase product drafts before Gemini is enabled.
 
 ### Expected Fonnte Payload
 
@@ -38,6 +39,16 @@ Fonnte payloads may vary by account and webhook setting. The endpoint uses a tol
 - Attachments: `attachments`, `files`, `media`, `image`, or similar nested values
 
 Do not assume public users are trusted. The endpoint rejects non-admin senders.
+
+### Supabase CMS Target
+
+The Fonnte webhook writes to Supabase, not Sanity:
+
+- `ADD_PRODUCT` creates or updates a draft row in `products`.
+- Attachments are uploaded to Supabase Storage bucket `product-images` when Fonnte provides reachable image URLs.
+- `UPDATE_PRODUCT slug-produk` updates existing product fields.
+- `PUBLISH_PRODUCT slug-produk` changes product status to `published`.
+- The owner should review all AI-created drafts in `/admin/products`.
 
 ## B. Meta WhatsApp Cloud API Production Setup
 

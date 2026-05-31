@@ -8,7 +8,8 @@ import StoryHero from "@/components/sections/StoryHero";
 import StoryIntro from "@/components/sections/StoryIntro";
 import { FALLBACK_SITE_SETTINGS } from "@/data/fallbackSiteSettings";
 import { FALLBACK_STORY } from "@/data/fallbackStory";
-import { getBrandStory, getSiteSettings } from "@/sanity/lib/queries";
+import { getBrandStory } from "@/data-access/story";
+import { getSiteSettings } from "@/data-access/siteSettings";
 
 export const metadata: Metadata = {
   title: "Cerita Mountain Rose | Tas Kulit Sapi Premium",
@@ -55,4 +56,3 @@ export default async function StoryPage() {
     </div>
   );
 }
-

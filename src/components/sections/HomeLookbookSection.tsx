@@ -33,10 +33,10 @@ export default function HomeLookbookSection({ products }: HomeLookbookSectionPro
           <div className="relative grid gap-10 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-5">
               <div className="text-xs font-semibold uppercase text-mutedRose">
-                Editorial Lookbook
+                Ruang Visual Katalog
               </div>
               <h2 className="mt-3 font-heading text-4xl leading-tight text-espresso sm:text-5xl">
-                Carry your world, carry it well.
+                Bawa ceritamu dengan karakter yang matang.
               </h2>
               <p className="mt-5 text-sm leading-7 text-mutedBrown sm:text-base">
                 Potongan visual yang hangat, tenang, dan editorial. Setiap gambar
@@ -46,7 +46,7 @@ export default function HomeLookbookSection({ products }: HomeLookbookSectionPro
                 href="/collections"
                 className="mt-7 inline-flex h-11 items-center justify-center rounded-soft border border-espresso/15 bg-warmIvory px-5 text-sm font-semibold text-espresso transition-colors hover:bg-bone focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
               >
-                New Arrivals
+                Lihat Koleksi
               </Link>
             </div>
 

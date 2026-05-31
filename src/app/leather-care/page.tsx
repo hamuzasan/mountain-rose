@@ -5,11 +5,12 @@ import LeatherCareGrid from "@/components/sections/LeatherCareGrid";
 import LeatherCareHero from "@/components/sections/LeatherCareHero";
 import { FALLBACK_SITE_SETTINGS } from "@/data/fallbackSiteSettings";
 import { FALLBACK_LEATHER_CARE_ARTICLES } from "@/data/fallbackLeatherCare";
-import { getLeatherCareArticles, getSiteSettings } from "@/sanity/lib/queries";
+import { getLeatherCareArticles } from "@/data-access/leatherCare";
+import { getSiteSettings } from "@/data-access/siteSettings";
 import type { LeatherCareArticle } from "@/types/leatherCare";
 
 export const metadata: Metadata = {
-  title: "Leather Care | Mountain Rose",
+  title: "Perawatan Kulit | Mountain Rose",
   description:
     "Panduan merawat tas kulit sapi asli agar tetap elegan, kuat, dan memiliki karakter yang indah seiring waktu.",
 };
@@ -20,6 +21,7 @@ function toArticle(a: {
   slug: string;
   excerpt?: string;
   coverImage?: LeatherCareArticle["coverImage"];
+  coverImageUrl?: string;
   publishedAt?: string;
 }): LeatherCareArticle {
   return {
@@ -28,6 +30,7 @@ function toArticle(a: {
     slug: a.slug,
     excerpt: a.excerpt,
     coverImage: a.coverImage,
+    coverImageUrl: a.coverImageUrl,
     publishedAt: a.publishedAt,
   };
 }
@@ -50,6 +53,7 @@ export default async function LeatherCarePage() {
           slug: string;
           excerpt?: string;
           coverImage?: LeatherCareArticle["coverImage"];
+          coverImageUrl?: string;
           publishedAt?: string;
         }>).map((a) => toArticle(a))
       : FALLBACK_LEATHER_CARE_ARTICLES;

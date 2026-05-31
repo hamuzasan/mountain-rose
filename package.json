@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "grant:admin": "tsx scripts/grant-admin-user.ts",
     "import:catalogue": "tsx scripts/import-catalogue-to-supabase.ts",
     "migrate:product-image-folders": "tsx scripts/migrate-product-image-folders.ts",
     "sync:product-images": "tsx scripts/sync-supabase-product-images.ts"
@@ -14,6 +15,7 @@
   "dependencies": {
     "@sanity/image-url": "^2.1.1",
     "@sanity/vision": "^5.27.0",
+    "@supabase/ssr": "^0.10.3",
     "@supabase/supabase-js": "^2.106.2",
     "next": "16.2.6",
     "next-sanity": "^12.4.5",

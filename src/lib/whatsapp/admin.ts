@@ -30,7 +30,8 @@ export function createHelpMessage() {
     "PUBLISH_PRODUCT slug-produk",
     "UPDATE_PRODUCT slug-produk",
     "",
-    "Produk AI dibuat sebagai draft terlebih dahulu. Review di Sanity Studio sebelum publish.",
+    "Produk AI dibuat sebagai draft terlebih dahulu. Review di /admin/products sebelum publish.",
+    "Jika GEMINI_API_KEY belum aktif, pakai format field berlabel seperti Nama:, Harga:, Kategori:, dan Deskripsi singkat:.",
   ].join("\n");
 }
 

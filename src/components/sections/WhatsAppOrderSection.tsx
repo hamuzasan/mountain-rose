@@ -15,7 +15,7 @@ export default function WhatsAppOrderSection({ siteSettings }: WhatsAppOrderSect
         <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-7">
             <div className="text-xs font-semibold uppercase text-dustyRose">
-              Order
+              Konsultasi
             </div>
             <h2 className="mt-3 font-heading text-3xl leading-tight text-bone sm:text-4xl">
               Siap Memilih Tas Kulit Mountain Rose?
@@ -30,7 +30,7 @@ export default function WhatsAppOrderSection({ siteSettings }: WhatsAppOrderSect
               <div className="flex flex-col gap-3 sm:flex-row">
                 <WhatsAppButton
                   phoneNumber={siteSettings.whatsappNumber}
-                  label="Order via WhatsApp"
+                  label="Konsultasi via WhatsApp"
                 />
                 <Link
                   href="/collections"
@@ -41,7 +41,7 @@ export default function WhatsAppOrderSection({ siteSettings }: WhatsAppOrderSect
               </div>
               <div className="mt-6 flex items-center gap-3 text-xs font-semibold uppercase text-bone/70">
                 <span className="h-1.5 w-1.5 rounded-full bg-antiqueGold" />
-                Calm consultation
+                Konsultasi yang tenang
               </div>
             </div>
           </div>
@@ -50,4 +50,3 @@ export default function WhatsAppOrderSection({ siteSettings }: WhatsAppOrderSect
     </section>
   );
 }
-

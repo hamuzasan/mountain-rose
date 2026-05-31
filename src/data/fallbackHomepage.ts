@@ -14,8 +14,12 @@ export type FeaturedProductFallback = {
   name: string;
   slug: string;
   price?: number;
+  priceAmount?: number;
+  priceCurrency?: string;
+  priceNote?: string;
   category?: string;
   shortDescription?: string;
+  material?: string;
   leatherType?: string;
   color?: string;
   isFeatured?: boolean;
@@ -28,10 +32,10 @@ export type FeaturedProductFallback = {
 };
 
 export const FALLBACK_HOMEPAGE: HomepageFallback = {
-  heroTitle: "Carry Your Story",
+  heroTitle: "Tas Kulit Sapi Asli dengan Karakter yang Bertahan Lama",
   heroSubtitle:
-    "Mountain Rose menghadirkan tas kulit sapi asli handmade dari Indonesia, dibuat untuk ketahanan, estetika, dan perjalanan yang penuh cerita.",
-  storySectionTitle: "Authenticity, Durability, and Aesthetics",
+    "Mountain Rose menghadirkan tas kulit sapi handmade dari Indonesia, dirancang dengan karakter kuat, detail rapi, dan elegansi yang tidak lekang oleh waktu.",
+  storySectionTitle: "Autentik, Tahan Lama, dan Berkarakter",
   storySectionText:
     "Berakar pada semangat alam dan keindahan pegunungan, setiap tas dibuat dari genuine cowhide dengan proses handmade oleh pengrajin lokal.",
   ctaTitle: "Temukan Tas Kulit yang Siap Menemani Perjalananmu",
@@ -41,52 +45,68 @@ export const FALLBACK_HOMEPAGE: HomepageFallback = {
 
 export const FALLBACK_FEATURED_PRODUCTS: FeaturedProductFallback[] = [
   {
-    _id: "fallback-rosewood-tote",
-    name: "Rosewood Tote",
-    slug: "rosewood-tote",
-    category: "Tote",
-    leatherType: "Kulit sapi asli",
+    _id: "fallback-papandayan-messenger",
+    name: "Papandayan Messenger",
+    slug: "papandayan-messenger",
+    category: "Messenger Bag",
+    material: "Genuine Cow Leather",
+    leatherType: "Genuine Cow Leather",
+    color: "Dark Brown",
+    priceAmount: 75,
+    priceCurrency: "USD",
     shortDescription:
-      "Siluet tote yang tenang, ruang lega, dan detail yang terasa rapi untuk rutinitas harian.",
+      "Messenger bag kulit sapi asli dengan siluet tegas dan ruang yang cukup untuk aktivitas harian.",
     isFeatured: true,
     isAvailable: true,
-    images: [
-      {
-        alt: "Rosewood Tote dalam nuansa kulit hangat (placeholder)",
-      },
-    ],
+    images: [],
   },
   {
-    _id: "fallback-alpine-sling",
-    name: "Alpine Sling",
-    slug: "alpine-sling",
+    _id: "fallback-sundaland-beauty-moon",
+    name: "Sundaland Beauty Moon",
+    slug: "sundaland-beauty-moon",
     category: "Sling Bag",
-    leatherType: "Kulit sapi asli",
+    material: "Genuine Cow Leather",
+    leatherType: "Genuine Cow Leather",
+    color: "Black",
+    priceAmount: 75,
+    priceCurrency: "USD",
     shortDescription:
-      "Ringkas, elegan, dan terasa ringan untuk langkah yang lebih bebas, tanpa kehilangan karakter.",
+      "Sling bag kulit sapi asli yang ringkas, elegan, dan praktis untuk perjalanan ringan.",
     isFeatured: true,
     isAvailable: true,
-    images: [
-      {
-        alt: "Alpine Sling dengan detail jahitan halus (placeholder)",
-      },
-    ],
+    images: [],
   },
   {
-    _id: "fallback-heritage-handbag",
-    name: "Heritage Handbag",
-    slug: "heritage-handbag",
-    category: "Handbag",
-    leatherType: "Kulit sapi asli",
+    _id: "fallback-sundaland-beauty-rose",
+    name: "Sundaland Beauty Rose",
+    slug: "sundaland-beauty-rose",
+    category: "Clutch & Sling Bag",
+    material: "Genuine Cow Leather",
+    leatherType: "Genuine Cow Leather",
+    color: "Black",
+    priceAmount: 75,
+    priceCurrency: "USD",
     shortDescription:
-      "Bentuk klasik yang matang, dibuat untuk menemani momen penting dengan kesan premium.",
+      "Tas clutch dan sling kulit sapi asli dengan siluet rapi dan aksen rose yang elegan.",
     isFeatured: true,
     isAvailable: true,
-    images: [
-      {
-        alt: "Heritage Handbag dengan tampilan editorial (placeholder)",
-      },
-    ],
+    images: [],
+  },
+  {
+    _id: "fallback-adler",
+    name: "Adler",
+    slug: "adler",
+    category: "Sling Bag",
+    material: "Genuine Cow Leather (Crazy Horse)",
+    leatherType: "Genuine Cow Leather (Crazy Horse)",
+    color: "Brown",
+    priceAmount: 50,
+    priceCurrency: "USD",
+    shortDescription:
+      "Sling bag kulit sapi crazy horse dengan karakter natural dan proporsi praktis.",
+    isFeatured: true,
+    isAvailable: true,
+    images: [],
   },
 ];
 

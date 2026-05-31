@@ -1,4 +1,7 @@
-import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { createBrowserClient } from "@supabase/ssr";
+import type { SupabaseClient } from "@supabase/supabase-js";
+
+import type { Database } from "./database.types";
 
 function getEnv() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
@@ -6,8 +9,10 @@ function getEnv() {
   return { url, anonKey };
 }
 
+let cachedClient: SupabaseClient<Database> | null = null;
+
 export function getSupabaseBrowserClient(): {
-  client: SupabaseClient | null;
+  client: SupabaseClient<Database> | null;
   error?: string;
 } {
   const { url, anonKey } = getEnv();
@@ -15,7 +20,11 @@ export function getSupabaseBrowserClient(): {
     return { client: null, error: "Supabase public configuration is missing." };
   }
 
+  if (!cachedClient) {
+    cachedClient = createBrowserClient<Database>(url, anonKey);
+  }
+
   return {
-    client: createClient(url, anonKey),
+    client: cachedClient,
   };
 }

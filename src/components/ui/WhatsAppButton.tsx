@@ -14,7 +14,7 @@ type WhatsAppButtonProps = {
   className?: string;
 };
 
-const DEFAULT_LABEL = "Order via WhatsApp";
+const DEFAULT_LABEL = "Konsultasi via WhatsApp";
 const DEFAULT_MESSAGE =
   "Halo Mountain Rose, saya tertarik dengan produk tas kulit sapi.";
 

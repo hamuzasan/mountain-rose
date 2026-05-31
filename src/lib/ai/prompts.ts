@@ -5,7 +5,7 @@ export function buildProductParsePrompt(input: GeminiProductParseInput) {
     "You are helping Mountain Rose, a premium genuine cow leather bag brand.",
     "Extract product data from this WhatsApp message.",
     "Return only valid JSON with these fields when available:",
-    "name, slug, price, category, shortDescription, description, leatherType, color, size, isFeatured, isAvailable, whatsAppMessage.",
+    "name, slug, price, priceAmount, priceCurrency, priceNote, category, shortDescription, description, material, leatherType, color, size, sourcePdfPage, isFeatured, isAvailable, whatsAppMessage.",
     "Use a refined Indonesian boutique tone. Do not invent unsupported facts.",
     "",
     "Message:",

@@ -1,6 +1,6 @@
 # Mountain Rose AI Features
 
-This document describes the safe technical foundation for future AI features. The website remains a premium Mountain Rose storefront with Sanity as the source of truth for products, content, and images.
+This document describes the safe technical foundation for future AI features. The website remains a premium Mountain Rose storefront with Supabase as the active CMS source of truth for products, content, and images.
 
 ## Planned Feature: Coba Tas Ini
 
@@ -13,7 +13,7 @@ Visitor opens product detail page
 Visitor uploads temporary photo
 Frontend sends photo + product slug to /api/ai/try-on
 Server validates feature flag, file type, and file size
-Server fetches product data and product image from Sanity or fallback
+Server fetches product data and product image from Supabase or fallback
 Server calls Gemini image editing
 Server returns generated preview
 Uploaded user photo is not stored permanently by default
@@ -29,7 +29,7 @@ Privacy rules:
 
 ## Planned Feature: WhatsApp AI CMS
 
-Goal: let the owner send product text and photos through WhatsApp. A webhook parses the message with Gemini, uploads images to Sanity, and creates a draft product for review.
+Goal: let the owner send product text and photos through WhatsApp. A webhook parses the message with Gemini or the safe labeled-field parser, uploads images to Supabase Storage when possible, and creates a draft product for review.
 
 Intended flow:
 
@@ -39,10 +39,10 @@ Provider posts webhook to /api/webhooks/whatsapp/fonnte or /api/webhooks/whatsap
 Server checks WHATSAPP_AI_CMS_ENABLED
 Server validates sender against ADMIN_WHATSAPP_NUMBERS
 Server parses command: HELP, ADD_PRODUCT, UPDATE_PRODUCT, PUBLISH_PRODUCT
-For ADD_PRODUCT, server calls Gemini text parser
-Server creates or updates a draft product in Sanity
+For ADD_PRODUCT, server calls Gemini text parser or the labeled-field parser
+Server creates or updates a draft product in Supabase
 Server replies with a summary and review/publish instruction
-Owner reviews content in Sanity Studio
+Owner reviews content in /admin/products
 Owner sends explicit PUBLISH_PRODUCT command when ready
 ```
 
@@ -52,7 +52,7 @@ Rules:
 - Only allowlisted owner/admin numbers may trigger CMS actions.
 - AI-created products must be drafts first.
 - Publishing requires explicit owner confirmation.
-- Sanity remains the source of truth after draft creation.
+- Supabase remains the source of truth after draft creation.
 
 ## Required Environment Variables
 
@@ -60,7 +60,7 @@ Rules:
 GEMINI_API_KEY=
 GEMINI_TEXT_MODEL=
 GEMINI_IMAGE_MODEL=
-SANITY_WRITE_TOKEN=
+SUPABASE_SERVICE_ROLE_KEY=
 WHATSAPP_PROVIDER=fonnte
 ADMIN_WHATSAPP_NUMBERS=6280000000000
 FONNTE_TOKEN=
@@ -83,13 +83,13 @@ Gemini is planned for:
 - Suggesting refined product copy in the Mountain Rose tone.
 - Editing visitor photos for the future "Coba Tas Ini" preview.
 
-The current foundation returns safe errors when `GEMINI_API_KEY` is missing and keeps paid image generation disabled behind feature flags.
+The current foundation can parse labeled WhatsApp product fields without `GEMINI_API_KEY`, returns safe errors for AI-only work when Gemini is missing, and keeps paid image generation disabled behind feature flags.
 
-## Sanity Write Token Usage
+## Supabase Service Role Usage
 
-`SANITY_WRITE_TOKEN` is used only by server-side mutation helpers. It should have the minimum permissions required to create drafts, upload assets, and publish reviewed documents.
+`SUPABASE_SERVICE_ROLE_KEY` is used only by server-side mutation helpers. It can bypass RLS and must never be exposed to the browser.
 
-Do not import Sanity write helpers into client components.
+Do not import Supabase service-role helpers into client components.
 
 ## WhatsApp Provider Options
 

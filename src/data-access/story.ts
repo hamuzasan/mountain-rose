@@ -28,6 +28,7 @@ export async function getBrandStory(): Promise<BrandStory> {
     ctaTitle: data?.cta_title || FALLBACK_STORY.ctaTitle,
     ctaText: data?.cta_text || FALLBACK_STORY.ctaText,
     content: undefined,
-    image: data?.image_url ? { alt: "Mountain Rose story image" } : undefined,
+    imageUrl: data?.image_url || FALLBACK_STORY.imageUrl,
+    image: data?.image_url ? { alt: "Foto editorial cerita Mountain Rose" } : undefined,
   };
 }
