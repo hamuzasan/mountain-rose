@@ -32,7 +32,7 @@ function StatusBadge({
 
 export default async function AdminWhatsAppDebugPage() {
   await requireAdmin();
-  const { logs, env, error } = await getWhatsAppDebugState();
+  const { logs, env, error, renderedAt, deploymentId } = await getWhatsAppDebugState();
 
   return (
     <div className="bg-warmIvory px-5 py-10 sm:px-6 lg:py-14">
@@ -67,6 +67,9 @@ export default async function AdminWhatsAppDebugPage() {
             Ini tidak menampilkan nilai rahasia, hanya mengecek apakah environment variable
             penting sudah terbaca di server.
           </p>
+          <div className="mt-4 rounded-soft border border-espresso/10 bg-warmIvory px-4 py-3 text-xs uppercase tracking-[0.12em] text-mutedBrown">
+            Rendered at: {new Date(renderedAt).toLocaleString("id-ID")} · Deployment: {deploymentId}
+          </div>
           <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <StatusBadge ok={env.whatsappAiCmsEnabled} label="WHATSAPP_AI_CMS_ENABLED" />
             <StatusBadge ok={env.adminWhatsAppNumbers} label="ADMIN_WHATSAPP_NUMBERS" />
@@ -86,6 +89,9 @@ export default async function AdminWhatsAppDebugPage() {
                 Setelah kamu kirim <span className="font-semibold text-espresso">HELP</span> ke
                 nomor device Fonnte, refresh halaman ini. Kalau log kosong, berarti webhook
                 belum sampai ke Vercel.
+              </p>
+              <p className="mt-2 text-xs uppercase tracking-[0.12em] text-mutedBrown">
+                Urutan log: terbaru ke lama.
               </p>
             </div>
             <Link

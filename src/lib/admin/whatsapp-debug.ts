@@ -29,12 +29,20 @@ function getEnvStatus() {
 
 export async function getWhatsAppDebugState() {
   const env = getEnvStatus();
+  const renderedAt = new Date().toISOString();
+  const deploymentId =
+    process.env.VERCEL_GIT_COMMIT_SHA ||
+    process.env.VERCEL_GIT_COMMIT_REF ||
+    process.env.NODE_ENV ||
+    "unknown";
   const { client, error } = getSupabaseAdminClient();
 
   if (!client) {
     return {
       logs: [] as WhatsAppDebugLog[],
       env,
+      renderedAt,
+      deploymentId,
       error: error || "Supabase admin client belum siap.",
     };
   }
@@ -48,6 +56,8 @@ export async function getWhatsAppDebugState() {
   return {
     logs: (data || []) as WhatsAppDebugLog[],
     env,
+    renderedAt,
+    deploymentId,
     error: logsError?.message,
   };
 }
