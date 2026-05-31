@@ -56,6 +56,40 @@ async function autoProvisionAdminProfile(user: { id: string; email?: string | nu
   return data as AdminProfile;
 }
 
+async function reconcileAdminProfileByEmail(user: {
+  id: string;
+  email?: string | null;
+}) {
+  const email = user.email?.trim().toLowerCase();
+  if (!email) return null;
+
+  const { client } = getSupabaseAdminClient();
+  if (!client) return null;
+
+  const { data: existingByEmail, error: existingError } = await client
+    .from("admin_profiles")
+    .select("id,email,role")
+    .eq("email", email)
+    .maybeSingle();
+
+  if (existingError || !existingByEmail) return null;
+
+  if (existingByEmail.id === user.id) {
+    return existingByEmail as AdminProfile;
+  }
+
+  const { data, error } = await client
+    .from("admin_profiles")
+    .update({ id: user.id })
+    .eq("email", email)
+    .select("id,email,role")
+    .maybeSingle();
+
+  if (error || !data) return null;
+
+  return data as AdminProfile;
+}
+
 export async function getAdminSession() {
   const { client, error } = await getSupabaseAuthServerClient();
   if (!client) {
@@ -86,7 +120,9 @@ export async function getAdminSession() {
     .maybeSingle();
 
   const resolvedProfile =
-    (profile as AdminProfile | null) || (await autoProvisionAdminProfile(user));
+    (profile as AdminProfile | null) ||
+    (await reconcileAdminProfileByEmail(user)) ||
+    (await autoProvisionAdminProfile(user));
 
   return {
     user,
