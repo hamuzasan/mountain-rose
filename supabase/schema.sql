@@ -126,6 +126,19 @@ create table if not exists public.admin_profiles (
   created_at timestamptz default now()
 );
 
+create table if not exists public.whatsapp_webhook_logs (
+  id uuid primary key default gen_random_uuid(),
+  provider text not null,
+  stage text not null,
+  status text not null default 'info',
+  sender text,
+  command text,
+  detail text,
+  payload jsonb,
+  parsed jsonb,
+  created_at timestamptz default now()
+);
+
 -- updated_at triggers
 drop trigger if exists set_updated_at_collections on public.collections;
 create trigger set_updated_at_collections
@@ -179,6 +192,7 @@ alter table public.homepage_content enable row level security;
 alter table public.brand_story enable row level security;
 alter table public.leather_care_articles enable row level security;
 alter table public.admin_profiles enable row level security;
+alter table public.whatsapp_webhook_logs enable row level security;
 
 -- Admin profiles: users can read their own admin row (so policies can check membership safely)
 drop policy if exists "admin_profiles_read_own" on public.admin_profiles;
@@ -300,6 +314,21 @@ with check (exists (select 1 from public.admin_profiles ap where ap.id = (select
 drop policy if exists "admin_profiles_admin_manage" on public.admin_profiles;
 create policy "admin_profiles_admin_manage"
 on public.admin_profiles
+for all
+to authenticated
+using (exists (select 1 from public.admin_profiles ap where ap.id = (select auth.uid())))
+with check (exists (select 1 from public.admin_profiles ap where ap.id = (select auth.uid())));
+
+drop policy if exists "whatsapp_webhook_logs_admin_read" on public.whatsapp_webhook_logs;
+create policy "whatsapp_webhook_logs_admin_read"
+on public.whatsapp_webhook_logs
+for select
+to authenticated
+using (exists (select 1 from public.admin_profiles ap where ap.id = (select auth.uid())));
+
+drop policy if exists "whatsapp_webhook_logs_admin_write" on public.whatsapp_webhook_logs;
+create policy "whatsapp_webhook_logs_admin_write"
+on public.whatsapp_webhook_logs
 for all
 to authenticated
 using (exists (select 1 from public.admin_profiles ap where ap.id = (select auth.uid())))

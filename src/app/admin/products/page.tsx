@@ -276,6 +276,12 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
           </div>
           <div className="flex flex-wrap gap-3">
             <Link
+              href="/admin/whatsapp-debug"
+              className="inline-flex min-h-11 items-center rounded-full border border-espresso/15 bg-bone px-5 text-sm font-semibold text-espresso"
+            >
+              Debug WhatsApp
+            </Link>
+            <Link
               href="/collections"
               className="inline-flex min-h-11 items-center rounded-full border border-espresso/15 bg-bone px-5 text-sm font-semibold text-espresso"
             >
@@ -402,6 +408,12 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
                 Set webhook ke /api/webhooks/whatsapp/fonnte, isi FONNTE_TOKEN,
                 ADMIN_WHATSAPP_NUMBERS, dan aktifkan WHATSAPP_AI_CMS_ENABLED=true.
               </p>
+              <Link
+                href="/admin/whatsapp-debug"
+                className="mt-4 inline-flex min-h-11 items-center rounded-full border border-antiqueGold/30 bg-warmIvory/10 px-5 text-sm font-semibold text-warmIvory"
+              >
+                Lihat debug webhook
+              </Link>
               <pre className="mt-4 overflow-x-auto rounded-soft bg-darkLeather p-4 text-xs leading-5 text-bone">
 {`ADD_PRODUCT
 Nama: Sundaland Beauty Rose

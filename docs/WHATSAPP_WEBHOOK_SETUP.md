@@ -29,6 +29,7 @@ WHATSAPP_AI_CMS_ENABLED=false
 9. Test with `WHATSAPP_AI_CMS_ENABLED=false` first to confirm the endpoint responds safely.
 10. Set `WHATSAPP_AI_CMS_ENABLED=true` only after admin number allowlist, Supabase service role key, and Fonnte token are configured.
 11. Gemini is recommended for free-form product messages, but labeled field messages can still create Supabase product drafts before Gemini is enabled.
+12. Untuk debugging, buka `/admin/whatsapp-debug` setelah mengirim pesan. Halaman ini akan menunjukkan apakah webhook masuk, nomor pengirim terbaca, command terdeteksi, dan apakah balasan Fonnte berhasil dikirim.
 
 ### Expected Fonnte Payload
 
@@ -49,6 +50,7 @@ The Fonnte webhook writes to Supabase, not Sanity:
 - `UPDATE_PRODUCT slug-produk` updates existing product fields.
 - `PUBLISH_PRODUCT slug-produk` changes product status to `published`.
 - The owner should review all AI-created drafts in `/admin/products`.
+- Debug event terbaru dapat dilihat di `/admin/whatsapp-debug`.
 
 ## B. Meta WhatsApp Cloud API Production Setup
 
