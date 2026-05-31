@@ -141,10 +141,13 @@ export async function POST(request: Request) {
     parsed: {
       sender: inbound.sender,
       text: inbound.text,
+      eventType: inbound.eventType,
       attachmentCount: inbound.attachments.length,
       isSelfMessage: inbound.isSelfMessage,
       isOutboundMessage: inbound.isOutboundMessage,
       contentType: request.headers.get("content-type"),
+      payloadKeys:
+        payload && typeof payload === "object" ? Object.keys(payload as Record<string, unknown>) : [],
     },
   });
 
@@ -169,6 +172,29 @@ export async function POST(request: Request) {
       },
     });
     return jsonResponse({ ok: true, ignored: "self_message" });
+  }
+
+  if (inbound.eventType !== "message" || (!inbound.sender && !inbound.text)) {
+    await logWhatsAppWebhookDebug({
+      provider: "fonnte",
+      stage: "non_message_event_ignored",
+      status: "warning",
+      sender: inbound.sender,
+      command: command.action,
+      detail:
+        inbound.eventType === "message_status"
+          ? "Payload status pesan diterima dan diabaikan."
+          : inbound.eventType === "device_status"
+            ? "Payload status device diterima dan diabaikan."
+            : "Payload tidak terlihat seperti pesan chat masuk, jadi diabaikan.",
+      payload,
+      parsed: {
+        eventType: inbound.eventType,
+        sender: inbound.sender,
+        text: inbound.text,
+      },
+    });
+    return jsonResponse({ ok: true, ignored: inbound.eventType || "unknown" });
   }
 
   if (!isWhatsAppAiCmsEnabled()) {
@@ -197,7 +223,7 @@ export async function POST(request: Request) {
       detail: "Nomor pengirim tidak ada di ADMIN_WHATSAPP_NUMBERS.",
       payload,
     });
-    return jsonResponse({ ok: false, error: "Sender is not allowlisted." }, 403);
+    return jsonResponse({ ok: true, ignored: "sender_not_allowlisted" });
   }
 
   if (command.action === "HELP" || command.action === "UNKNOWN") {

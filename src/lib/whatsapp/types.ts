@@ -11,6 +11,7 @@ export type InboundWhatsAppMessage = {
   attachments: WhatsAppAttachment[];
   isSelfMessage?: boolean;
   isOutboundMessage?: boolean;
+  eventType?: "message" | "message_status" | "device_status" | "unknown";
   raw: unknown;
 };
 

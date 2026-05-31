@@ -70,6 +70,32 @@ function collectAttachments(input: unknown): WhatsAppAttachment[] {
   });
 }
 
+function listObjectKeys(input: unknown): string[] {
+  if (!input || typeof input !== "object") return [];
+  return Object.keys(input as Record<string, unknown>);
+}
+
+function inferEventType(payload: unknown, sender: string, text: string) {
+  const data =
+    payload && typeof payload === "object"
+      ? ((payload as Record<string, unknown>).data as Record<string, unknown> | undefined)
+      : undefined;
+
+  if (sender || text) return "message" as const;
+
+  const keys = [...listObjectKeys(payload), ...listObjectKeys(data)].map((key) => key.toLowerCase());
+
+  if (keys.some((key) => ["status", "state", "delivery", "read", "inboxid"].includes(key))) {
+    return "message_status" as const;
+  }
+
+  if (keys.some((key) => ["device", "connected", "battery", "charging", "qrcode", "qr"].includes(key))) {
+    return "device_status" as const;
+  }
+
+  return "unknown" as const;
+}
+
 export function parseFonnteWebhookPayload(payload: unknown): InboundWhatsAppMessage {
   const data =
     payload && typeof payload === "object"
@@ -77,12 +103,34 @@ export function parseFonnteWebhookPayload(payload: unknown): InboundWhatsAppMess
       : undefined;
 
   const sender = normalizeWhatsAppNumber(
-    firstStringValue(payload, ["sender", "from", "number", "phone"]) ||
-      firstStringValue(data, ["sender", "from", "number", "phone"]),
+    firstStringValue(payload, [
+      "sender",
+      "from",
+      "number",
+      "phone",
+      "participant",
+      "member",
+      "author",
+      "jid",
+      "chat",
+      "remoteJid",
+    ]) ||
+      firstStringValue(data, [
+        "sender",
+        "from",
+        "number",
+        "phone",
+        "participant",
+        "member",
+        "author",
+        "jid",
+        "chat",
+        "remoteJid",
+      ]),
   );
   const text =
-    firstStringValue(payload, ["message", "text", "body", "caption"]) ||
-    firstStringValue(data, ["message", "text", "body", "caption"]);
+    firstStringValue(payload, ["message", "text", "body", "caption", "submission", "pollname"]) ||
+    firstStringValue(data, ["message", "text", "body", "caption", "submission", "pollname"]);
 
   const selfFlag =
     findBooleanValue(payload, [
@@ -126,6 +174,7 @@ export function parseFonnteWebhookPayload(payload: unknown): InboundWhatsAppMess
     attachments: collectAttachments(payload),
     isSelfMessage: Boolean(selfFlag),
     isOutboundMessage: Boolean(outboundFlag),
+    eventType: inferEventType(payload, sender, text),
     raw: payload,
   };
 }
