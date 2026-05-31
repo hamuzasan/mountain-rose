@@ -9,6 +9,8 @@ export type InboundWhatsAppMessage = {
   sender: string;
   text: string;
   attachments: WhatsAppAttachment[];
+  isSelfMessage?: boolean;
+  isOutboundMessage?: boolean;
   raw: unknown;
 };
 

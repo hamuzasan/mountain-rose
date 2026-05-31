@@ -22,6 +22,15 @@ import type { AiCmsAction } from "@/types/aiCms";
 
 export const runtime = "nodejs";
 
+const BOT_REPLY_PREFIXES = [
+  "Mountain Rose AI CMS commands:",
+  "Draft produk Mountain Rose berhasil dibuat.",
+  "Produk belum bisa dibuat.",
+  "Produk belum bisa diupdate.",
+  "Draft produk",
+  "Produk ",
+];
+
 function getCommand(text: string): { action: AiCmsAction; arg?: string } {
   const [firstLine = ""] = text.trim().split(/\r?\n/);
   const [command = "", arg = ""] = firstLine.trim().split(/\s+/, 2);
@@ -133,9 +142,34 @@ export async function POST(request: Request) {
       sender: inbound.sender,
       text: inbound.text,
       attachmentCount: inbound.attachments.length,
+      isSelfMessage: inbound.isSelfMessage,
+      isOutboundMessage: inbound.isOutboundMessage,
       contentType: request.headers.get("content-type"),
     },
   });
+
+  const looksLikeBotReply = BOT_REPLY_PREFIXES.some((prefix) =>
+    inbound.text.trim().startsWith(prefix),
+  );
+
+  if (inbound.isSelfMessage || inbound.isOutboundMessage || looksLikeBotReply) {
+    await logWhatsAppWebhookDebug({
+      provider: "fonnte",
+      stage: "self_message_ignored",
+      status: "warning",
+      sender: inbound.sender,
+      command: command.action,
+      detail: "Pesan terdeteksi sebagai balasan bot/outgoing message dan diabaikan untuk mencegah loop.",
+      payload,
+      parsed: {
+        isSelfMessage: inbound.isSelfMessage,
+        isOutboundMessage: inbound.isOutboundMessage,
+        looksLikeBotReply,
+        text: inbound.text,
+      },
+    });
+    return jsonResponse({ ok: true, ignored: "self_message" });
+  }
 
   if (!isWhatsAppAiCmsEnabled()) {
     await logWhatsAppWebhookDebug({

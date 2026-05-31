@@ -3,6 +3,24 @@ import "server-only";
 import { normalizeWhatsAppNumber } from "./admin";
 import type { InboundWhatsAppMessage, WhatsAppAttachment, WhatsAppReplyResult } from "./types";
 
+function findBooleanValue(input: unknown, keys: string[]): boolean | null {
+  if (!input || typeof input !== "object") return null;
+  const record = input as Record<string, unknown>;
+
+  for (const key of keys) {
+    const value = record[key];
+    if (typeof value === "boolean") return value;
+    if (typeof value === "number") return value !== 0;
+    if (typeof value === "string") {
+      const normalized = value.trim().toLowerCase();
+      if (["true", "1", "yes"].includes(normalized)) return true;
+      if (["false", "0", "no"].includes(normalized)) return false;
+    }
+  }
+
+  return null;
+}
+
 function firstStringValue(input: unknown, keys: string[]): string {
   if (!input || typeof input !== "object") return "";
   const record = input as Record<string, unknown>;
@@ -66,10 +84,48 @@ export function parseFonnteWebhookPayload(payload: unknown): InboundWhatsAppMess
     firstStringValue(payload, ["message", "text", "body", "caption"]) ||
     firstStringValue(data, ["message", "text", "body", "caption"]);
 
+  const selfFlag =
+    findBooleanValue(payload, [
+      "isFromMe",
+      "fromMe",
+      "self",
+      "owner",
+      "isOwner",
+      "from_self",
+    ]) ??
+    findBooleanValue(data, [
+      "isFromMe",
+      "fromMe",
+      "self",
+      "owner",
+      "isOwner",
+      "from_self",
+    ]);
+
+  const outboundFlag =
+    findBooleanValue(payload, [
+      "isOutbound",
+      "outbound",
+      "isOutgoing",
+      "outgoing",
+      "sent",
+      "sentByMe",
+    ]) ??
+    findBooleanValue(data, [
+      "isOutbound",
+      "outbound",
+      "isOutgoing",
+      "outgoing",
+      "sent",
+      "sentByMe",
+    ]);
+
   return {
     sender,
     text,
     attachments: collectAttachments(payload),
+    isSelfMessage: Boolean(selfFlag),
+    isOutboundMessage: Boolean(outboundFlag),
     raw: payload,
   };
 }
