@@ -1,10 +1,10 @@
 import type { MetadataRoute } from "next";
 
 import { absoluteUrl } from "@/config/site";
+import { getAllProducts } from "@/data-access/products";
+import { getLeatherCareArticles } from "@/data-access/leatherCare";
 import { getFallbackLeatherCareArticles } from "@/lib/leatherCare";
 import { getFallbackProducts } from "@/lib/products";
-import { getAllProducts } from "@/data-access/products";
-import { getLeatherCareArticles } from "@/sanity/lib/queries";
 
 type SitemapEntry = MetadataRoute.Sitemap[number];
 

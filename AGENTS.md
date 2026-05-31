@@ -16,21 +16,21 @@ Use the documented design tokens and component rules as the source of truth.
 
 ## CMS Rules
 
-Sanity is the source of truth for product and content data.
+Supabase is the source of truth for product and content data.
 
 - Do not hardcode product content in page components unless it is temporary placeholder data.
-- Use typed CMS query helpers from `src/sanity/lib/queries.ts`.
+- Use typed data-access helpers from `src/data-access/`.
 - Do not bypass the design system when rendering CMS content.
 - CMS content must be displayed using the Mountain Rose visual style.
-- Keep Sanity schemas aligned with the premium genuine cow leather bag brand, the rose-inspired boutique identity, and the Indonesian copywriting guidance.
+- Keep the Supabase schema, admin CMS, and product/content workflow aligned with the premium genuine cow leather bag brand, the rose-inspired boutique identity, and the Indonesian copywriting guidance.
 
 ## AI Rules
 
 AI features must stay server-side, reviewed, and privacy-conscious.
 
-- Never expose `GEMINI_API_KEY`, `SANITY_WRITE_TOKEN`, `FONNTE_TOKEN`, Meta WhatsApp tokens, or other secrets to the browser.
+- Never expose `GEMINI_API_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `FONNTE_TOKEN`, Meta WhatsApp tokens, or other secrets to the browser.
 - Gemini API calls must happen server-side only.
-- Sanity write helpers and `SANITY_WRITE_TOKEN` must never be imported into client components.
+- Supabase admin helpers and `SUPABASE_SERVICE_ROLE_KEY` must never be imported into client components.
 - WhatsApp AI CMS updates must require an owner/admin allowlist check.
 - Public users must never be able to create CMS content.
 - AI-created CMS content must follow a draft-before-publish workflow.

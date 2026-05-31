@@ -1,31 +1,23 @@
-# CMS Migration: Sanity to Supabase
+# Supabase CMS Status
 
-Supabase is the active CMS backend:
+Mountain Rose now uses Supabase as the only active CMS backend.
 
-- Postgres for structured content
-- Storage for images
-- Auth for admin access
-- Custom admin UI at `/admin`
+## Current Source of Truth
 
-Sanity is deprecated but temporarily kept to avoid breaking the public website during migration.
+- Supabase Postgres for structured content
+- Supabase Storage for product images
+- Supabase Auth for admin access
+- Custom admin CMS at `/admin`
 
-## Migration Approach
+## Current Editing Flow
 
-1. Add Supabase foundation: client utilities, schema, RLS policies, and safe data-access placeholders.
-2. Migrate public read paths page-by-page to use Supabase data-access.
-3. Use `/admin/products` for product catalogue editing, image upload, draft/publish status, and review of AI-created drafts.
-4. Retarget imports:
-   - PDF catalogue import should write to Supabase tables + Storage.
-   - WhatsApp AI CMS writes to Supabase tables + Storage.
-5. Remove Sanity only after:
-   - all public pages use Supabase
-   - admin CMS is stable
-   - content parity is verified
+1. Products are added and edited in `/admin/products`.
+2. Product images are stored in Supabase Storage bucket `product-images`.
+3. WhatsApp AI CMS commands write draft products into Supabase.
+4. Drafts are reviewed in the admin CMS before they are published.
 
 ## Rules
 
-- Do not break the public website.
-- Do not remove Sanity until migration is complete.
 - Do not allow public writes to CMS tables.
 - Draft content must not appear on public pages.
-- Admin writes require allowlisted authenticated admins.
+- Admin writes require authenticated allowlisted admins.

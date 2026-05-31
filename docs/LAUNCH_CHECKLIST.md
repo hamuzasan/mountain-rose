@@ -6,9 +6,9 @@
 - [ ] `npm run build` passes.
 - [ ] `.env.example` is complete.
 - [ ] `.env.local` is not committed.
-- [ ] Sanity project ID is correct.
-- [ ] Sanity dataset is correct.
-- [ ] Sanity CORS/origin settings include the final production domain.
+- [ ] Supabase URL is correct.
+- [ ] Supabase anon key is correct.
+- [ ] Supabase service role key is configured server-side only.
 - [ ] Site Settings is filled in CMS.
 - [ ] Homepage content is filled in CMS.
 - [ ] Products are filled in CMS.
@@ -31,7 +31,8 @@
 - [ ] `/leather-care` loads.
 - [ ] Article detail pages load.
 - [ ] `/contact` loads.
-- [ ] `/studio` loads.
+- [ ] `/admin/login` loads.
+- [ ] `/admin/products` loads.
 - [ ] `/sitemap.xml` loads.
 - [ ] `/robots.txt` loads.
 - [ ] WhatsApp buttons work.

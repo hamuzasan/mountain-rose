@@ -13,15 +13,11 @@
     "sync:product-images": "tsx scripts/sync-supabase-product-images.ts"
   },
   "dependencies": {
-    "@sanity/image-url": "^2.1.1",
-    "@sanity/vision": "^5.27.0",
     "@supabase/ssr": "^0.10.3",
     "@supabase/supabase-js": "^2.106.2",
     "next": "16.2.6",
-    "next-sanity": "^12.4.5",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "sanity": "^5.27.0",
     "styled-components": "^6.4.2"
   },
   "devDependencies": {

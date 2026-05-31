@@ -1,8 +1,8 @@
 # Mountain Rose CMS Content Guide
 
-This guide explains how to fill Mountain Rose content in Sanity Studio. Use it together with `docs/BRAND_GUIDE.md`, `docs/DESIGN_SYSTEM.md`, and `docs/CMS_MODEL.md`.
+This guide explains how to fill Mountain Rose content in the Supabase-based admin CMS. Use it together with `docs/BRAND_GUIDE.md`, `docs/DESIGN_SYSTEM.md`, and `docs/CMS_MODEL.md`.
 
-Sanity is the source of truth for editable website content. Keep copy elegant, calm, premium, refined, and trustworthy.
+Supabase is the source of truth for editable website content. Keep copy elegant, calm, premium, refined, and trustworthy.
 
 ## Recommended Entry Order
 

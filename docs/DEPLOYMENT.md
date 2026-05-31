@@ -10,19 +10,17 @@ Set these in Vercel Project Settings > Environment Variables:
 
 ```env
 NEXT_PUBLIC_SITE_URL=https://mountainrose.id
-NEXT_PUBLIC_SANITY_PROJECT_ID=
-NEXT_PUBLIC_SANITY_DATASET=production
-NEXT_PUBLIC_SANITY_API_VERSION=
-SANITY_API_READ_TOKEN=
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
 ```
 
 Notes:
 
 - `NEXT_PUBLIC_SITE_URL` is public-safe and should be the final production domain.
-- `NEXT_PUBLIC_SANITY_PROJECT_ID` is public-safe.
-- `NEXT_PUBLIC_SANITY_DATASET` is public-safe.
-- `NEXT_PUBLIC_SANITY_API_VERSION` is public-safe.
-- `SANITY_API_READ_TOKEN` must stay server-only. Do not expose it in browser code or prefix it with `NEXT_PUBLIC_`.
+- `NEXT_PUBLIC_SUPABASE_URL` is public-safe.
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY` is public-safe only when RLS is configured correctly.
+- `SUPABASE_SERVICE_ROLE_KEY` must stay server-only. Do not expose it in browser code or prefix it with `NEXT_PUBLIC_`.
 
 ## Vercel Setup
 
@@ -41,22 +39,21 @@ Notes:
 4. Set `NEXT_PUBLIC_SITE_URL=https://mountainrose.id`.
 5. Redeploy after the environment variable is confirmed.
 
-## Sanity Studio
+## Admin CMS
 
-The embedded Studio route is:
+The admin CMS routes are:
 
 ```text
-/studio
+/admin/login
+/admin/products
+/admin/whatsapp-debug
 ```
 
 After deployment, check:
 
-- `/studio` loads.
+- `/admin/login` loads.
 - Authorized users can log in.
-- The Sanity project ID and dataset are correct.
-- CORS/origin settings in Sanity allow the production domain.
-
-`robots.txt` disallows `/studio` from indexing, but it does not block users from opening the Studio.
+- Product and content data can be read from Supabase.
 
 ## SEO Checks
 
@@ -65,7 +62,7 @@ After deployment, verify:
 - `/sitemap.xml` loads.
 - `/robots.txt` loads.
 - `robots.txt` allows public pages.
-- `robots.txt` disallows `/studio`, `/studio/`, and `/api/`.
+- `robots.txt` disallows `/admin`, `/admin/`, and `/api/`.
 - `robots.txt` includes `https://mountainrose.id/sitemap.xml`.
 - Shared links use the expected metadata and Open Graph image.
 
@@ -85,9 +82,9 @@ Use `npm run start` only after `npm run build`.
 
 ## Production Content Warning
 
-Fallback data is useful during development, but production content should be filled in Sanity CMS so the website shows real Mountain Rose products, real images, and real business information.
+Fallback data is useful during development, but production content should be filled in Supabase CMS so the website shows real Mountain Rose products, real images, and real business information.
 
-Replace these placeholder values in Sanity Site Settings before launch:
+Replace these placeholder values in Site Settings before launch:
 
 - WhatsApp number: `6280000000000`
 - Instagram URL: `https://instagram.com/mountainrose`
@@ -98,10 +95,9 @@ Also replace fallback product/article content with real CMS entries where possib
 
 ## Common Deployment Errors
 
-- Missing Sanity project ID: check `NEXT_PUBLIC_SANITY_PROJECT_ID`.
-- Wrong dataset: check `NEXT_PUBLIC_SANITY_DATASET`, usually `production`.
-- Studio loads but cannot read/write: check Sanity project permissions and CORS origins.
-- Images fail in production: confirm Sanity images use `cdn.sanity.io`; this is configured in `next.config.ts`.
+- Missing Supabase URL: check `NEXT_PUBLIC_SUPABASE_URL`.
+- Missing anon key: check `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
+- Admin CMS cannot read/write: check Supabase RLS, `SUPABASE_SERVICE_ROLE_KEY`, and `ADMIN_EMAILS`.
 - Metadata uses wrong domain: confirm `NEXT_PUBLIC_SITE_URL`.
-- Sitemap uses fallback data only: confirm products and articles are published in Sanity.
+- Sitemap uses fallback data only: confirm products and articles are published in Supabase.
 - Build fails on environment assumptions: run `npm run build` locally and check exact error output.

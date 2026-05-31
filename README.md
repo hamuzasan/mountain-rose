@@ -8,12 +8,11 @@ Mountain Rose is a premium website for genuine cow leather bags with an elegant 
 - TypeScript
 - Tailwind CSS
 - ESLint
-- Supabase CMS foundation
-- Sanity CMS
+- Supabase CMS
 
 ## CMS Setup
 
-Supabase is the source of truth for product data and product images. Sanity remains available for editorial content during the migration. The embedded Studio is available at `/studio`.
+Supabase is the source of truth for product data, product images, and editable website content.
 
 Required environment variables:
 
@@ -22,15 +21,6 @@ NEXT_PUBLIC_SITE_URL=https://mountainrose.id
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
-```
-
-Sanity is still used for editorial content during the migration:
-
-```env
-NEXT_PUBLIC_SANITY_PROJECT_ID=
-NEXT_PUBLIC_SANITY_DATASET=production
-NEXT_PUBLIC_SANITY_API_VERSION=
-SANITY_API_READ_TOKEN=
 ```
 
 Use `.env.local` for local values. Do not commit real secrets.
@@ -71,9 +61,9 @@ The manual workflow is documented in `docs/MANUAL_PRODUCT_IMAGE_WORKFLOW.md`.
 
 The metadata import creates or updates draft products first. Review and publish them in `/admin` before showing them on the public site.
 
-## Managing Content with Sanity
+## Managing Content with Supabase CMS
 
-Open `http://localhost:3000/studio` after starting the dev server.
+Open `http://localhost:3000/admin/login` after starting the dev server.
 
 Fill content in this recommended order:
 
@@ -131,7 +121,9 @@ Use `npm run start` after `npm run build`.
 - `/leather-care`
 - `/leather-care/[slug]`
 - `/contact`
-- `/studio`
+- `/admin`
+- `/admin/products`
+- `/admin/whatsapp-debug`
 
 ## SEO
 
@@ -148,9 +140,7 @@ Deployment target: Vercel.
 
 Read `docs/DEPLOYMENT.md` before deploying and use `docs/LAUNCH_CHECKLIST.md` before launch.
 
-## Supabase CMS (Foundation)
-
-Supabase CMS foundation is prepared for incremental migration. Sanity remains active until public pages are migrated.
+## Supabase CMS
 
 - Schema: `supabase/schema.sql`
 - Setup: `docs/SUPABASE_SETUP.md`

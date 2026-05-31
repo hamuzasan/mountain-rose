@@ -15,7 +15,7 @@ QA date: 2026-05-27
 - [ ] Final branded Open Graph image is still needed at `public/og-image.jpg`.
 - [ ] Manual real-device and social-share preview checks are still needed before launch.
 
-Production readiness status: build-ready. Final launch should wait until the manual checklist items are completed in Vercel, Sanity, and real devices.
+Production readiness status: build-ready. Final launch should wait until the manual checklist items are completed in Vercel, Supabase, and real devices.
 
 ## Routes Checked
 
@@ -28,11 +28,11 @@ Checked with a local production server using `npm run build` followed by `next s
 - [x] `/leather-care` returned 200.
 - [x] `/leather-care/cara-merawat-tas-kulit-sapi` returned 200.
 - [x] `/contact` returned 200.
-- [x] `/studio` returned 200.
+- [x] `/admin/login` returned 200.
 - [x] `/sitemap.xml` returned 200.
 - [x] `/robots.txt` returned 200.
 
-Finding fixed: `/studio` returned 500 when Sanity environment variables were missing. The Studio route now renders a clear setup notice when Sanity project configuration is absent, while preserving the real embedded Studio when configuration exists.
+Finding fixed: admin CMS access now relies on Supabase only, without requiring any legacy CMS environment variables.
 
 ## Lint Result
 
@@ -81,7 +81,7 @@ Automated viewport screenshots were not available in this session. Complete a fi
 - [x] Brand Story fallback is available.
 - [x] Leather Care fallback is available.
 
-Fallback data remains development-safe. Production content should be filled in Sanity before launch.
+Fallback data remains development-safe. Production content should be filled in Supabase before launch.
 
 ## WhatsApp Checks
 
@@ -93,7 +93,7 @@ Fallback data remains development-safe. Production content should be filled in S
 - [x] Product detail messages include the product name.
 - [x] Contact form message includes user-entered name, WhatsApp number, product interest, and message.
 
-Manual check before launch: replace placeholder WhatsApp number in Sanity Site Settings.
+Manual check before launch: replace placeholder WhatsApp number in Site Settings.
 
 ## SEO Checks
 
@@ -113,12 +113,12 @@ Manual check before launch: replace placeholder WhatsApp number in Sanity Site S
 - [x] Leather care article routes from CMS are used when available.
 - [x] Fallback article routes are used when CMS articles are unavailable.
 - [x] URLs are absolute and based on `NEXT_PUBLIC_SITE_URL` / site config.
-- [x] `/studio` and `/api` are not included.
+- [x] `/admin` and `/api` are not included.
 
 ## Robots Checks
 
 - [x] Public pages are allowed.
-- [x] `/studio` and `/studio/` are disallowed from indexing.
+- [x] `/admin` and `/admin/` are disallowed from indexing.
 - [x] `/api/` is disallowed from indexing.
 - [x] Sitemap URL is included.
 - [x] The whole site is not blocked.
@@ -143,15 +143,15 @@ Finding fixed: product JSON-LD now skips zero/custom price products so a custom 
 - [x] Heading order is generally logical across reviewed pages.
 - [x] Contrast uses approved dark leather and warm ivory design tokens.
 
-Manual check before launch: keyboard-test the deployed site in a real browser, especially the mobile menu and Sanity Studio login flow.
+Manual check before launch: keyboard-test the deployed site in a real browser, especially the mobile menu and admin login flow.
 
 ## Image Handling Checks
 
-- [x] Product images use `next/image` when Sanity image URLs exist.
-- [x] Article cover images use `next/image` when Sanity image URLs exist.
+- [x] Product images use `next/image` when Supabase image URLs exist.
+- [x] Article cover images use `next/image` when Supabase image URLs exist.
 - [x] Hero/story CMS images use `next/image` where available.
 - [x] Missing images render elegant Mountain Rose placeholders.
-- [x] `next.config.ts` only allows `cdn.sanity.io` remote images.
+- [x] `next.config.ts` only allows the configured Supabase storage domain.
 - [x] No random external images were found.
 - [ ] Add final `public/og-image.jpg` before launch.
 
@@ -166,15 +166,15 @@ Manual check before launch: keyboard-test the deployed site in a real browser, e
 ## Known Issues
 
 - `public/og-image.jpg` is referenced by metadata but has not been created yet.
-- Production Sanity project ID, dataset, API version, and optional read token must be configured in Vercel.
-- Placeholder contact values must be replaced in Sanity Site Settings.
-- Final product images, article covers, and editorial imagery must be uploaded in Sanity.
+- Production Supabase URL, anon key, and service role key must be configured in Vercel.
+- Placeholder contact values must be replaced in Supabase Site Settings.
+- Final product images, article covers, and editorial imagery must be uploaded in Supabase Storage.
 - Automated screenshot-based viewport verification was not available in this session.
 
 ## Recommended Fixes
 
 - Add a final branded Open Graph image at `public/og-image.jpg`.
-- Fill Sanity Site Settings, Homepage, Collections, Products, Brand Story, and Leather Care Articles before launch.
-- Confirm Sanity CORS/origin settings include the production domain.
+- Fill Supabase Site Settings, Homepage, Collections, Products, Brand Story, and Leather Care Articles before launch.
+- Confirm Supabase Auth and storage settings match the production domain and workflow.
 - Complete a manual device/browser pass at common mobile, tablet, and desktop widths.
 - Verify social preview cards after deployment.

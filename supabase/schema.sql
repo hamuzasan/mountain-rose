@@ -1,5 +1,4 @@
 -- Mountain Rose Supabase CMS schema
--- Safe incremental migration: Sanity remains in place until public pages are migrated.
 
 create extension if not exists pgcrypto;
 

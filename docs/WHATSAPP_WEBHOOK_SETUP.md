@@ -43,7 +43,7 @@ Do not assume public users are trusted. The endpoint rejects non-admin senders.
 
 ### Supabase CMS Target
 
-The Fonnte webhook writes to Supabase, not Sanity:
+The Fonnte webhook writes to Supabase:
 
 - `ADD_PRODUCT` creates or updates a draft row in `products`.
 - Attachments are uploaded to Supabase Storage bucket `product-images` when Fonnte provides reachable image URLs.

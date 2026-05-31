@@ -1,6 +1,6 @@
 # Mountain Rose CMS Model
 
-Sanity CMS is the source of truth for Mountain Rose product and content data. Frontend pages should use typed query helpers from `src/sanity/lib/queries.ts` and render CMS content through Mountain Rose design system components.
+Supabase is the source of truth for Mountain Rose product and content data. Frontend pages should use typed data-access helpers from `src/data-access/` and render CMS content through Mountain Rose design system components.
 
 ## CMS Collections
 
@@ -95,4 +95,4 @@ WhatsApp order links should be generated from CMS data and site settings:
 - Encode the final message safely for URL usage.
 - Keep WhatsApp CTAs visually aligned with Mountain Rose button rules. Do not use neon green or aggressive marketplace styling.
 
-No private customer data should be stored in Sanity unless a future privacy and operations plan explicitly defines it.
+No private customer data should be stored in Supabase unless a future privacy and operations plan explicitly defines it.
