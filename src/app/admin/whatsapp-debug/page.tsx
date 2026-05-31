@@ -11,6 +11,12 @@ export const metadata: Metadata = {
   description: "Pantau webhook Fonnte dan AI CMS Mountain Rose.",
 };
 
+const wibFormatter = new Intl.DateTimeFormat("id-ID", {
+  timeZone: "Asia/Jakarta",
+  dateStyle: "short",
+  timeStyle: "medium",
+});
+
 function StatusBadge({
   ok,
   label,
@@ -33,6 +39,7 @@ function StatusBadge({
 export default async function AdminWhatsAppDebugPage() {
   await requireAdmin();
   const { logs, env, error, renderedAt, deploymentId } = await getWhatsAppDebugState();
+  const latestLogAt = logs[0]?.created_at ?? null;
 
   return (
     <div className="bg-warmIvory px-5 py-10 sm:px-6 lg:py-14">
@@ -68,7 +75,7 @@ export default async function AdminWhatsAppDebugPage() {
             penting sudah terbaca di server.
           </p>
           <div className="mt-4 rounded-soft border border-espresso/10 bg-warmIvory px-4 py-3 text-xs uppercase tracking-[0.12em] text-mutedBrown">
-            Rendered at: {new Date(renderedAt).toLocaleString("id-ID")} · Deployment: {deploymentId}
+            Rendered at: {wibFormatter.format(new Date(renderedAt))} WIB · Deployment: {deploymentId}
           </div>
           <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <StatusBadge ok={env.whatsappAiCmsEnabled} label="WHATSAPP_AI_CMS_ENABLED" />
@@ -93,6 +100,9 @@ export default async function AdminWhatsAppDebugPage() {
               <p className="mt-2 text-xs uppercase tracking-[0.12em] text-mutedBrown">
                 Urutan log: terbaru ke lama.
               </p>
+              <p className="mt-2 text-xs uppercase tracking-[0.12em] text-mutedBrown">
+                Log terbaru: {latestLogAt ? `${wibFormatter.format(new Date(latestLogAt))} WIB` : "belum ada"}
+              </p>
             </div>
             <Link
               href="/admin/whatsapp-debug"
@@ -105,6 +115,14 @@ export default async function AdminWhatsAppDebugPage() {
           {error ? (
             <div className="mt-5 rounded-soft border border-mutedRose/30 bg-dustyRose/10 px-4 py-3 text-sm text-deepRose">
               {error}
+            </div>
+          ) : null}
+
+          {!error && latestLogAt && new Date(latestLogAt).getTime() < new Date(renderedAt).getTime() - 60_000 ? (
+            <div className="mt-5 rounded-soft border border-antiqueGold/30 bg-antiqueGold/10 px-4 py-3 text-sm text-espresso">
+              Belum ada request webhook baru yang tercatat setelah deployment/refresh ini. Kalau kamu barusan
+              kirim <span className="font-semibold">HELP</span> tapi log tetap berhenti di jam lama, berarti
+              Fonnte belum mengirim request baru ke endpoint Vercel.
             </div>
           ) : null}
 
@@ -143,7 +161,7 @@ export default async function AdminWhatsAppDebugPage() {
                           </p>
                         </div>
                         <p className="shrink-0 text-xs uppercase tracking-[0.12em] text-mutedBrown">
-                          {new Date(log.created_at).toLocaleString("id-ID")}
+                          {wibFormatter.format(new Date(log.created_at))} WIB
                         </p>
                       </div>
                     </summary>
