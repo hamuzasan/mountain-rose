@@ -19,30 +19,29 @@ export default function BrandStoryPreview({ title, text }: BrandStoryPreviewProp
               description={text}
             />
             <p className="mt-6 max-w-2xl text-sm leading-7 text-mutedBrown sm:text-base">
-              Mountain Rose adalah brand lokal yang mengutamakan authenticity, durability,
-              dan aesthetics. Setiap tas dibuat dari 100% high-quality genuine cowhide
-              melalui proses handmade agar fungsional, berkarakter, dan tahan menemani
-              perjalanan panjang.
+              Mountain Rose is an Indonesian leather goods brand focused on authenticity,
+              durability, and aesthetics. Each bag is made from genuine cowhide through a
+              handmade process so it feels functional, characterful, and lasting.
             </p>
           </div>
           <div className="lg:col-span-5">
             <div className="rounded-soft border border-espresso/10 bg-warmIvory p-6">
               <div className="text-xs font-semibold uppercase text-mutedRose">
-                Filosofi
+                Philosophy
               </div>
               <div className="mt-3 font-heading text-2xl leading-snug text-espresso">
-                Elegansi yang tidak perlu berteriak.
+                Elegance that does not need to shout.
               </div>
               <p className="mt-4 text-sm leading-7 text-mutedBrown">
-                Seperti mawar yang tumbuh di tengah tebing, Mountain Rose membawa
-                karakter kuat yang tetap elegan dan penuh cerita.
+                Like a rose growing against stone, Mountain Rose carries strong character
+                with quiet elegance and story.
               </p>
               <div className="mt-6">
                 <Link
                   href="/story"
                   className="inline-flex h-10 items-center justify-center rounded-soft border border-espresso/15 bg-bone px-4 text-sm font-semibold text-espresso transition-colors hover:bg-warmIvory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
                 >
-                  Baca Cerita Brand
+                  Read the Brand Story
                 </Link>
               </div>
             </div>

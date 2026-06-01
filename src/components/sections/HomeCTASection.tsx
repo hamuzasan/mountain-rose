@@ -18,7 +18,7 @@ export default function HomeCTASection({
 }: HomeCTASectionProps) {
   const waHref = buildWhatsAppLink(
     siteSettings.whatsappNumber,
-    `Halo ${siteSettings.brandName}, saya ingin konsultasi model tas dan warna.`,
+    `Hello ${siteSettings.brandName}, I would like to ask about bag styles and colors.`,
   );
 
   return (
@@ -27,7 +27,7 @@ export default function HomeCTASection({
         <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-7">
             <SectionHeading
-              eyebrow="Konsultasi"
+              eyebrow="Consultation"
               title={<span className="text-bone">{title}</span>}
               description={<span className="text-bone/85">{text}</span>}
             />
@@ -36,13 +36,13 @@ export default function HomeCTASection({
           <div className="lg:col-span-5">
             <div className="rounded-soft border border-warmIvory/10 bg-darkLeather p-6">
               <div className="text-xs font-semibold uppercase text-dustyRose">
-                Langkah Berikutnya
+                Next Step
               </div>
               <div className="mt-3 font-heading text-2xl leading-snug text-bone">
-                Order dengan tenang.
+                Order with calm confidence.
               </div>
               <p className="mt-4 text-sm leading-7 text-bone/80">
-                Sampaikan kebutuhanmu, dan kami bantu memilih model yang paling tepat untuk perjalananmu.
+                Tell us what you need, and we will help you choose the most suitable bag for your daily journey.
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <a
@@ -52,18 +52,18 @@ export default function HomeCTASection({
                   className="inline-flex h-11 items-center justify-center rounded-soft border border-brass/40 bg-warmIvory px-5 text-sm font-semibold text-espresso transition-colors hover:bg-bone focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
                   aria-label="Order via WhatsApp"
                 >
-                  Konsultasi via WhatsApp
+                  Consult via WhatsApp
                 </a>
                 <Link
                   href="/collections"
                   className="inline-flex h-11 items-center justify-center rounded-soft border border-warmIvory/15 bg-transparent px-5 text-sm font-semibold text-bone transition-colors hover:bg-warmIvory/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
                 >
-                  Lihat Koleksi
+                  View Collection
                 </Link>
               </div>
               <div className="mt-6 flex items-center gap-3 text-xs font-semibold uppercase text-bone/70">
                 <span className="h-1.5 w-1.5 rounded-full bg-antiqueGold" />
-                Detail antique gold
+                Antique gold detail
               </div>
             </div>
           </div>

@@ -20,7 +20,7 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
   const activeUrl = useMemo(() => getProductImageUrl(active), [active]);
 
   const alt =
-    active?.alt || `${productName} - tas kulit sapi (Mountain Rose)`;
+    active?.alt || `${productName} - Mountain Rose cow leather bag`;
 
   return (
     <div className="rounded-soft border border-espresso/10 bg-bone p-3 shadow-soft">
@@ -47,7 +47,7 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
           </div>
         )}
         <div className="absolute left-4 top-4 rounded-soft border border-espresso/10 bg-bone/90 px-3 py-2 text-xs font-semibold uppercase text-mutedRose">
-          Tampilan {activeIndex + 1}
+          View {activeIndex + 1}
         </div>
       </div>
 
@@ -66,7 +66,7 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
                   "relative aspect-square overflow-hidden rounded-soft border transition-colors",
                   isActive ? "border-antiqueGold/70" : "border-espresso/10 hover:border-espresso/20",
                 ].join(" ")}
-                aria-label={`Tampilkan gambar ${idx + 1}`}
+                aria-label={`Show image ${idx + 1}`}
               >
                 {thumbUrl ? (
                   <Image

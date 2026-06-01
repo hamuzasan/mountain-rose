@@ -32,7 +32,8 @@ export default function ContactInfoSection({ siteSettings }: ContactInfoSectionP
                 {siteSettings.tagline}
               </div>
               <p className="mt-4 text-sm leading-7 text-mutedBrown">
-                Pilih cara menghubungi yang paling nyaman. Kami siap membantu konsultasi model, warna, dan detail produk.
+                Choose the contact method that feels easiest. We can help with models,
+                colors, materials, and product details.
               </p>
             </div>
           </div>
@@ -44,14 +45,14 @@ export default function ContactInfoSection({ siteSettings }: ContactInfoSectionP
                 target="_blank"
                 rel="noopener noreferrer"
                 className="rounded-soft border border-espresso/10 bg-bone p-5 transition-colors hover:border-espresso/20"
-                aria-label="Hubungi via WhatsApp"
+                aria-label="Contact Mountain Rose via WhatsApp"
               >
                 <div className="text-xs font-semibold uppercase text-mutedRose">
                   WhatsApp
                 </div>
                 <div className="mt-3 text-sm font-medium text-espresso">{waLabel}</div>
                 <div className="mt-2 text-sm text-mutedBrown">
-                  Konsultasi dengan suasana yang tenang dan personal.
+                  A calm and personal consultation.
                 </div>
               </a>
 
@@ -60,7 +61,7 @@ export default function ContactInfoSection({ siteSettings }: ContactInfoSectionP
                 target="_blank"
                 rel="noopener noreferrer"
                 className="rounded-soft border border-espresso/10 bg-bone p-5 transition-colors hover:border-espresso/20"
-                aria-label="Buka Instagram Mountain Rose"
+                aria-label="Open Mountain Rose Instagram"
               >
                 <div className="text-xs font-semibold uppercase text-mutedRose">
                   Instagram
@@ -69,27 +70,27 @@ export default function ContactInfoSection({ siteSettings }: ContactInfoSectionP
                   {siteSettings.instagramUrl.replace(/^https?:\/\//, "")}
                 </div>
                 <div className="mt-2 text-sm text-mutedBrown">
-                  Lihat suasana editorial dan update terbaru.
+                  See editorial moments and the latest updates.
                 </div>
               </a>
 
               <a
                 href={`mailto:${siteSettings.email}`}
                 className="rounded-soft border border-espresso/10 bg-bone p-5 transition-colors hover:border-espresso/20"
-                aria-label="Kirim email ke Mountain Rose"
+                aria-label="Send an email to Mountain Rose"
               >
                 <div className="text-xs font-semibold uppercase text-mutedRose">
                   Email
                 </div>
                 <div className="mt-3 text-sm font-medium text-espresso">{siteSettings.email}</div>
                 <div className="mt-2 text-sm text-mutedBrown">
-                  Untuk pertanyaan detail atau kebutuhan khusus.
+                  For detailed questions or special requests.
                 </div>
               </a>
 
               <div className="rounded-soft border border-espresso/10 bg-bone p-5">
                 <div className="text-xs font-semibold uppercase text-mutedRose">
-                  Alamat
+                  Address
                 </div>
                 <div className="mt-3 text-sm font-medium text-espresso">Indonesia</div>
                 <div className="mt-2 text-sm text-mutedBrown">{siteSettings.address}</div>

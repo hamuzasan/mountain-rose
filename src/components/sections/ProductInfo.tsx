@@ -34,7 +34,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <div className="text-xs font-semibold uppercase text-mutedRose">
-            {product.category || "Koleksi"}
+            {product.category || "Collection"}
           </div>
           <div className="mt-3 font-heading text-2xl leading-snug text-espresso">
             {product.name}
@@ -42,7 +42,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         </div>
         <div className="text-right">
           <div className="text-xs font-semibold uppercase text-mutedBrown">
-            Harga
+            Price
           </div>
           <div className="mt-2 text-lg font-semibold text-espresso">
             {price}
@@ -53,7 +53,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
             </div>
           ) : null}
           <div className="mt-2 text-xs font-semibold uppercase text-mutedBrown">
-            {(product.isAvailable ?? true) ? "Tersedia" : "Belum tersedia"}
+            {(product.isAvailable ?? true) ? "Available" : "Not available"}
           </div>
         </div>
       </div>
@@ -64,12 +64,12 @@ export default function ProductInfo({ product }: ProductInfoProps) {
             Material
           </div>
           <div className="mt-2 text-sm font-medium text-espresso">
-            {product.material || product.leatherType || "Kulit sapi asli"}
+            {product.material || product.leatherType || "Genuine cow leather"}
           </div>
         </div>
         <div className="rounded-soft border border-espresso/10 bg-warmIvory px-4 py-3">
             <div className="text-xs font-semibold uppercase text-mutedBrown">
-            Warna
+            Color
           </div>
           <div className="mt-2 text-sm font-medium text-espresso">
             {product.color || "Warm tone"}
@@ -78,7 +78,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         {product.size ? (
           <div className="rounded-soft border border-espresso/10 bg-warmIvory px-4 py-3">
             <div className="text-xs font-semibold uppercase text-mutedBrown">
-              Ukuran
+              Size
             </div>
             <div className="mt-2 text-sm font-medium text-espresso">
               {product.size}
@@ -88,10 +88,10 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         {product.sourcePdfPage ? (
           <div className="rounded-soft border border-espresso/10 bg-warmIvory px-4 py-3">
             <div className="text-xs font-semibold uppercase text-mutedBrown">
-              Sumber
+              Source
             </div>
             <div className="mt-2 text-sm font-medium text-espresso">
-              Katalog PDF halaman {product.sourcePdfPage}
+              PDF catalogue page {product.sourcePdfPage}
             </div>
           </div>
         ) : null}
@@ -106,7 +106,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       {longDesc ? (
         <div className="mt-6 rounded-soft border border-espresso/10 bg-warmIvory p-4">
           <div className="text-xs font-semibold uppercase text-mutedRose">
-            Deskripsi
+            Description
           </div>
           <p className="mt-3 whitespace-pre-line text-sm leading-7 text-mutedBrown">
             {longDesc}

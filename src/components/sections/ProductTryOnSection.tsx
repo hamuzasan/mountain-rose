@@ -13,18 +13,18 @@ export default function ProductTryOnSection({
 }: ProductTryOnSectionProps) {
   const [file, setFile] = useState<File | null>(null);
   const [status, setStatus] = useState<string>(
-    isEnabled ? "" : "Fitur preview AI sedang disiapkan.",
+    isEnabled ? "" : "AI preview is being prepared.",
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!isEnabled) {
-      setStatus("Fitur preview AI sedang disiapkan.");
+      setStatus("AI preview is being prepared.");
       return;
     }
     if (!file) {
-      setStatus("Pilih foto terlebih dahulu.");
+      setStatus("Choose a photo first.");
       return;
     }
 
@@ -33,7 +33,7 @@ export default function ProductTryOnSection({
     formData.append("image", file);
 
     setIsSubmitting(true);
-    setStatus("Mempersiapkan preview...");
+    setStatus("Preparing preview...");
 
     try {
       const response = await fetch("/api/ai/try-on", {
@@ -48,11 +48,11 @@ export default function ProductTryOnSection({
 
       setStatus(
         result.ok
-          ? "Preview berhasil dibuat."
-          : result.message || result.error || "Preview belum bisa dibuat saat ini.",
+          ? "Preview was created."
+          : result.message || result.error || "Preview is not available yet.",
       );
     } catch {
-      setStatus("Preview belum bisa dibuat saat ini.");
+      setStatus("Preview is not available yet.");
     } finally {
       setIsSubmitting(false);
     }
@@ -67,12 +67,11 @@ export default function ProductTryOnSection({
               AI Preview
             </div>
             <h2 className="mt-3 font-heading text-3xl leading-tight text-espresso">
-              Coba Tas Ini
+              Try This Bag
             </h2>
             <p className="mt-4 max-w-2xl text-sm leading-7 text-mutedBrown sm:text-base">
-              Unggah foto untuk melihat gambaran visual tas ini secara personal.
-              Preview AI bersifat ilustratif dan tidak menyimpan foto secara
-              permanen.
+              Upload a photo to see a personal visual preview of this bag. AI preview is
+              illustrative and does not store your photo permanently.
             </p>
           </div>
 
@@ -81,7 +80,7 @@ export default function ProductTryOnSection({
               htmlFor="try-on-image"
               className="block text-xs font-semibold uppercase text-mutedRose"
             >
-              Foto pribadi
+              Personal Photo
             </label>
             <input
               id="try-on-image"
@@ -96,7 +95,7 @@ export default function ProductTryOnSection({
               disabled={!isEnabled || isSubmitting}
               className="mt-4 inline-flex h-11 w-full items-center justify-center rounded-soft border border-brass/40 bg-espresso px-5 text-sm font-semibold text-warmIvory transition-colors hover:bg-darkLeather focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70 disabled:cursor-not-allowed disabled:bg-mutedBrown disabled:text-bone"
             >
-              {isSubmitting ? "Membuat Preview" : "Buat Preview"}
+              {isSubmitting ? "Creating Preview" : "Create Preview"}
             </button>
             {status ? (
               <p className="mt-3 text-sm leading-6 text-mutedBrown" role="status">

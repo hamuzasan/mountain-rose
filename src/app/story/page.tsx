@@ -12,9 +12,9 @@ import { getBrandStory } from "@/data-access/story";
 import { getSiteSettings } from "@/data-access/siteSettings";
 
 export const metadata: Metadata = {
-  title: "Cerita Mountain Rose | Tas Kulit Sapi Premium",
+  title: "The Mountain Rose Story | Premium Cow Leather Bags",
   description:
-    "Kenali cerita Mountain Rose, brand tas kulit sapi premium yang memadukan karakter kuat kulit asli dengan keanggunan mawar.",
+    "Discover the Mountain Rose story: premium cow leather bags with handmade Indonesian character and restrained rose-inspired elegance.",
 };
 
 export default async function StoryPage() {

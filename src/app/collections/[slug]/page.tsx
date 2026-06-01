@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${product.name} | Mountain Rose`,
     description:
       product.shortDescription ||
-      "Tas kulit sapi asli dengan desain elegan terinspirasi dari mawar, dibuat untuk menemani perjalanan panjang.",
+      "A handmade genuine cow leather bag from Mountain Rose with refined rose-inspired elegance.",
   };
 }
 

@@ -158,6 +158,39 @@ export type Database = {
         }
         Relationships: []
       }
+      instagram_embeds: {
+        Row: {
+          caption: string | null
+          created_at: string | null
+          id: string
+          instagram_url: string
+          sort_order: number | null
+          status: string | null
+          title: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          caption?: string | null
+          created_at?: string | null
+          id?: string
+          instagram_url: string
+          sort_order?: number | null
+          status?: string | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          caption?: string | null
+          created_at?: string | null
+          id?: string
+          instagram_url?: string
+          sort_order?: number | null
+          status?: string | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       leather_care_articles: {
         Row: {
           content: string | null

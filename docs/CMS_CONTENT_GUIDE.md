@@ -10,8 +10,9 @@ Supabase is the source of truth for editable website content. Keep copy elegant,
 2. Homepage
 3. Collections
 4. Products
-5. Brand Story
+5. Instagram Cards
 6. Leather Care Articles
+7. Brand Story, optional archive page
 
 ## Site Settings
 
@@ -25,6 +26,7 @@ Recommended starter content:
 - `instagramUrl`: https://instagram.com/mountainrose
 - `email`: hello@mountainrose.id
 - `address`: Indonesia
+- `logoUrl`: public Supabase Storage URL for the real Mountain Rose logo
 
 These are placeholders. Replace them with real business data before launch.
 
@@ -159,7 +161,23 @@ Collections group products by use case and product family.
   `slug`: custom-bag
   `description`: Layanan tas kulit custom untuk kebutuhan model, ukuran, warna, dan detail tertentu.
 
+## Instagram Cards
+
+Instagram Cards power the homepage `Follow Our Instagram` section. Add them from `/admin/instagram`.
+
+Recommended fields:
+
+- `title`: Product moment, workshop detail, or campaign title.
+- `instagramUrl`: A public Instagram post or reel URL. Story URLs can be added, but Instagram may not allow direct embeds.
+- `caption`: Short optional caption.
+- `sortOrder`: Use `0`, `1`, `2`, and so on.
+- `status`: Use `published` when the card should appear on the homepage.
+
+The cards are intentionally edge-to-edge, like an Instagram grid. Use clean product, workshop, or editorial posts that match the Mountain Rose boutique mood.
+
 ## Brand Story
+
+Brand Story is currently a secondary editorial page. It is not linked from the main navbar, because the homepage now prioritizes product imagery and Instagram content.
 
 Recommended starter content:
 

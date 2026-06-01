@@ -33,20 +33,19 @@ export default function HomeLookbookSection({ products }: HomeLookbookSectionPro
           <div className="relative grid gap-10 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-5">
               <div className="text-xs font-semibold uppercase text-mutedRose">
-                Ruang Visual Katalog
+                Catalogue Lookbook
               </div>
               <h2 className="mt-3 font-heading text-4xl leading-tight text-espresso sm:text-5xl">
-                Bawa ceritamu dengan karakter yang matang.
+                Carry your story with mature character.
               </h2>
               <p className="mt-5 text-sm leading-7 text-mutedBrown sm:text-base">
-                Potongan visual yang hangat, tenang, dan editorial. Setiap gambar
-                berasal dari produk Mountain Rose yang benar-benar ada di katalog.
+                Warm, calm, editorial product moments. Every visual comes from real Mountain Rose catalogue pieces.
               </p>
               <Link
                 href="/collections"
                 className="mt-7 inline-flex h-11 items-center justify-center rounded-soft border border-espresso/15 bg-warmIvory px-5 text-sm font-semibold text-espresso transition-colors hover:bg-bone focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
               >
-                Lihat Koleksi
+                View Collection
               </Link>
             </div>
 
@@ -69,7 +68,7 @@ export default function HomeLookbookSection({ products }: HomeLookbookSectionPro
                           src={item.imageUrl}
                           alt={
                             item.image?.alt ||
-                            `${item.product.name} - tas kulit sapi Mountain Rose`
+                            `${item.product.name} - Mountain Rose cow leather bag`
                           }
                           fill
                           sizes="(min-width: 1024px) 180px, 50vw"

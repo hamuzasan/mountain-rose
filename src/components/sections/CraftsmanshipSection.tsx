@@ -30,7 +30,7 @@ export default function CraftsmanshipSection({
                     Structure
                   </div>
                   <div className="mt-2 text-sm font-medium text-espresso">
-                    Proporsi seimbang, terasa rapi.
+                    Balanced proportions with a refined feel.
                   </div>
                 </div>
                 <div className="rounded-soft border border-espresso/10 bg-warmIvory px-4 py-3">
@@ -38,7 +38,7 @@ export default function CraftsmanshipSection({
                     Stitching
                   </div>
                   <div className="mt-2 text-sm font-medium text-espresso">
-                    Jahitan halus untuk ketahanan.
+                    Careful stitching for lasting structure.
                   </div>
                 </div>
                 <div className="rounded-soft border border-espresso/10 bg-warmIvory px-4 py-3">
@@ -46,7 +46,7 @@ export default function CraftsmanshipSection({
                     Finishing
                   </div>
                   <div className="mt-2 text-sm font-medium text-espresso">
-                    Tepi rapi, detail terukur.
+                    Clean edges and measured detail.
                   </div>
                 </div>
                 <div className="rounded-soft border border-espresso/10 bg-warmIvory px-4 py-3">
@@ -54,7 +54,7 @@ export default function CraftsmanshipSection({
                     Usability
                   </div>
                   <div className="mt-2 text-sm font-medium text-espresso">
-                    Nyaman dipakai, siap harian.
+                    Comfortable, practical, and ready for daily use.
                   </div>
                 </div>
               </div>
@@ -69,4 +69,3 @@ export default function CraftsmanshipSection({
     </section>
   );
 }
-

@@ -26,18 +26,18 @@ export default function ContactFormSection({ siteSettings }: ContactFormSectionP
 
   const composedMessage = useMemo(() => {
     const parts = [
-      "Halo Mountain Rose, saya ingin konsultasi.",
+      "Hello Mountain Rose, I would like to have a consultation.",
       "",
-      "Nama:",
+      "Name:",
       state.name || "-",
       "",
-      "Nomor WhatsApp:",
+      "WhatsApp number:",
       state.waNumber || "-",
       "",
-      "Produk yang diminati:",
+      "Product interest:",
       state.productInterest || "-",
       "",
-      "Pesan:",
+      "Message:",
       state.message || "-",
     ];
     return parts.join("\n");
@@ -51,13 +51,14 @@ export default function ContactFormSection({ siteSettings }: ContactFormSectionP
         <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
           <div className="lg:col-span-5">
             <div className="text-xs font-semibold uppercase text-mutedRose">
-              Pertanyaan
+              Inquiry
             </div>
             <h2 className="mt-3 font-heading text-3xl leading-tight text-espresso">
-              Form Konsultasi Singkat
+              Quick Consultation Form
             </h2>
             <p className="mt-4 text-sm leading-7 text-mutedBrown sm:text-base">
-              Isi beberapa detail agar kami bisa memberi rekomendasi yang lebih tepat. Form ini akan membuka WhatsApp dan tidak menyimpan data.
+              Share a few details so we can recommend the right piece. This form opens
+              WhatsApp and does not store your data.
             </p>
           </div>
 
@@ -75,7 +76,7 @@ export default function ContactFormSection({ siteSettings }: ContactFormSectionP
                     htmlFor="contact-name"
                     className="block text-xs font-semibold uppercase text-mutedRose"
                   >
-                    Nama
+                    Name
                   </label>
                   <input
                     id="contact-name"
@@ -92,7 +93,7 @@ export default function ContactFormSection({ siteSettings }: ContactFormSectionP
                     htmlFor="contact-wa"
                     className="block text-xs font-semibold uppercase text-mutedRose"
                   >
-                    Nomor WhatsApp
+                    WhatsApp Number
                   </label>
                   <input
                     id="contact-wa"
@@ -111,7 +112,7 @@ export default function ContactFormSection({ siteSettings }: ContactFormSectionP
                   htmlFor="contact-interest"
                   className="block text-xs font-semibold uppercase text-mutedRose"
                 >
-                  Produk yang diminati
+                  Product Interest
                 </label>
                 <input
                   id="contact-interest"
@@ -121,7 +122,7 @@ export default function ContactFormSection({ siteSettings }: ContactFormSectionP
                     setState((s) => ({ ...s, productInterest: e.target.value }))
                   }
                   className="mt-2 h-10 w-full rounded-soft border border-espresso/15 bg-bone px-3 text-sm text-espresso outline-none transition-colors focus:border-antiqueGold/70"
-                  placeholder="Mis. Tote untuk kerja, sling untuk harian"
+                  placeholder="Example: sling bag for daily use"
                 />
               </div>
 
@@ -130,7 +131,7 @@ export default function ContactFormSection({ siteSettings }: ContactFormSectionP
                   htmlFor="contact-message"
                   className="block text-xs font-semibold uppercase text-mutedRose"
                 >
-                  Pesan
+                  Message
                 </label>
                 <textarea
                   id="contact-message"
@@ -138,7 +139,7 @@ export default function ContactFormSection({ siteSettings }: ContactFormSectionP
                   onChange={(e) => setState((s) => ({ ...s, message: e.target.value }))}
                   className="mt-2 w-full rounded-soft border border-espresso/15 bg-bone px-3 py-2 text-sm leading-7 text-espresso outline-none transition-colors focus:border-antiqueGold/70"
                   rows={5}
-                  placeholder="Ceritakan kebutuhanmu: ukuran, warna, dan penggunaan harian."
+                  placeholder="Tell us about size, color, and daily use."
                 />
               </div>
 
@@ -147,10 +148,10 @@ export default function ContactFormSection({ siteSettings }: ContactFormSectionP
                   type="submit"
                   className="inline-flex h-11 items-center justify-center rounded-soft border border-brass/40 bg-espresso px-5 text-sm font-semibold text-warmIvory transition-colors hover:bg-darkLeather focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
                 >
-                  Kirim via WhatsApp
+                  Send via WhatsApp
                 </button>
                 <div className="text-xs font-semibold uppercase text-mutedBrown">
-                  Data tidak disimpan
+                  Data is not stored
                 </div>
               </div>
             </form>

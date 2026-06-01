@@ -17,7 +17,7 @@ export default function ProductDetailHero({ product }: ProductDetailHeroProps) {
           <ol className="flex flex-wrap items-center gap-2">
             <li>
               <Link href="/" className="transition-colors hover:text-espresso">
-                Beranda
+                Home
               </Link>
             </li>
             <li className="text-mutedBrown/60">/</li>
@@ -26,7 +26,7 @@ export default function ProductDetailHero({ product }: ProductDetailHeroProps) {
                 href="/collections"
                 className="transition-colors hover:text-espresso"
               >
-                Koleksi
+                Collections
               </Link>
             </li>
             <li className="text-mutedBrown/60">/</li>
@@ -46,7 +46,7 @@ export default function ProductDetailHero({ product }: ProductDetailHeroProps) {
             ) : null}
             <div className="h-1.5 w-1.5 rounded-full bg-antiqueGold" />
             <div className="text-xs font-semibold uppercase text-mutedBrown">
-              Kulit sapi asli
+              Genuine cow leather
             </div>
           </div>
 

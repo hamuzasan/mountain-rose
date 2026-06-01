@@ -25,7 +25,7 @@ export default function FeaturedProducts({ products, siteSettings }: FeaturedPro
         <div className="mb-6 flex items-center gap-4 lg:hidden">
           <div className="h-px flex-1 bg-mutedRose/70" />
           <h2 className="text-center text-sm font-semibold uppercase text-deepRose">
-            Produk Pilihan
+            Catalogue Picks
           </h2>
           <div className="h-px flex-1 bg-mutedRose/70" />
         </div>
@@ -45,7 +45,7 @@ export default function FeaturedProducts({ products, siteSettings }: FeaturedPro
                   {imageUrl ? (
                     <Image
                       src={imageUrl}
-                      alt={image?.alt || `${product.name} - tas kulit sapi Mountain Rose`}
+                      alt={image?.alt || `${product.name} - Mountain Rose cow leather bag`}
                       fill
                       sizes="50vw"
                       className="object-contain p-4 transition-transform duration-700 ease-out group-hover:scale-[1.04]"
@@ -72,22 +72,22 @@ export default function FeaturedProducts({ products, siteSettings }: FeaturedPro
             href="/collections"
             className="inline-flex h-11 items-center justify-center rounded-full bg-espresso px-6 text-sm font-semibold text-warmIvory transition-colors hover:bg-darkLeather focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
           >
-            Lihat Semua Koleksi
+            View All Collections
           </Link>
         </div>
 
         <div className="hidden lg:block">
           <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading
-            eyebrow="Pilihan Katalog"
-            title="Produk Katalog yang Siap Menjadi Sorotan"
-            description="Tas kulit sapi asli dari katalog Mountain Rose, ditampilkan dengan ruang visual yang lebih besar agar detail bentuk, tekstur, dan karakter material terasa jelas."
+            eyebrow="Catalogue Picks"
+            title="Featured Pieces from the Mountain Rose Catalogue"
+            description="Genuine cow leather bags presented with larger visual space so the shape, texture, and material character can be seen clearly."
           />
           <Link
             href="/collections"
             className="inline-flex h-10 items-center justify-center rounded-soft border border-espresso/15 bg-bone px-4 text-sm font-semibold text-espresso transition-colors hover:bg-warmIvory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
           >
-            Lihat Semua Koleksi
+            View All Collections
           </Link>
           </div>
 

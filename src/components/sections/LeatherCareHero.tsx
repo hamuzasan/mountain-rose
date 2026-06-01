@@ -11,8 +11,8 @@ export default function LeatherCareHero() {
               Leather Care
             </h1>
             <p className="mt-6 max-w-3xl text-base leading-8 text-mutedBrown sm:text-lg">
-              Panduan merawat tas kulit sapi asli agar tetap anggun, kuat, dan
-              berkarakter dari waktu ke waktu.
+              A calm guide to keeping genuine cow leather bags elegant, strong, and
+              characterful over time.
             </p>
           </div>
           <div className="lg:col-span-4">
@@ -24,7 +24,7 @@ export default function LeatherCareHero() {
                 <div className="h-2 w-20 rounded-full bg-antiqueGold/40" />
               </div>
               <p className="mt-3 text-sm leading-7 text-mutedBrown">
-                Perawatan yang konsisten membantu kulit berkembang menjadi patina yang lebih kaya dan indah.
+                Consistent care helps leather develop a richer and more beautiful patina.
               </p>
             </div>
           </div>
@@ -34,4 +34,3 @@ export default function LeatherCareHero() {
     </section>
   );
 }
-

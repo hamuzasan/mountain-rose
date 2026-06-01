@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
 
-import BrandStoryPreview from "@/components/sections/BrandStoryPreview";
 import FeaturedProducts from "@/components/sections/FeaturedProducts";
 import HomeCategoryShowcase from "@/components/sections/HomeCategoryShowcase";
 import HeroSection from "@/components/sections/HeroSection";
 import HomeCTASection from "@/components/sections/HomeCTASection";
 import HomeLookbookSection from "@/components/sections/HomeLookbookSection";
+import InstagramShowcase from "@/components/sections/InstagramShowcase";
 import LeatherHighlight from "@/components/sections/LeatherHighlight";
 import RoseEditorialSection from "@/components/sections/RoseEditorialSection";
 import { FALLBACK_HOMEPAGE, FALLBACK_FEATURED_PRODUCTS } from "@/data/fallbackHomepage";
 import { FALLBACK_SITE_SETTINGS } from "@/data/fallbackSiteSettings";
 import { getHomepage } from "@/data-access/homepage";
+import { getInstagramEmbeds } from "@/data-access/instagram";
 import { getAllProducts, getFeaturedProducts } from "@/data-access/products";
 import { getSiteSettings } from "@/data-access/siteSettings";
 import { createOrganizationJsonLd, createWebsiteJsonLd } from "@/lib/structuredData";
@@ -41,17 +42,18 @@ function hasRealCatalogueProducts(products: Product[]) {
 }
 
 export const metadata: Metadata = {
-  title: "Mountain Rose | Tas Kulit Sapi Premium",
+  title: "Mountain Rose | Premium Cow Leather Bags",
   description:
-    "Tas kulit sapi asli dengan desain elegan terinspirasi dari mawar, dibuat untuk menemani perjalanan panjang.",
+    "Premium handmade genuine cow leather bags from Indonesia with timeless rose-inspired elegance.",
 };
 
 export default async function Home() {
-  const [cmsHomepage, cmsFeatured, allProducts, cmsSiteSettings] = await Promise.all([
+  const [cmsHomepage, cmsFeatured, allProducts, cmsSiteSettings, instagramEmbeds] = await Promise.all([
     getHomepage(),
     getFeaturedProducts(),
     getAllProducts(),
     getSiteSettings(),
+    getInstagramEmbeds(),
   ]);
 
   const siteSettings = cmsSiteSettings
@@ -60,9 +62,6 @@ export default async function Home() {
 
   const heroTitle = cmsHomepage?.heroTitle || FALLBACK_HOMEPAGE.heroTitle;
   const heroSubtitle = cmsHomepage?.heroSubtitle || FALLBACK_HOMEPAGE.heroSubtitle;
-
-  const storyTitle = cmsHomepage?.storySectionTitle || FALLBACK_HOMEPAGE.storySectionTitle;
-  const storyText = cmsHomepage?.storySectionText || FALLBACK_HOMEPAGE.storySectionText;
 
   const ctaTitle = cmsHomepage?.ctaTitle || FALLBACK_HOMEPAGE.ctaTitle;
   const ctaText = cmsHomepage?.ctaText || FALLBACK_HOMEPAGE.ctaText;
@@ -94,7 +93,7 @@ export default async function Home() {
       />
       <HomeCategoryShowcase products={visualProducts} />
       <FeaturedProducts products={featuredProducts} siteSettings={siteSettings} />
-      <BrandStoryPreview title={storyTitle} text={storyText} />
+      <InstagramShowcase embeds={instagramEmbeds} siteSettings={siteSettings} />
       <LeatherHighlight />
       <HomeLookbookSection products={visualProducts} />
       <RoseEditorialSection />

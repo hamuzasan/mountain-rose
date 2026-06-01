@@ -7,9 +7,9 @@ import { getAllProducts } from "@/data-access/products";
 import { getSiteSettings } from "@/data-access/siteSettings";
 
 export const metadata: Metadata = {
-  title: "Koleksi Mountain Rose | Tas Kulit Sapi Premium",
+  title: "Mountain Rose Collections | Premium Cow Leather Bags",
   description:
-    "Jelajahi koleksi tas kulit sapi Mountain Rose dengan desain elegan, material asli, dan karakter timeless.",
+    "Explore Mountain Rose genuine cow leather bags with timeless design, handmade details, and premium material character.",
 };
 
 export default async function CollectionsPage() {

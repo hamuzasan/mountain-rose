@@ -53,13 +53,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const cms = fallback ? null : await getLeatherCareArticleBySlug(slug);
   const article = cms ? toArticle(cms as unknown as CmsLeatherCareArticle) : fallback;
 
-  if (!article) return { title: "Perawatan Kulit | Mountain Rose" };
+  if (!article) return { title: "Leather Care | Mountain Rose" };
 
   return {
-    title: `${article.title} | Perawatan Kulit Mountain Rose`,
+    title: `${article.title} | Mountain Rose Leather Care`,
     description:
       article.excerpt ||
-      "Panduan merawat tas kulit sapi asli agar tetap elegan, kuat, dan memiliki karakter yang indah seiring waktu.",
+      "Care guidance for genuine cow leather bags so they stay elegant, strong, and characterful over time.",
   };
 }
 

@@ -10,9 +10,9 @@ import { getSiteSettings } from "@/data-access/siteSettings";
 import type { LeatherCareArticle } from "@/types/leatherCare";
 
 export const metadata: Metadata = {
-  title: "Perawatan Kulit | Mountain Rose",
+  title: "Leather Care | Mountain Rose",
   description:
-    "Panduan merawat tas kulit sapi asli agar tetap elegan, kuat, dan memiliki karakter yang indah seiring waktu.",
+    "Care guidance for genuine cow leather bags so they stay elegant, strong, and naturally characterful over time.",
 };
 
 function toArticle(a: {

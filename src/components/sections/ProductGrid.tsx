@@ -12,7 +12,7 @@ export default function ProductGrid({ products, siteSettings }: ProductGridProps
   if (!products.length) {
     return (
       <div className="rounded-soft border border-espresso/10 bg-bone p-8 text-center text-sm text-mutedBrown">
-        Belum ada produk yang tersedia saat ini.
+        No products are available right now.
       </div>
     );
   }

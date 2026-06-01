@@ -15,13 +15,14 @@ export default function WhatsAppOrderSection({ siteSettings }: WhatsAppOrderSect
         <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-7">
             <div className="text-xs font-semibold uppercase text-dustyRose">
-              Konsultasi
+              Consultation
             </div>
             <h2 className="mt-3 font-heading text-3xl leading-tight text-bone sm:text-4xl">
-              Siap Memilih Tas Kulit Mountain Rose?
+              Ready to Choose a Mountain Rose Bag?
             </h2>
             <p className="mt-4 max-w-2xl text-sm leading-7 text-bone/85 sm:text-base">
-              Hubungi kami melalui WhatsApp untuk rekomendasi model, warna, dan detail produk yang sesuai dengan kebutuhanmu.
+              Contact us through WhatsApp for model, color, and product detail
+              recommendations that fit your needs.
             </p>
           </div>
 
@@ -30,18 +31,18 @@ export default function WhatsAppOrderSection({ siteSettings }: WhatsAppOrderSect
               <div className="flex flex-col gap-3 sm:flex-row">
                 <WhatsAppButton
                   phoneNumber={siteSettings.whatsappNumber}
-                  label="Konsultasi via WhatsApp"
+                  label="Consult via WhatsApp"
                 />
                 <Link
                   href="/collections"
                   className="inline-flex h-10 items-center justify-center rounded-soft border border-warmIvory/15 bg-transparent px-4 text-sm font-medium text-bone transition-colors hover:bg-warmIvory/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
                 >
-                  Lihat Koleksi
+                  View Collections
                 </Link>
               </div>
               <div className="mt-6 flex items-center gap-3 text-xs font-semibold uppercase text-bone/70">
                 <span className="h-1.5 w-1.5 rounded-full bg-antiqueGold" />
-                Konsultasi yang tenang
+                Calm consultation
               </div>
             </div>
           </div>

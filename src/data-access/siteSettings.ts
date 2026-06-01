@@ -22,6 +22,7 @@ export async function getSiteSettings(): Promise<SiteSettingsUi> {
     instagramUrl: data.instagram_url || FALLBACK_SITE_SETTINGS.instagramUrl,
     email: data.email || FALLBACK_SITE_SETTINGS.email,
     address: data.address || FALLBACK_SITE_SETTINGS.address,
+    logoUrl: data.logo_url || null,
     logo: data.logo_url ? { alt: "Mountain Rose logo" } : undefined,
   };
 }

@@ -71,6 +71,17 @@ export type HomepageContent = {
   updatedAt: string;
 };
 
+export type InstagramEmbed = {
+  id: string;
+  title: string | null;
+  instagramUrl: string;
+  caption: string | null;
+  sortOrder: number;
+  status: "draft" | "published" | string;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type BrandStory = {
   id: string;
   title: string | null;

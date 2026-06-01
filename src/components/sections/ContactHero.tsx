@@ -5,26 +5,26 @@ export default function ContactHero() {
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
             <div className="text-xs font-semibold uppercase text-mutedRose">
-              Kontak
+              Contact
             </div>
             <h1 className="mt-4 font-heading text-4xl leading-tight text-espresso sm:text-5xl">
-              Hubungi Mountain Rose
+              Contact Mountain Rose
             </h1>
             <p className="mt-6 max-w-3xl text-base leading-8 text-mutedBrown sm:text-lg">
-              Konsultasikan pilihan tas kulit sapi, warna, model, dan kebutuhanmu
-              dengan suasana yang tenang dan personal.
+              Ask about genuine cow leather bags, colors, shapes, and product details
+              through a calm and personal conversation.
             </p>
           </div>
           <div className="lg:col-span-4">
             <div className="rounded-soft border border-espresso/10 bg-bone p-5">
               <div className="flex items-center justify-between">
                 <div className="text-xs font-semibold uppercase text-mutedRose">
-                  Catatan
+                  Note
                 </div>
                 <div className="h-2 w-20 rounded-full bg-antiqueGold/40" />
               </div>
               <p className="mt-3 text-sm leading-7 text-mutedBrown">
-                Kami merespons dengan tenang dan jelas, agar kamu bisa memilih dengan percaya diri.
+                We respond clearly and thoughtfully, so every choice feels confident.
               </p>
             </div>
           </div>

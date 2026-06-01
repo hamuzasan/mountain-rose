@@ -7,8 +7,8 @@ type ProductMaterialDetailsProps = {
 export default function ProductMaterialDetails({
   product,
 }: ProductMaterialDetailsProps) {
-  const leather = product.leatherType || "Kulit sapi asli";
-  const color = product.color || "nuansa hangat";
+  const leather = product.leatherType || "genuine cow leather";
+  const color = product.color || "warm tone";
 
   return (
     <section className="bg-warmIvory">
@@ -19,11 +19,10 @@ export default function ProductMaterialDetails({
               Material Details
             </div>
             <h2 className="mt-3 font-heading text-3xl leading-tight text-espresso">
-              Kulit yang Berkarakter, Detail yang Tenang
+              Characterful Leather, Quiet Details
             </h2>
             <p className="mt-4 text-sm leading-7 text-mutedBrown">
-              Setiap bagian dirancang untuk terasa nyaman dipakai, rapi dipandang,
-              dan layak menemani perjalanan panjang.
+              Every part is shaped to feel comfortable, look refined, and stay ready for years of daily movement.
             </p>
           </div>
 
@@ -34,7 +33,7 @@ export default function ProductMaterialDetails({
                   Material
                 </div>
                 <div className="mt-3 text-sm leading-7 text-mutedBrown">
-                  Dibuat dari <span className="font-semibold text-espresso">{leather}</span>, dipilih untuk ketahanan dan struktur yang matang.
+                  Made from <span className="font-semibold text-espresso">{leather}</span>, selected for durability, structure, and mature character.
                 </div>
               </div>
               <div className="rounded-soft border border-espresso/10 bg-bone p-5">
@@ -42,7 +41,7 @@ export default function ProductMaterialDetails({
                   Texture
                 </div>
                 <div className="mt-3 text-sm leading-7 text-mutedBrown">
-                  Tekstur grain alami memberi karakter unik pada setiap tas, dengan warna <span className="font-semibold text-espresso">{color}</span>.
+                  Natural grain gives every bag a distinct character, supported by a <span className="font-semibold text-espresso">{color}</span> finish.
                 </div>
               </div>
               <div className="rounded-soft border border-espresso/10 bg-bone p-5">
@@ -50,7 +49,7 @@ export default function ProductMaterialDetails({
                   Durability
                 </div>
                 <div className="mt-3 text-sm leading-7 text-mutedBrown">
-                  Kulit sapi asli dapat menua dengan indah. Dengan pemakaian wajar, tas tetap kokoh dan semakin terasa personal.
+                  Genuine cow leather can age beautifully. With mindful use, the bag stays strong and becomes more personal over time.
                 </div>
               </div>
               <div className="rounded-soft border border-espresso/10 bg-bone p-5">
@@ -58,12 +57,12 @@ export default function ProductMaterialDetails({
                   Care
                 </div>
                 <div className="mt-3 text-sm leading-7 text-mutedBrown">
-                  Simpan di tempat kering, bersihkan lembut, dan gunakan conditioner kulit seperlunya agar patina berkembang dengan halus.
+                  Store in a dry place, wipe gently, and use leather conditioner sparingly so the patina develops with care.
                 </div>
               </div>
             </div>
             <div className="mt-4 text-xs font-semibold uppercase text-mutedBrown">
-              Category: {product.category || "Koleksi"}
+              Category: {product.category || "Collection"}
             </div>
           </div>
         </div>
@@ -71,4 +70,3 @@ export default function ProductMaterialDetails({
     </section>
   );
 }
-

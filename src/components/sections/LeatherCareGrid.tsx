@@ -10,7 +10,7 @@ export default function LeatherCareGrid({ articles }: LeatherCareGridProps) {
   if (!articles.length) {
     return (
       <div className="rounded-soft border border-espresso/10 bg-bone p-8 text-center text-sm text-mutedBrown">
-        Belum ada artikel perawatan kulit saat ini.
+        No leather care articles are available yet.
       </div>
     );
   }

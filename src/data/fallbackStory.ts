@@ -1,22 +1,21 @@
 import type { BrandStory } from "@/types/story";
 
 export const FALLBACK_STORY: BrandStory = {
-  title: "Cerita Mountain Rose",
+  title: "The Mountain Rose Story",
   subtitle:
-    "Terinspirasi dari ketenangan pegunungan dan keanggunan mawar, Mountain Rose menghadirkan tas kulit sapi asli dengan karakter yang kuat, hangat, dan timeless.",
+    "Inspired by mountain calm and restrained rose elegance, Mountain Rose creates genuine cow leather bags with warm, lasting character.",
   intro:
-    "Mountain Rose lahir dari keyakinan bahwa tas bukan hanya pelengkap penampilan, tetapi bagian dari perjalanan. Setiap material, garis desain, dan detail dibuat untuk menghadirkan kesan elegan yang tidak lekang oleh waktu.",
-  craftsmanshipTitle: "Dibuat dengan Perhatian pada Detail",
+    "Mountain Rose was built on the belief that a bag is not only an accessory, but part of the journey. Every material, line, and detail is shaped to feel elegant beyond passing trends.",
+  craftsmanshipTitle: "Made with Attention to Detail",
   craftsmanshipText:
-    "Setiap tas dirancang dengan pendekatan yang tenang dan terukur. Kami mengutamakan struktur, kenyamanan, dan tampilan yang matang agar setiap produk dapat digunakan dalam berbagai momen.",
-  leatherTitle: "Karakter Kulit Sapi Asli",
+    "Each bag is designed with a calm and measured approach. We focus on structure, comfort, careful stitching, and a mature silhouette that can move through many moments.",
+  leatherTitle: "The Character of Genuine Cow Leather",
   leatherText:
-    "Kulit sapi asli memiliki tekstur alami, ketahanan yang baik, dan karakter yang berkembang seiring pemakaian. Setiap guratan menjadi bagian dari cerita pemiliknya.",
-  roseTitle: "Filosofi Mawar",
+    "Genuine cow leather has natural texture, reliable durability, and a character that develops with use. Every mark becomes part of the owner's story.",
+  roseTitle: "The Rose Philosophy",
   roseText:
-    "Mawar menjadi simbol keanggunan, kelembutan, dan karakter. Dalam Mountain Rose, inspirasi ini diterjemahkan secara halus melalui warna, detail, dan suasana visual yang elegan.",
-  ctaTitle: "Temukan Tas Kulit yang Selaras dengan Ceritamu",
+    "The rose represents elegance, softness, and character. At Mountain Rose, that inspiration appears subtly through color, detail, and a refined visual mood.",
+  ctaTitle: "Find the Leather Bag That Fits Your Story",
   ctaText:
-    "Jelajahi koleksi Mountain Rose dan pilih tas kulit sapi yang menemani perjalananmu.",
+    "Explore the Mountain Rose catalogue and choose a genuine cow leather bag made to accompany your journey.",
 };
-

@@ -31,7 +31,7 @@ export default function StoryHero({ story }: StoryHeroProps) {
                 Material
               </div>
               <div className="mt-2 text-sm font-medium text-espresso">
-                Kulit sapi asli
+                Genuine cow leather
               </div>
             </div>
             <div className="rounded-soft border border-espresso/10 bg-bone px-3 py-3">
@@ -39,15 +39,15 @@ export default function StoryHero({ story }: StoryHeroProps) {
                 Detail
               </div>
               <div className="mt-2 text-sm font-medium text-espresso">
-                Finishing rapi
+                Refined finishing
               </div>
             </div>
             <div className="rounded-soft border border-espresso/10 bg-bone px-3 py-3">
               <div className="text-xs font-semibold uppercase text-mutedRose">
-                Nuansa
+                Mood
               </div>
               <div className="mt-2 text-sm font-medium text-espresso">
-                Tenang, matang
+                Calm, mature
               </div>
             </div>
           </div>
@@ -61,7 +61,7 @@ export default function StoryHero({ story }: StoryHeroProps) {
                   src={imgUrl}
                   alt={
                     story.image?.alt ||
-                    "Mountain Rose story image - suasana editorial kulit"
+                    "Mountain Rose editorial leather story image"
                   }
                   fill
                   sizes="(min-width: 1024px) 560px, 100vw"
@@ -81,10 +81,10 @@ export default function StoryHero({ story }: StoryHeroProps) {
                       Mountain Rose
                     </div>
                     <div className="mt-3 font-heading text-3xl leading-tight text-espresso">
-                      Kulit, mawar, dan perjalanan panjang
+                      Leather, roses, and a long journey
                     </div>
                     <p className="mt-4 text-sm leading-7 text-mutedBrown">
-                      Visual editorial yang tenang untuk menceritakan karakter material dan detail handmade.
+                      A calm editorial visual for the character of material and handmade detail.
                     </p>
                   </div>
                 </div>
@@ -92,7 +92,7 @@ export default function StoryHero({ story }: StoryHeroProps) {
             )}
             <div className="absolute left-5 top-5 inline-flex items-center gap-2 rounded-soft border border-espresso/10 bg-warmIvory/80 px-3 py-2 text-xs font-semibold text-espresso">
               <span className="h-1.5 w-1.5 rounded-full bg-antiqueGold" />
-              Elegansi terinspirasi mawar
+              Rose-inspired restraint
             </div>
           </div>
         </div>

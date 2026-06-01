@@ -29,7 +29,7 @@ export default function LeatherMaterialStory({
                   Natural texture
                 </div>
                 <p className="mt-3 text-sm leading-7 text-mutedBrown">
-                  Grain alami memberi karakter yang unik, terasa hangat dan matang.
+                  Natural grain gives each bag a unique, warm, and mature character.
                 </p>
               </div>
               <div className="rounded-soft border border-espresso/10 bg-warmIvory p-5">
@@ -37,7 +37,7 @@ export default function LeatherMaterialStory({
                   Durability
                 </div>
                 <p className="mt-3 text-sm leading-7 text-mutedBrown">
-                  Dipilih untuk ketahanan dan struktur, agar siap dipakai untuk momen harian.
+                  Chosen for durability and structure, ready for everyday moments.
                 </p>
               </div>
               <div className="rounded-soft border border-espresso/10 bg-warmIvory p-5">
@@ -45,7 +45,7 @@ export default function LeatherMaterialStory({
                   Aging character
                 </div>
                 <p className="mt-3 text-sm leading-7 text-mutedBrown">
-                  Dengan perawatan yang tepat, kulit berkembang menjadi patina yang lebih kaya.
+                  With proper care, leather develops a richer patina over time.
                 </p>
               </div>
               <div className="rounded-soft border border-espresso/10 bg-warmIvory p-5">
@@ -53,7 +53,7 @@ export default function LeatherMaterialStory({
                   Daily use
                 </div>
                 <p className="mt-3 text-sm leading-7 text-mutedBrown">
-                  Nyaman dipakai, mudah dipadukan, dan tetap terlihat premium tanpa berlebihan.
+                  Easy to wear, easy to style, and premium without being excessive.
                 </p>
               </div>
             </div>
@@ -63,4 +63,3 @@ export default function LeatherMaterialStory({
     </section>
   );
 }
-

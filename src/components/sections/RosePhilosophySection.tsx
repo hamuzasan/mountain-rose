@@ -30,7 +30,7 @@ export default function RosePhilosophySection({
                     Elegance
                   </div>
                   <div className="mt-2 text-sm font-medium text-espresso">
-                    Halus, matang.
+                    Subtle, mature.
                   </div>
                 </div>
                 <div className="rounded-soft border border-espresso/10 bg-warmIvory px-4 py-3">
@@ -38,7 +38,7 @@ export default function RosePhilosophySection({
                     Softness
                   </div>
                   <div className="mt-2 text-sm font-medium text-espresso">
-                    Aksen terukur.
+                    Measured accents.
                   </div>
                 </div>
                 <div className="rounded-soft border border-espresso/10 bg-warmIvory px-4 py-3">
@@ -46,7 +46,7 @@ export default function RosePhilosophySection({
                     Character
                   </div>
                   <div className="mt-2 text-sm font-medium text-espresso">
-                    Berlapis makna.
+                    Layered meaning.
                   </div>
                 </div>
               </div>
@@ -61,4 +61,3 @@ export default function RosePhilosophySection({
     </section>
   );
 }
-

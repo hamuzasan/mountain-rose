@@ -30,63 +30,62 @@ function sectionsToPortableText(
 export const FALLBACK_LEATHER_CARE_ARTICLES: LeatherCareArticle[] = [
   {
     _id: "fallback-lc-1",
-    title: "Cara Merawat Tas Kulit Sapi agar Tetap Elegan",
+    title: "How to Keep a Cow Leather Bag Elegant",
     slug: "cara-merawat-tas-kulit-sapi",
     excerpt:
-      "Panduan dasar menjaga tas kulit sapi agar tetap bersih, lembut, dan memiliki karakter alami yang indah.",
-    content: sectionsToPortableText("Panduan dasar:", [
-      "Bersihkan dengan kain lembut",
-      "Hindari air berlebih",
-      "Simpan di tempat kering",
-      "Gunakan leather conditioner secukupnya",
+      "A simple care guide to keep genuine cow leather clean, supple, and naturally beautiful.",
+    content: sectionsToPortableText("Basic care:", [
+      "Wipe gently with a soft cloth",
+      "Avoid excess water",
+      "Store in a dry, ventilated place",
+      "Use leather conditioner sparingly",
     ]),
     coverImage: { alt: "Leather care (placeholder)" },
     publishedAt: isoDate(18),
   },
   {
     _id: "fallback-lc-2",
-    title: "Hal yang Harus Dihindari pada Tas Kulit Asli",
+    title: "What to Avoid with Genuine Leather Bags",
     slug: "hal-yang-harus-dihindari-pada-tas-kulit-asli",
     excerpt:
-      "Beberapa kebiasaan sederhana bisa membuat tas kulit lebih awet jika diperhatikan sejak awal.",
-    content: sectionsToPortableText("Hal yang perlu dihindari:", [
-      "Jangan menjemur langsung di bawah matahari",
-      "Hindari menyimpan di tempat lembap",
-      "Jangan memakai bahan kimia keras",
-      "Hindari menumpuk barang terlalu berat",
+      "A few simple habits can help leather bags stay beautiful for longer.",
+    content: sectionsToPortableText("Things to avoid:", [
+      "Do not dry directly under harsh sunlight",
+      "Avoid damp storage areas",
+      "Do not use harsh chemical cleaners",
+      "Avoid stacking overly heavy items on top",
     ]),
-    coverImage: { alt: "Tas kulit asli (placeholder)" },
+    coverImage: { alt: "Genuine leather bag care placeholder" },
     publishedAt: isoDate(26),
   },
   {
     _id: "fallback-lc-3",
-    title: "Kenapa Kulit Sapi Berubah Karakter Seiring Waktu",
+    title: "Why Cow Leather Develops Character Over Time",
     slug: "kenapa-kulit-sapi-berubah-karakter",
     excerpt:
-      "Kulit sapi asli memiliki karakter alami yang berkembang seiring pemakaian dan perawatan.",
-    content: sectionsToPortableText("Mengapa berubah:", [
-      "Tekstur alami kulit",
+      "Genuine cow leather naturally develops a richer character through use and care.",
+    content: sectionsToPortableText("Why it changes:", [
+      "Natural leather texture",
       "Patina",
-      "Warna yang semakin matang",
-      "Cara menjaga perubahan tetap indah",
+      "Color that becomes more mature",
+      "Ways to keep the aging process beautiful",
     ]),
-    coverImage: { alt: "Karakter kulit sapi (placeholder)" },
+    coverImage: { alt: "Cow leather texture placeholder" },
     publishedAt: isoDate(35),
   },
   {
     _id: "fallback-lc-4",
-    title: "Tips Menyimpan Tas Kulit Saat Tidak Digunakan",
+    title: "How to Store a Leather Bag When Not in Use",
     slug: "tips-menyimpan-tas-kulit",
     excerpt:
-      "Penyimpanan yang tepat membantu menjaga bentuk, warna, dan kualitas tas kulit sapi.",
-    content: sectionsToPortableText("Tips penyimpanan:", [
-      "Gunakan dust bag",
-      "Isi bagian dalam tas agar bentuk terjaga",
-      "Simpan di tempat bersirkulasi baik",
-      "Keluarkan secara berkala",
+      "Proper storage helps preserve the shape, color, and quality of genuine cow leather.",
+    content: sectionsToPortableText("Storage tips:", [
+      "Use a dust bag",
+      "Fill the inside so the shape stays balanced",
+      "Store in a place with good air circulation",
+      "Take the bag out occasionally",
     ]),
-    coverImage: { alt: "Penyimpanan tas kulit (placeholder)" },
+    coverImage: { alt: "Leather bag storage placeholder" },
     publishedAt: isoDate(44),
   },
 ];
-

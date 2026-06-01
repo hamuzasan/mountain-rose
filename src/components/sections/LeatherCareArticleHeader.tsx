@@ -24,7 +24,7 @@ export default function LeatherCareArticleHeader({
           <ol className="flex flex-wrap items-center gap-2">
             <li>
               <Link href="/" className="transition-colors hover:text-espresso">
-                Beranda
+                Home
               </Link>
             </li>
             <li className="text-mutedBrown/60">/</li>
@@ -33,7 +33,7 @@ export default function LeatherCareArticleHeader({
                 href="/leather-care"
                 className="transition-colors hover:text-espresso"
               >
-                Perawatan Kulit
+                Leather Care
               </Link>
             </li>
             <li className="text-mutedBrown/60">/</li>
@@ -65,7 +65,7 @@ export default function LeatherCareArticleHeader({
                   src={imgUrl}
                   alt={
                     article.coverImage?.alt ||
-                    `${article.title} - perawatan kulit Mountain Rose`
+                    `${article.title} - Mountain Rose leather care`
                   }
                   fill
                   sizes="(min-width: 1024px) 960px, 100vw"

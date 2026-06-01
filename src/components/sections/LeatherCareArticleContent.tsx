@@ -33,11 +33,10 @@ export default function LeatherCareArticleContent({
             Article
           </div>
           <div className="mt-6 whitespace-pre-line text-sm leading-8 text-mutedBrown sm:text-base">
-            {text || "Konten artikel belum tersedia."}
+            {text || "Article content is not available yet."}
           </div>
         </div>
       </div>
     </section>
   );
 }
-

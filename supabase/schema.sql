@@ -87,6 +87,17 @@ create table if not exists public.homepage_content (
   updated_at timestamptz default now()
 );
 
+create table if not exists public.instagram_embeds (
+  id uuid primary key default gen_random_uuid(),
+  title text,
+  instagram_url text not null,
+  caption text,
+  sort_order integer default 0,
+  status text default 'published',
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+
 create table if not exists public.brand_story (
   id uuid primary key default gen_random_uuid(),
   title text,
@@ -159,6 +170,11 @@ create trigger set_updated_at_homepage_content
 before update on public.homepage_content
 for each row execute function public.set_updated_at();
 
+drop trigger if exists set_updated_at_instagram_embeds on public.instagram_embeds;
+create trigger set_updated_at_instagram_embeds
+before update on public.instagram_embeds
+for each row execute function public.set_updated_at();
+
 drop trigger if exists set_updated_at_brand_story on public.brand_story;
 create trigger set_updated_at_brand_story
 before update on public.brand_story
@@ -182,12 +198,16 @@ create index if not exists leather_care_articles_status_idx on public.leather_ca
 
 create index if not exists product_images_product_id_idx on public.product_images (product_id);
 
+create index if not exists instagram_embeds_status_idx on public.instagram_embeds (status);
+create index if not exists instagram_embeds_sort_order_idx on public.instagram_embeds (sort_order);
+
 -- RLS
 alter table public.collections enable row level security;
 alter table public.products enable row level security;
 alter table public.product_images enable row level security;
 alter table public.site_settings enable row level security;
 alter table public.homepage_content enable row level security;
+alter table public.instagram_embeds enable row level security;
 alter table public.brand_story enable row level security;
 alter table public.leather_care_articles enable row level security;
 alter table public.admin_profiles enable row level security;
@@ -236,6 +256,16 @@ on public.homepage_content
 for select
 to anon, authenticated
 using (true);
+
+drop policy if exists "instagram_embeds_public_read_published" on public.instagram_embeds;
+create policy "instagram_embeds_public_read_published"
+on public.instagram_embeds
+for select
+to anon, authenticated
+using (status = 'published');
+
+grant select on table public.instagram_embeds to anon, authenticated;
+grant insert, update, delete on table public.instagram_embeds to authenticated;
 
 drop policy if exists "brand_story_public_read" on public.brand_story;
 create policy "brand_story_public_read"
@@ -288,6 +318,14 @@ with check (exists (select 1 from public.admin_profiles ap where ap.id = (select
 drop policy if exists "homepage_content_admin_write" on public.homepage_content;
 create policy "homepage_content_admin_write"
 on public.homepage_content
+for all
+to authenticated
+using (exists (select 1 from public.admin_profiles ap where ap.id = (select auth.uid())))
+with check (exists (select 1 from public.admin_profiles ap where ap.id = (select auth.uid())));
+
+drop policy if exists "instagram_embeds_admin_write" on public.instagram_embeds;
+create policy "instagram_embeds_admin_write"
+on public.instagram_embeds
 for all
 to authenticated
 using (exists (select 1 from public.admin_profiles ap where ap.id = (select auth.uid())))

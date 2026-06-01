@@ -6,11 +6,11 @@ export const siteConfig = {
   ogImage: "/og-image.jpg",
   locale: "id_ID",
   keywords: [
-    "tas kulit sapi",
-    "tas kulit asli",
-    "tas kulit premium",
-    "tas kulit wanita",
-    "tas handmade",
+    "cow leather bags",
+    "genuine leather bags",
+    "premium leather bags",
+    "women leather bags",
+    "handmade bags",
     "Mountain Rose",
   ],
 };

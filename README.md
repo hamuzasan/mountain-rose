@@ -71,8 +71,9 @@ Fill content in this recommended order:
 2. Homepage
 3. Collections
 4. Products
-5. Brand Story
+5. Instagram Cards
 6. Leather Care Articles
+7. Brand Story, optional archive page
 
 Use `docs/CMS_CONTENT_GUIDE.md` for starter content, image guidelines, copywriting guidance, WhatsApp message examples, and SEO content tips.
 
@@ -117,12 +118,13 @@ Use `npm run start` after `npm run build`.
 - `/`
 - `/collections`
 - `/collections/[slug]`
-- `/story`
 - `/leather-care`
 - `/leather-care/[slug]`
 - `/contact`
 - `/admin`
 - `/admin/products`
+- `/admin/settings`
+- `/admin/instagram`
 - `/admin/whatsapp-debug`
 
 ## SEO
@@ -145,6 +147,8 @@ Read `docs/DEPLOYMENT.md` before deploying and use `docs/LAUNCH_CHECKLIST.md` be
 - Schema: `supabase/schema.sql`
 - Setup: `docs/SUPABASE_SETUP.md`
 - Migration notes: `docs/CMS_MIGRATION_TO_SUPABASE.md`
+- Logo URL is managed at `/admin/settings`.
+- Homepage Instagram cards are managed at `/admin/instagram`.
 
 ## Project Rules
 

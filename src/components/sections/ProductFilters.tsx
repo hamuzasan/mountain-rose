@@ -23,7 +23,7 @@ export default function ProductFilters({
   categories = [],
 }: ProductFiltersProps) {
   const categoryOptions = ["All", ...categories].map((category) => ({
-    label: category === "All" ? "Semua" : category,
+    label: category,
     value: category as ProductCategory,
   }));
 
@@ -35,7 +35,7 @@ export default function ProductFilters({
             htmlFor="filter-category"
             className="block text-xs font-semibold uppercase text-mutedRose"
           >
-            Kategori
+            Category
           </label>
           <select
             id="filter-category"
@@ -58,7 +58,7 @@ export default function ProductFilters({
             htmlFor="filter-availability"
             className="block text-xs font-semibold uppercase text-mutedRose"
           >
-            Ketersediaan
+            Availability
           </label>
           <select
             id="filter-availability"
@@ -71,9 +71,9 @@ export default function ProductFilters({
             }
             className="mt-2 h-11 w-full rounded-soft border border-espresso/15 bg-warmIvory px-3 text-sm font-medium text-espresso outline-none transition-colors focus:border-antiqueGold/70 focus:ring-2 focus:ring-antiqueGold/20"
           >
-            <option value="All">Semua</option>
-            <option value="Available">Tersedia</option>
-            <option value="Not Available">Belum tersedia</option>
+            <option value="All">All</option>
+            <option value="Available">Available</option>
+            <option value="Not Available">Not available</option>
           </select>
         </div>
 
@@ -82,7 +82,7 @@ export default function ProductFilters({
             htmlFor="filter-sort"
             className="block text-xs font-semibold uppercase text-mutedRose"
           >
-            Urutan
+            Sort
           </label>
           <select
             id="filter-sort"
@@ -90,9 +90,9 @@ export default function ProductFilters({
             onChange={(e) => onChange({ ...value, sort: e.target.value as SortKey })}
             className="mt-2 h-11 w-full rounded-soft border border-espresso/15 bg-warmIvory px-3 text-sm font-medium text-espresso outline-none transition-colors focus:border-antiqueGold/70 focus:ring-2 focus:ring-antiqueGold/20"
           >
-            <option value="Featured">Sorotan</option>
-            <option value="PriceLow">Harga: rendah ke tinggi</option>
-            <option value="PriceHigh">Harga: tinggi ke rendah</option>
+            <option value="Featured">Featured</option>
+            <option value="PriceLow">Price: low to high</option>
+            <option value="PriceHigh">Price: high to low</option>
           </select>
         </div>
       </div>

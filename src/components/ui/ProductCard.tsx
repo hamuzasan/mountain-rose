@@ -46,9 +46,9 @@ export default function ProductCard({
   const imgUrl = getProductImageUrl(primaryImage);
 
   const alt =
-    primaryImage?.alt || `${product.name} - tas kulit sapi (Mountain Rose)`;
+    primaryImage?.alt || `${product.name} - Mountain Rose cow leather bag`;
 
-  const subLabel = product.category || product.leatherType || "Kulit sapi asli";
+  const subLabel = product.category || product.leatherType || "Genuine cow leather";
   const priceLabel = formatProductPrice(product);
 
   const waMessage =
@@ -125,11 +125,11 @@ export default function ProductCard({
               {product.name}
             </Link>
             <div className="mt-2 text-xs font-medium uppercase text-mutedRose">
-              {product.material || product.leatherType || "Kulit sapi asli"}
+              {product.material || product.leatherType || "Genuine cow leather"}
             </div>
             {(product.isAvailable ?? true) ? null : (
               <div className="mt-2 inline-flex items-center rounded-soft border border-espresso/10 bg-warmIvory px-2 py-1 text-[11px] font-semibold uppercase text-mutedBrown">
-                Belum tersedia
+                Not available
               </div>
             )}
           </div>
@@ -139,7 +139,7 @@ export default function ProductCard({
             </div>
           ) : (
             <div className="text-xs font-medium text-mutedBrown">
-              Hubungi untuk harga
+              Ask for price
             </div>
           )}
         </div>
@@ -160,14 +160,14 @@ export default function ProductCard({
             href={`/collections/${product.slug}`}
             className="inline-flex h-10 items-center justify-center rounded-soft border border-espresso/15 bg-warmIvory px-4 text-sm font-medium text-espresso transition-colors hover:bg-bone focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
           >
-            Lihat Detail
+            View Detail
           </Link>
           {showWhatsAppCta && (product.isAvailable ?? true) ? (
             <a
               href={waHref}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`Konsultasi ${product.name} via WhatsApp`}
+              aria-label={`Consult about ${product.name} via WhatsApp`}
               className="inline-flex h-10 items-center justify-center rounded-soft border border-brass/40 bg-espresso px-4 text-sm font-medium text-warmIvory transition-colors hover:bg-darkLeather focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
             >
               WhatsApp

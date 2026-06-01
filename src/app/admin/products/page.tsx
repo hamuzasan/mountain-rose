@@ -276,6 +276,18 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
           </div>
           <div className="flex flex-wrap gap-3">
             <Link
+              href="/admin/settings"
+              className="inline-flex min-h-11 items-center rounded-full border border-espresso/15 bg-bone px-5 text-sm font-semibold text-espresso"
+            >
+              Site Settings
+            </Link>
+            <Link
+              href="/admin/instagram"
+              className="inline-flex min-h-11 items-center rounded-full border border-espresso/15 bg-bone px-5 text-sm font-semibold text-espresso"
+            >
+              Instagram Cards
+            </Link>
+            <Link
               href="/admin/whatsapp-debug"
               className="inline-flex min-h-11 items-center rounded-full border border-espresso/15 bg-bone px-5 text-sm font-semibold text-espresso"
             >

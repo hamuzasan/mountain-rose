@@ -43,7 +43,7 @@ export default function HomeCategoryShowcase({ products }: HomeCategoryShowcaseP
         <div className="mb-6 flex items-center gap-4 lg:hidden">
           <div className="h-px flex-1 bg-mutedRose/70" />
           <h2 className="text-center text-sm font-semibold uppercase text-deepRose">
-            Produk Kategori
+            Product Categories
           </h2>
           <div className="h-px flex-1 bg-mutedRose/70" />
         </div>
@@ -83,14 +83,13 @@ export default function HomeCategoryShowcase({ products }: HomeCategoryShowcaseP
         <div className="hidden gap-10 lg:grid lg:grid-cols-12 lg:items-start">
           <div className="lg:col-span-4">
             <div className="text-xs font-semibold uppercase text-mutedRose">
-              Pilih Berdasarkan Kategori
+              Shop by Category
             </div>
             <h2 className="mt-3 font-heading text-4xl leading-tight text-espresso sm:text-5xl">
-              Pilih bentuk yang paling dekat dengan ritmemu.
+              Choose the shape that fits your rhythm.
             </h2>
             <p className="mt-5 text-sm leading-7 text-mutedBrown sm:text-base">
-              Dari sling bag hingga backpack, setiap kategori membawa fungsi yang
-              berbeda tanpa kehilangan karakter kulit sapi asli Mountain Rose.
+              From sling bags to backpacks, every category carries a different function while keeping the same genuine cow leather character.
             </p>
             <div className="mt-6 flex flex-wrap gap-2">
               {categories.map((item, index) => (
@@ -146,7 +145,7 @@ export default function HomeCategoryShowcase({ products }: HomeCategoryShowcaseP
                       {item.product.name}
                     </div>
                     <div className="mt-3 text-xs font-semibold uppercase text-mutedBrown">
-                      Lihat Detail
+                      View Detail
                     </div>
                   </div>
                 </Link>

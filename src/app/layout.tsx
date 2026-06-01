@@ -57,7 +57,7 @@ export default async function RootLayout({
     : FALLBACK_SITE_SETTINGS;
 
   return (
-    <html lang="id" className="h-full" data-scroll-behavior="smooth">
+    <html lang="en" className="h-full" data-scroll-behavior="smooth">
       <body className="flex min-h-full flex-col">
         <Navbar siteSettings={siteSettings} />
         <main className="flex-1">{children}</main>

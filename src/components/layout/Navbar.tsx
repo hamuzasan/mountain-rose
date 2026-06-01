@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useId, useMemo, useState } from "react";
@@ -40,7 +41,7 @@ export default function Navbar({ siteSettings }: NavbarProps) {
           className="fixed left-5 top-4 z-50 inline-flex h-10 w-10 items-center justify-center rounded-soft text-espresso transition-colors hover:bg-warmIvory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70 md:hidden"
           aria-controls={menuId}
           aria-expanded={isOpen}
-          aria-label={isOpen ? "Tutup menu" : "Buka menu"}
+          aria-label={isOpen ? "Close menu" : "Open menu"}
           onClick={() => setIsOpen((v) => !v)}
         >
           <span className="relative block h-3.5 w-5" aria-hidden="true">
@@ -55,11 +56,22 @@ export default function Navbar({ siteSettings }: NavbarProps) {
           className="flex flex-col items-center text-center text-espresso hover:text-darkLeather md:flex-row md:items-baseline md:gap-3 md:text-left"
           onClick={() => setIsOpen(false)}
         >
-          <span className="font-heading text-xl leading-none md:text-lg">
-            {settings.brandName}
-          </span>
+          {settings.logoUrl ? (
+            <Image
+              src={settings.logoUrl}
+              alt={`${settings.brandName} logo`}
+              width={180}
+              height={72}
+              className="h-12 w-auto object-contain md:h-10"
+              priority
+            />
+          ) : (
+            <span className="font-heading text-xl leading-none md:text-lg">
+              {settings.brandName}
+            </span>
+          )}
           <span className="hidden text-xs font-medium text-mutedBrown sm:inline md:inline">
-            Kulit Sapi Handmade
+            Handmade Cow Leather
           </span>
         </Link>
 

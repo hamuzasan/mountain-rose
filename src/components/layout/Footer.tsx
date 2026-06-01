@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import { FALLBACK_SITE_SETTINGS } from "@/data/fallbackSiteSettings";
 import { NAVIGATION } from "@/data/navigation";
@@ -27,7 +28,17 @@ export default function Footer({ siteSettings }: FooterProps) {
       <div className="mx-auto w-full max-w-7xl px-5 py-12 sm:px-6 lg:py-14">
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-5">
-            <div className="font-heading text-2xl text-bone">{settings.brandName}</div>
+            {settings.logoUrl ? (
+              <Image
+                src={settings.logoUrl}
+                alt={`${settings.brandName} logo`}
+                width={200}
+                height={80}
+                className="h-14 w-auto object-contain"
+              />
+            ) : (
+              <div className="font-heading text-2xl text-bone">{settings.brandName}</div>
+            )}
             <p className="mt-3 max-w-md text-sm leading-7 text-bone/80">
               {settings.tagline}
             </p>
@@ -36,7 +47,7 @@ export default function Footer({ siteSettings }: FooterProps) {
 
           <div className="md:col-span-3">
             <div className="text-xs font-semibold uppercase text-dustyRose">
-              Navigasi
+              Navigation
             </div>
             <ul className="mt-4 flex flex-col gap-2">
               {NAVIGATION.map((item) => (
@@ -54,7 +65,7 @@ export default function Footer({ siteSettings }: FooterProps) {
 
           <div className="md:col-span-4">
             <div className="text-xs font-semibold uppercase text-dustyRose">
-              Kontak
+              Contact
             </div>
             <div className="mt-4 flex flex-col gap-2 text-sm text-bone/85">
               <a
@@ -63,7 +74,7 @@ export default function Footer({ siteSettings }: FooterProps) {
                 rel="noopener noreferrer"
                 className="transition-colors hover:text-warmIvory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
               >
-                Konsultasi via WhatsApp
+                Consult via WhatsApp
               </a>
               <a
                 href={settings.instagramUrl}
@@ -87,8 +98,8 @@ export default function Footer({ siteSettings }: FooterProps) {
         </div>
 
         <div className="mt-12 flex flex-col gap-3 border-t border-warmIvory/10 pt-6 text-xs text-bone/70 sm:flex-row sm:items-center sm:justify-between">
-          <div>© 2026 {settings.brandName}. All rights reserved.</div>
-          <div className="text-bone/60">Tas kulit sapi premium handmade dari Indonesia.</div>
+          <div>&copy; 2026 {settings.brandName}. All rights reserved.</div>
+          <div className="text-bone/60">Premium handmade cow leather bags from Indonesia.</div>
         </div>
       </div>
     </footer>

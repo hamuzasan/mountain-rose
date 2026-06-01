@@ -1,10 +1,10 @@
 import type { Product } from "@/types/product";
 
 export function formatCurrencyIDR(value: number): string {
-  if (!Number.isFinite(value) || value < 0) return "Harga tersedia via WhatsApp";
-  if (value === 0) return "Harga custom";
+  if (!Number.isFinite(value) || value < 0) return "Price available via WhatsApp";
+  if (value === 0) return "Custom price";
 
-  return new Intl.NumberFormat("id-ID", {
+  return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "IDR",
     maximumFractionDigits: 0,
@@ -27,10 +27,10 @@ export function formatProductPrice(product: Pick<Product, "price" | "priceAmount
   }
 
   if (typeof product.price === "number" && product.price === 0) {
-    return "Harga custom";
+    return "Custom price";
   }
 
-  return "Hubungi kami";
+  return "Ask for price";
 }
 
 export function formatDateID(value?: string): string {
@@ -38,7 +38,7 @@ export function formatDateID(value?: string): string {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return "";
 
-  return new Intl.DateTimeFormat("id-ID", {
+  return new Intl.DateTimeFormat("en-US", {
     day: "2-digit",
     month: "long",
     year: "numeric",

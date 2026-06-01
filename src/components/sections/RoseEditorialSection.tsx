@@ -8,12 +8,11 @@ export default function RoseEditorialSection() {
           <div className="lg:col-span-7">
             <SectionHeading
               eyebrow="Rose"
-              title="Mawar sebagai Simbol, Bukan Dekorasi"
-              description="Di Mountain Rose, mawar hadir sebagai isyarat elegansi: halus, matang, dan penuh karakter."
+              title="Rose as a Symbol, Not Decoration"
+              description="At Mountain Rose, the rose is a quiet signal of elegance: subtle, mature, and full of character."
             />
             <p className="mt-6 max-w-2xl text-sm leading-7 text-mutedBrown sm:text-base">
-              Sentuhan rose tidak dimaksudkan untuk menjadi warna dominan. Ia hadir sebagai aksen yang terukur,
-              menyeimbangkan kekuatan kulit sapi asli dengan nuansa lembut yang tetap premium.
+              The rose accent is never meant to dominate. It appears with restraint, balancing the strength of genuine cow leather with a softer boutique mood.
             </p>
           </div>
 
@@ -21,36 +20,36 @@ export default function RoseEditorialSection() {
             <div className="rounded-soft border border-espresso/10 bg-warmIvory p-6">
               <div className="flex items-center justify-between">
                 <div className="text-xs font-semibold uppercase text-mutedRose">
-                  Catatan Editorial
+                  Editorial Note
                 </div>
                 <div className="h-2 w-20 rounded-full bg-antiqueGold/40" />
               </div>
               <div className="mt-4 font-heading text-2xl leading-snug text-espresso">
-                Halus, hangat, dan tidak lekang waktu.
+                Subtle, warm, and timeless.
               </div>
               <div className="mt-5 grid gap-3">
                 <div className="rounded-soft border border-espresso/10 bg-bone px-4 py-3">
-                  <div className="text-sm font-medium text-espresso">Elegansi</div>
+                  <div className="text-sm font-medium text-espresso">Elegance</div>
                   <div className="mt-1 text-sm text-mutedBrown">
-                    Siluet bersih dan proporsi yang seimbang.
+                    Clean silhouettes and balanced proportions.
                   </div>
                 </div>
                 <div className="rounded-soft border border-espresso/10 bg-bone px-4 py-3">
-                  <div className="text-sm font-medium text-espresso">Kelembutan</div>
+                  <div className="text-sm font-medium text-espresso">Softness</div>
                   <div className="mt-1 text-sm text-mutedBrown">
-                    Aksen rose yang tidak mencolok, tetapi terasa.
+                    Rose accents that are quiet, not loud.
                   </div>
                 </div>
                 <div className="rounded-soft border border-espresso/10 bg-bone px-4 py-3">
-                  <div className="text-sm font-medium text-espresso">Karakter</div>
+                  <div className="text-sm font-medium text-espresso">Character</div>
                   <div className="mt-1 text-sm text-mutedBrown">
-                    Kulit yang semakin hidup seiring waktu.
+                    Leather that becomes richer with time.
                   </div>
                 </div>
               </div>
               <div className="mt-6 h-px w-full bg-espresso/10" />
               <div className="mt-4 text-xs font-semibold uppercase text-mutedBrown">
-                Aksen muted rose secukupnya
+                Muted rose, used with restraint
               </div>
             </div>
           </div>

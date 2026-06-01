@@ -32,15 +32,15 @@ export type FeaturedProductFallback = {
 };
 
 export const FALLBACK_HOMEPAGE: HomepageFallback = {
-  heroTitle: "Tas Kulit Sapi Asli dengan Karakter yang Bertahan Lama",
+  heroTitle: "Timeless Genuine Cow Leather Bags",
   heroSubtitle:
-    "Mountain Rose menghadirkan tas kulit sapi handmade dari Indonesia, dirancang dengan karakter kuat, detail rapi, dan elegansi yang tidak lekang oleh waktu.",
-  storySectionTitle: "Autentik, Tahan Lama, dan Berkarakter",
+    "Mountain Rose creates handmade genuine cow leather bags from Indonesia, shaped with lasting character, careful detail, and quiet elegance.",
+  storySectionTitle: "Authentic, Durable, and Full of Character",
   storySectionText:
-    "Berakar pada semangat alam dan keindahan pegunungan, setiap tas dibuat dari genuine cowhide dengan proses handmade oleh pengrajin lokal.",
-  ctaTitle: "Temukan Tas Kulit yang Siap Menemani Perjalananmu",
+    "Rooted in mountain calm and mature rose-inspired elegance, each piece is made from genuine cowhide by local craftsmen.",
+  ctaTitle: "Find the Leather Bag That Carries Your Story",
   ctaText:
-    "Konsultasikan pilihan model, ukuran, dan karakter tas langsung melalui WhatsApp.",
+    "Consult with Mountain Rose to choose the shape, size, and character that fits your daily rhythm.",
 };
 
 export const FALLBACK_FEATURED_PRODUCTS: FeaturedProductFallback[] = [
@@ -55,7 +55,7 @@ export const FALLBACK_FEATURED_PRODUCTS: FeaturedProductFallback[] = [
     priceAmount: 75,
     priceCurrency: "USD",
     shortDescription:
-      "Messenger bag kulit sapi asli dengan siluet tegas dan ruang yang cukup untuk aktivitas harian.",
+      "A genuine cow leather messenger bag with a confident silhouette and practical daily space.",
     isFeatured: true,
     isAvailable: true,
     images: [],
@@ -71,7 +71,7 @@ export const FALLBACK_FEATURED_PRODUCTS: FeaturedProductFallback[] = [
     priceAmount: 75,
     priceCurrency: "USD",
     shortDescription:
-      "Sling bag kulit sapi asli yang ringkas, elegan, dan praktis untuk perjalanan ringan.",
+      "A compact genuine cow leather sling bag made for light travel and refined everyday use.",
     isFeatured: true,
     isAvailable: true,
     images: [],
@@ -87,7 +87,7 @@ export const FALLBACK_FEATURED_PRODUCTS: FeaturedProductFallback[] = [
     priceAmount: 75,
     priceCurrency: "USD",
     shortDescription:
-      "Tas clutch dan sling kulit sapi asli dengan siluet rapi dan aksen rose yang elegan.",
+      "A refined cow leather clutch and sling bag with an elegant rose accent.",
     isFeatured: true,
     isAvailable: true,
     images: [],
@@ -103,7 +103,7 @@ export const FALLBACK_FEATURED_PRODUCTS: FeaturedProductFallback[] = [
     priceAmount: 50,
     priceCurrency: "USD",
     shortDescription:
-      "Sling bag kulit sapi crazy horse dengan karakter natural dan proporsi praktis.",
+      "A crazy horse cow leather sling bag with natural character and practical proportions.",
     isFeatured: true,
     isAvailable: true,
     images: [],
@@ -115,6 +115,6 @@ export function buildDefaultProductWhatsAppMessage(
   productName?: string,
 ) {
   const brand = siteSettings.brandName || "Mountain Rose";
-  if (!productName) return `Halo ${brand}, saya tertarik dengan produk tas kulit sapi.`;
-  return `Halo ${brand}, saya tertarik dengan ${productName}. Boleh info detailnya?`;
+  if (!productName) return `Hello ${brand}, I am interested in your cow leather bags.`;
+  return `Hello ${brand}, I am interested in ${productName}. Could you share more details?`;
 }

@@ -47,7 +47,19 @@ Homepage content is editable in one Homepage document. It should remain structur
 - `ctaTitle`: Call-to-action heading.
 - `ctaText`: Calm inquiry or collection prompt.
 
-The homepage UI should only be built when explicitly requested. This document prepares the content model for that future work.
+The current homepage uses product-led sections, catalogue highlights, material notes, and Instagram embeds. Story content can remain available as a hidden editorial route, but it is no longer part of the main homepage navigation.
+
+### Instagram Embed
+
+Instagram Embed records power the homepage "Follow Our Instagram" section.
+
+- `title`: Optional card title shown in the Instagram-style card header.
+- `instagramUrl`: Public Instagram post, reel, TV, or story URL.
+- `caption`: Optional short caption below the embedded card.
+- `sortOrder`: Lower numbers appear first.
+- `status`: Use `published` for visible cards and `draft` for hidden cards.
+
+Public Instagram posts and reels are the most reliable for embedding. Stories and private content may open as a link card instead of rendering inside an iframe.
 
 ### Brand Story
 
@@ -81,7 +93,8 @@ Site Settings stores global brand and contact data.
 - `instagramUrl`: Instagram profile URL.
 - `email`: Contact email.
 - `address`: Boutique or business address.
-- `logo`: Brand logo with alt text.
+- `logoUrl`: Public logo image URL, preferably from Supabase Storage.
+- `logo`: Legacy logo metadata shape retained for compatibility.
 
 Use Site Settings for shared layout and contact information instead of hardcoding those values in components.
 

@@ -36,7 +36,7 @@ function getHeroProductImage(product: HeroProduct | null, imageIndex: number) {
 
 function getShortHeroTitle(title: string) {
   if (title.length <= 62) return title;
-  return "Tas Kulit Sapi Asli dengan Karakter Timeless";
+  return "Timeless Cow Leather Bags";
 }
 
 function getHeroTitleLines(title: string) {
@@ -99,7 +99,7 @@ function ProductMiniStrip({
             key={product.slug}
             type="button"
             onClick={() => onSelect(index)}
-            aria-label={`Tampilkan ${product.name}`}
+            aria-label={`Show ${product.name}`}
             aria-current={active}
             className={[
               "relative h-16 w-16 shrink-0 overflow-hidden border bg-bone transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70",
@@ -169,13 +169,13 @@ export default function HeroSection({
   const productHref = product ? `/collections/${product.slug}` : "/collections";
   const waHref = buildWhatsAppLink(
     siteSettings.whatsappNumber,
-    `Halo ${siteSettings.brandName}, saya ingin konsultasi tas kulit sapi.`,
+    `Hello ${siteSettings.brandName}, I would like to ask about your cow leather bags.`,
   );
   const heroTitle = getShortHeroTitle(title);
   const heroTitleLines = getHeroTitleLines(heroTitle);
   const imageAlt =
     image?.alt ||
-    (product ? `${product.name} - tas kulit sapi Mountain Rose` : "Tas kulit Mountain Rose");
+    (product ? `${product.name} - Mountain Rose cow leather bag` : "Mountain Rose cow leather bag");
 
   return (
     <section className="overflow-hidden bg-warmIvory">
@@ -193,9 +193,12 @@ export default function HeroSection({
           <Link
             href={productHref}
             className="group absolute inset-x-4 top-8 z-10 h-[72%] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
-            aria-label={product ? `Lihat detail ${product.name}` : "Lihat koleksi Mountain Rose"}
+            aria-label={product ? `View ${product.name}` : "View Mountain Rose collection"}
           >
-            <div className="absolute inset-x-10 bottom-0 top-14 rotate-[-3deg] bg-sand/35 transition-transform duration-700 group-hover:rotate-[-1deg]" />
+            <div
+              className="absolute inset-x-10 bottom-0 top-14 rotate-[-3deg] bg-sand/35 transition-transform duration-700 group-hover:rotate-[-1deg]"
+              style={{ clipPath: "polygon(8% 4%, 96% 12%, 88% 95%, 12% 100%)" }}
+            />
             <div className="hero-product-in relative z-10 h-full">
               {imageUrl ? (
                 <Image
@@ -237,7 +240,7 @@ export default function HeroSection({
                       if (heroProducts.length) setActiveIndex(index);
                     }}
                     aria-label={
-                      item ? `Tampilkan ${item.name}` : `Slide produk ${index + 1}`
+                      item ? `Show ${item.name}` : `Product slide ${index + 1}`
                     }
                     aria-current={active}
                     className={[
@@ -258,7 +261,7 @@ export default function HeroSection({
         <div className="relative z-20 min-w-0 lg:col-span-5">
           <div className="inline-flex items-center gap-3 text-xs font-semibold uppercase text-mutedRose">
             <span className="h-px w-10 bg-mutedRose/60" />
-            Kulit sapi asli handmade dari Indonesia
+            Handmade genuine cow leather from Indonesia
           </div>
           <h1 className="mt-5 max-w-2xl font-heading text-4xl leading-[0.96] text-charcoal sm:text-6xl lg:text-7xl">
             {heroTitleLines.map((line) => (
@@ -276,16 +279,16 @@ export default function HeroSection({
               href="/collections"
               className="inline-flex min-h-12 items-center justify-center rounded-full bg-espresso px-7 text-sm font-semibold text-warmIvory transition-colors hover:bg-darkLeather focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
             >
-              Lihat Koleksi
+              Explore Collection
             </Link>
             <a
               href={waHref}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex min-h-12 items-center justify-center rounded-full border border-espresso/20 bg-bone px-7 text-sm font-semibold text-espresso transition-colors hover:border-antiqueGold hover:bg-warmIvory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
-              aria-label="Konsultasi via WhatsApp"
+              aria-label="Consult via WhatsApp"
             >
-              Konsultasi via WhatsApp
+              Consult via WhatsApp
             </a>
           </div>
 
@@ -299,7 +302,7 @@ export default function HeroSection({
             <div>
               <div className="font-heading text-2xl text-espresso">9</div>
               <div className="mt-1 text-xs font-semibold uppercase text-mutedBrown">
-                Model Katalog
+                Catalogue Styles
               </div>
             </div>
             <div>
@@ -331,16 +334,19 @@ export default function HeroSection({
             <Link
               href={productHref}
               className="group relative block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
-              aria-label={product ? `Lihat detail ${product.name}` : "Lihat koleksi Mountain Rose"}
+              aria-label={product ? `View ${product.name}` : "View Mountain Rose collection"}
             >
-              <div className="absolute inset-x-6 bottom-10 top-5 rotate-[-4deg] bg-sand/45 transition-transform duration-700 group-hover:rotate-[-2deg] sm:inset-x-16 lg:bottom-14 lg:top-8" />
+              <div
+                className="absolute inset-x-6 bottom-10 top-5 rotate-[-4deg] bg-sand/45 transition-transform duration-700 group-hover:rotate-[-2deg] sm:inset-x-16 lg:bottom-14 lg:top-8"
+                style={{ clipPath: "polygon(10% 0%, 95% 8%, 88% 86%, 63% 96%, 15% 100%, 4% 23%)" }}
+              />
               <div className="absolute right-4 top-20 z-20 flex h-12 w-12 items-center justify-center rounded-full border border-espresso/15 bg-warmIvory/95 font-heading text-base text-espresso shadow-soft sm:right-12 lg:right-20">
                 {product?.heroImages.length ? `${product.heroImages.length}v` : "MR"}
               </div>
               <div className="absolute left-0 top-28 z-20 flex h-20 w-20 items-center justify-center rounded-full border border-espresso/15 bg-warmIvory/95 text-center text-xs leading-4 text-espresso shadow-soft sm:left-12 lg:left-20 lg:h-24 lg:w-24">
-                Kulit Sapi
+                Genuine
                 <br />
-                Handmade
+                Cowhide
               </div>
               <div className="hero-product-in relative z-10 h-[25rem] sm:h-[34rem] lg:h-[38rem]">
                 {imageUrl ? (
@@ -359,39 +365,29 @@ export default function HeroSection({
               </div>
             </Link>
 
-            <div className="relative z-30 mx-auto -mt-16 w-[calc(100%-2rem)] max-w-[21rem] border border-espresso/10 bg-warmIvory/95 p-5 shadow-soft sm:-mt-20 sm:max-w-[28rem] sm:p-6 lg:-mt-24 lg:ml-auto lg:mr-0">
-              <div className="flex items-start justify-between gap-4">
+            <div className="relative z-30 mx-auto -mt-12 w-[calc(100%-2rem)] max-w-[34rem] rounded-[2rem] border border-espresso/10 bg-warmIvory/95 px-5 py-4 shadow-soft backdrop-blur-[2px] sm:-mt-16 lg:-mt-20">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="min-w-0">
-                  <div className="text-xs font-semibold uppercase text-mutedRose">
+                  <div className="text-xs font-semibold uppercase tracking-[0.12em] text-mutedRose">
                     {product?.category || "Mountain Rose"}
                   </div>
-                  <h2 className="mt-2 font-heading text-3xl leading-tight text-espresso">
-                    {product?.name || "Tas Kulit Sapi Asli"}
+                  <h2 className="mt-1 font-heading text-2xl leading-tight text-espresso sm:text-3xl">
+                    {product?.name || "Genuine Cow Leather Bag"}
                   </h2>
                 </div>
-                {product ? (
-                  <div className="shrink-0 rounded-full border border-espresso/10 bg-bone px-3 py-2 text-xs font-semibold text-espresso">
-                    {formatProductPrice(product)}
-                  </div>
-                ) : null}
-              </div>
-              <p className="mt-4 text-sm leading-7 text-mutedBrown">
-                {product?.shortDescription ||
-                  "Tas kulit sapi asli dengan karakter hangat dan detail yang matang."}
-              </p>
-              <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-                <Link
-                  href={productHref}
-                  className="inline-flex min-h-11 items-center justify-center rounded-full bg-espresso px-6 text-sm font-semibold text-warmIvory transition-colors hover:bg-darkLeather focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
-                >
-                  Lihat Detail
-                </Link>
-                <Link
-                  href="/collections"
-                  className="inline-flex min-h-11 items-center justify-center rounded-full border border-espresso/15 bg-bone px-6 text-sm font-semibold text-espresso transition-colors hover:bg-warmIvory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
-                >
-                  Semua Koleksi
-                </Link>
+                <div className="flex shrink-0 items-center gap-3">
+                  {product ? (
+                    <div className="rounded-full border border-espresso/10 bg-bone px-4 py-2 text-xs font-semibold text-espresso">
+                      {formatProductPrice(product)}
+                    </div>
+                  ) : null}
+                  <Link
+                    href={productHref}
+                    className="inline-flex min-h-11 items-center justify-center rounded-full bg-espresso px-5 text-sm font-semibold text-warmIvory transition-colors hover:bg-darkLeather focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
+                  >
+                    View Detail
+                  </Link>
+                </div>
               </div>
             </div>
 

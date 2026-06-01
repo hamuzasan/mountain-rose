@@ -8,9 +8,9 @@ import { FALLBACK_SITE_SETTINGS } from "@/data/fallbackSiteSettings";
 import { getSiteSettings } from "@/data-access/siteSettings";
 
 export const metadata: Metadata = {
-  title: "Kontak Mountain Rose | Tas Kulit Sapi Premium",
+  title: "Contact Mountain Rose | Premium Cow Leather Bags",
   description:
-    "Hubungi Mountain Rose untuk konsultasi tas kulit sapi, pilihan model, warna, dan pemesanan melalui WhatsApp.",
+    "Contact Mountain Rose for cow leather bag consultation, product details, colors, and WhatsApp ordering.",
 };
 
 export default async function ContactPage() {

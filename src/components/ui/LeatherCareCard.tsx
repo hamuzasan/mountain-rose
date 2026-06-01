@@ -24,7 +24,7 @@ export default function LeatherCareCard({ article }: LeatherCareCardProps) {
               src={imgUrl}
               alt={
                 article.coverImage?.alt ||
-                `${article.title} - perawatan kulit Mountain Rose`
+                `${article.title} - Mountain Rose leather care`
               }
               fill
               sizes="(min-width: 1024px) 320px, (min-width: 640px) 50vw, 100vw"
@@ -61,7 +61,7 @@ export default function LeatherCareCard({ article }: LeatherCareCardProps) {
           </p>
         ) : null}
         <div className="mt-5 inline-flex h-10 items-center justify-center rounded-soft border border-espresso/15 bg-warmIvory px-4 text-sm font-medium text-espresso transition-colors hover:bg-bone">
-          Baca Artikel
+          Read Article
         </div>
       </div>
     </article>
