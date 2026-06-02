@@ -1,28 +1,12 @@
 import Link from "next/link";
 
+import { getInstagramMediaImageUrl } from "@/lib/instagram";
 import type { InstagramEmbed, SiteSettings } from "@/types/site";
 
 type InstagramShowcaseProps = {
   embeds: InstagramEmbed[];
   siteSettings: Pick<SiteSettings, "instagramUrl" | "brandName">;
 };
-
-function getInstagramEmbedUrl(url: string) {
-  try {
-    const parsed = new URL(url);
-    if (!parsed.hostname.includes("instagram.com")) return null;
-
-    const parts = parsed.pathname.split("/").filter(Boolean);
-    const type = parts[0];
-    const code = parts[1];
-
-    if (!code || !["p", "reel", "tv"].includes(type)) return null;
-
-    return `https://www.instagram.com/${type}/${code}/embed`;
-  } catch {
-    return null;
-  }
-}
 
 function getInstagramHandle(profileUrl: string) {
   try {
@@ -43,11 +27,11 @@ function InstagramFrame({
   index: number;
   handle: string;
 }) {
-  const embedUrl = getInstagramEmbedUrl(embed.instagramUrl);
+  const imageUrl = embed.thumbnailUrl || getInstagramMediaImageUrl(embed.instagramUrl);
   const title = embed.title || `Mountain Rose Journal ${index + 1}`;
 
   return (
-    <article className="group min-h-[18rem] overflow-hidden border border-espresso/10 bg-bone md:min-h-[28rem]">
+    <article className="group overflow-hidden border border-espresso/10 bg-bone">
       <div className="flex h-12 items-center gap-2 border-b border-espresso/10 px-2 sm:h-14 sm:gap-3 sm:px-4">
         <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-mutedRose/30 bg-warmIvory font-heading text-xs text-espresso sm:h-9 sm:w-9 sm:text-sm">
           MR
@@ -60,57 +44,37 @@ function InstagramFrame({
         </div>
       </div>
 
-      {embedUrl ? (
-        <>
-          <div
-            className="relative overflow-hidden bg-warmIvory md:hidden"
-            style={{
-              height:
-                "clamp(18rem, calc(600px * ((100vw - 2.5rem) / 652)), 34rem)",
-            }}
-          >
-            <iframe
-              title={`${title} Instagram embed mobile`}
-              src={embedUrl}
-              className="absolute left-0 top-0 h-[600px] w-[326px] border-0 bg-warmIvory"
-              loading="lazy"
-              scrolling="no"
-              style={{
-                overflow: "hidden",
-                transform: "scale(calc((100vw - 2.5rem) / 652))",
-                transformOrigin: "top left",
-              }}
-            />
-            <Link
-              href={embed.instagramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Open ${title} on Instagram`}
-              className="absolute inset-0"
-            >
-              <span className="sr-only">Open Instagram post</span>
-            </Link>
+      {imageUrl ? (
+        <Link
+          href={embed.instagramUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Open ${title} on Instagram`}
+          className="relative block aspect-[4/5] overflow-hidden bg-warmIvory"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={imageUrl}
+            alt={`${title} Instagram post`}
+            className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+            loading="lazy"
+            referrerPolicy="no-referrer"
+          />
+          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-espresso/80 via-espresso/25 to-transparent p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100 sm:p-4">
+            <span className="inline-flex rounded-full bg-warmIvory px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-espresso sm:text-xs">
+              Open Post
+            </span>
           </div>
-          <div className="hidden h-[32rem] overflow-hidden bg-warmIvory md:block">
-            <iframe
-              title={`${title} Instagram embed`}
-              src={embedUrl}
-              className="h-full w-full overflow-hidden border-0 bg-warmIvory"
-              loading="lazy"
-              scrolling="no"
-              style={{ overflow: "hidden" }}
-            />
-          </div>
-        </>
+        </Link>
       ) : (
         <Link
           href={embed.instagramUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex h-[18rem] flex-col items-center justify-center bg-warmIvory px-3 text-center transition-colors hover:bg-bone md:h-[32rem] md:px-6"
+          className="flex aspect-[4/5] flex-col items-center justify-center bg-warmIvory px-3 text-center transition-colors hover:bg-bone md:px-6"
         >
           <span className="text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-mutedRose sm:text-xs">
-            Instagram Story
+            Instagram
           </span>
           <span className="mt-3 font-heading text-xl leading-tight text-espresso sm:mt-4 sm:text-3xl">
             Open on Instagram
@@ -122,7 +86,7 @@ function InstagramFrame({
       )}
 
       {embed.caption ? (
-        <div className="hidden border-t border-espresso/10 px-4 py-4 text-sm leading-6 text-mutedBrown md:block">
+        <div className="hidden border-t border-espresso/10 px-4 py-4 text-sm leading-6 text-mutedBrown lg:block">
           {embed.caption}
         </div>
       ) : null}

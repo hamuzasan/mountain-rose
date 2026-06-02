@@ -24,4 +24,5 @@ export type InstagramEmbed = {
   caption: string | null;
   sortOrder: number;
   status: "draft" | "published" | string;
+  thumbnailUrl?: string | null;
 };

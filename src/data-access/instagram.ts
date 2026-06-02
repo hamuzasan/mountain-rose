@@ -1,4 +1,5 @@
 import { getSupabaseServerClient } from "@/lib/supabase/server";
+import { getInstagramThumbnailUrl } from "@/lib/instagram";
 import type { InstagramEmbed } from "@/types/site";
 
 type InstagramEmbedRow = {
@@ -31,9 +32,16 @@ export async function getInstagramEmbeds(): Promise<InstagramEmbed[]> {
     .eq("status", "published")
     .order("sort_order", { ascending: true })
     .order("created_at", { ascending: false })
-    .limit(12);
+    .limit(6);
 
   if (error || !data) return [];
 
-  return (data as InstagramEmbedRow[]).map(mapInstagramEmbed);
+  const embeds = (data as InstagramEmbedRow[]).map(mapInstagramEmbed);
+
+  return Promise.all(
+    embeds.map(async (embed) => ({
+      ...embed,
+      thumbnailUrl: await getInstagramThumbnailUrl(embed.instagramUrl),
+    })),
+  );
 }
