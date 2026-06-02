@@ -17,6 +17,7 @@ export const metadata: Metadata = {
 type PageProps = {
   searchParams?: Promise<{
     edit?: string;
+    error?: string;
     saved?: string;
     deleted?: string;
   }>;
@@ -126,7 +127,12 @@ export default async function AdminInstagramPage({ searchParams }: PageProps) {
     searchParams ? searchParams : Promise.resolve({}),
     getAdminInstagramEmbeds(),
   ]);
-  const params = rawParams as { edit?: string; saved?: string; deleted?: string };
+  const params = rawParams as {
+    edit?: string;
+    error?: string;
+    saved?: string;
+    deleted?: string;
+  };
   const activeEmbed = params.edit
     ? result.embeds.find((embed) => embed.id === params.edit)
     : undefined;
@@ -193,9 +199,20 @@ export default async function AdminInstagramPage({ searchParams }: PageProps) {
             Instagram card deleted.
           </div>
         ) : null}
+        {params.error ? (
+          <div className="mt-6 rounded-soft border border-mutedRose/30 bg-dustyRose/10 px-4 py-3 text-sm leading-6 text-deepRose">
+            {params.error}
+          </div>
+        ) : null}
         {result.error ? (
-          <div className="mt-6 rounded-soft border border-mutedRose/30 bg-dustyRose/10 px-4 py-3 text-sm text-deepRose">
-            {result.error}
+          <div className="mt-6 rounded-soft border border-mutedRose/30 bg-dustyRose/10 px-4 py-3 text-sm leading-6 text-deepRose">
+            <div>{result.error}</div>
+            {result.error.includes("instagram_embeds") ? (
+              <div className="mt-2 text-mutedBrown">
+                Run the Instagram CMS schema in Supabase SQL Editor from{" "}
+                <code>supabase/schema.sql</code>, then reload this page.
+              </div>
+            ) : null}
           </div>
         ) : null}
 

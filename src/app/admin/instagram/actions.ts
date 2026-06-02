@@ -40,44 +40,73 @@ function instagramPayload(formData: FormData): InstagramInsert {
   };
 }
 
+function adminInstagramErrorUrl(message: string) {
+  const params = new URLSearchParams({ error: message });
+  return `/admin/instagram?${params.toString()}`;
+}
+
+function messageFromError(error: unknown) {
+  if (error instanceof Error) return error.message;
+  if (typeof error === "string") return error;
+  return "Instagram card action failed.";
+}
+
 export async function saveInstagramEmbedAction(formData: FormData) {
   const session = await requireAdmin();
-  if (!session.profile) throw new Error("This account is not active as a CMS admin.");
-
-  const { client } = getSupabaseAdminClient();
-  if (!client) throw new Error("Supabase admin client is not configured.");
-
-  const embedId = text(formData, "embedId");
-  const payload = instagramPayload(formData);
-
-  if (embedId) {
-    const updatePayload: InstagramUpdate = payload;
-    const { error } = await client.from("instagram_embeds").update(updatePayload).eq("id", embedId);
-    if (error) throw new Error(error.message);
-  } else {
-    const { error } = await client.from("instagram_embeds").insert(payload);
-    if (error) throw new Error(error.message);
+  if (!session.profile) {
+    redirect(adminInstagramErrorUrl("This account is not active as a CMS admin."));
   }
 
-  revalidatePath("/");
-  revalidatePath("/admin/instagram");
+  const { client } = getSupabaseAdminClient();
+  if (!client) {
+    redirect(adminInstagramErrorUrl("Supabase admin client is not configured."));
+  }
+
+  try {
+    const embedId = text(formData, "embedId");
+    const payload = instagramPayload(formData);
+
+    if (embedId) {
+      const updatePayload: InstagramUpdate = payload;
+      const { error } = await client.from("instagram_embeds").update(updatePayload).eq("id", embedId);
+      if (error) throw new Error(error.message);
+    } else {
+      const { error } = await client.from("instagram_embeds").insert(payload);
+      if (error) throw new Error(error.message);
+    }
+
+    revalidatePath("/");
+    revalidatePath("/admin/instagram");
+  } catch (error) {
+    redirect(adminInstagramErrorUrl(messageFromError(error)));
+  }
+
   redirect("/admin/instagram?saved=1");
 }
 
 export async function deleteInstagramEmbedAction(formData: FormData) {
   const session = await requireAdmin();
-  if (!session.profile) throw new Error("This account is not active as a CMS admin.");
+  if (!session.profile) {
+    redirect(adminInstagramErrorUrl("This account is not active as a CMS admin."));
+  }
 
   const { client } = getSupabaseAdminClient();
-  if (!client) throw new Error("Supabase admin client is not configured.");
+  if (!client) {
+    redirect(adminInstagramErrorUrl("Supabase admin client is not configured."));
+  }
 
-  const embedId = text(formData, "embedId");
-  if (!embedId) throw new Error("Instagram embed ID is missing.");
+  try {
+    const embedId = text(formData, "embedId");
+    if (!embedId) throw new Error("Instagram embed ID is missing.");
 
-  const { error } = await client.from("instagram_embeds").delete().eq("id", embedId);
-  if (error) throw new Error(error.message);
+    const { error } = await client.from("instagram_embeds").delete().eq("id", embedId);
+    if (error) throw new Error(error.message);
 
-  revalidatePath("/");
-  revalidatePath("/admin/instagram");
+    revalidatePath("/");
+    revalidatePath("/admin/instagram");
+  } catch (error) {
+    redirect(adminInstagramErrorUrl(messageFromError(error)));
+  }
+
   redirect("/admin/instagram?deleted=1");
 }
