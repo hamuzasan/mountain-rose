@@ -46,16 +46,16 @@ function InstagramFrame({
   const embedUrl = getInstagramEmbedUrl(embed.instagramUrl);
 
   return (
-    <article className="group min-h-[28rem] border border-espresso/10 bg-bone">
-      <div className="flex h-14 items-center gap-3 border-b border-espresso/10 px-4">
-        <div className="flex h-9 w-9 items-center justify-center rounded-full border border-mutedRose/30 bg-warmIvory font-heading text-sm text-espresso">
+    <article className="group min-h-[18rem] border border-espresso/10 bg-bone sm:min-h-[28rem]">
+      <div className="flex h-12 items-center gap-2 border-b border-espresso/10 px-2 sm:h-14 sm:gap-3 sm:px-4">
+        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-mutedRose/30 bg-warmIvory font-heading text-xs text-espresso sm:h-9 sm:w-9 sm:text-sm">
           MR
         </div>
         <div className="min-w-0">
-          <div className="truncate text-sm font-semibold text-espresso">
+          <div className="truncate text-xs font-semibold text-espresso sm:text-sm">
             {embed.title || `Mountain Rose Journal ${index + 1}`}
           </div>
-          <div className="text-xs text-mutedBrown">{handle}</div>
+          <div className="text-[0.65rem] text-mutedBrown sm:text-xs">{handle}</div>
         </div>
       </div>
 
@@ -63,7 +63,7 @@ function InstagramFrame({
         <iframe
           title={embed.title || `Mountain Rose Instagram embed ${index + 1}`}
           src={embedUrl}
-          className="h-[32rem] w-full bg-warmIvory"
+          className="h-[18rem] w-full bg-warmIvory sm:h-[32rem]"
           loading="lazy"
         />
       ) : (
@@ -71,22 +71,22 @@ function InstagramFrame({
           href={embed.instagramUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex h-[32rem] flex-col items-center justify-center bg-warmIvory px-6 text-center transition-colors hover:bg-bone"
+          className="flex h-[18rem] flex-col items-center justify-center bg-warmIvory px-3 text-center transition-colors hover:bg-bone sm:h-[32rem] sm:px-6"
         >
-          <span className="text-xs font-semibold uppercase tracking-[0.16em] text-mutedRose">
+          <span className="text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-mutedRose sm:text-xs">
             Instagram Story
           </span>
-          <span className="mt-4 font-heading text-3xl leading-tight text-espresso">
+          <span className="mt-3 font-heading text-xl leading-tight text-espresso sm:mt-4 sm:text-3xl">
             Open on Instagram
           </span>
-          <span className="mt-4 max-w-xs text-sm leading-6 text-mutedBrown">
+          <span className="mt-4 hidden max-w-xs text-sm leading-6 text-mutedBrown sm:block">
             Stories and some private content cannot be embedded directly, but this card is ready for the link you add in CMS.
           </span>
         </Link>
       )}
 
       {embed.caption ? (
-        <div className="border-t border-espresso/10 px-4 py-4 text-sm leading-6 text-mutedBrown">
+        <div className="hidden border-t border-espresso/10 px-4 py-4 text-sm leading-6 text-mutedBrown sm:block">
           {embed.caption}
         </div>
       ) : null}
@@ -121,32 +121,32 @@ export default function InstagramShowcase({ embeds, siteSettings }: InstagramSho
         </div>
 
         {visibleEmbeds.length ? (
-          <div className="grid gap-0 overflow-hidden border border-espresso/10 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid grid-cols-2 gap-0 overflow-hidden border border-espresso/10 md:grid-cols-2 xl:grid-cols-3">
             {visibleEmbeds.map((embed, index) => (
               <InstagramFrame key={embed.id} embed={embed} index={index} handle={handle} />
             ))}
           </div>
         ) : (
-          <div className="grid gap-0 overflow-hidden border border-espresso/10 md:grid-cols-3">
+          <div className="grid grid-cols-2 gap-0 overflow-hidden border border-espresso/10 md:grid-cols-3">
             {[0, 1, 2].map((index) => (
               <Link
                 key={index}
                 href={siteSettings.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex min-h-[20rem] flex-col justify-between border border-espresso/10 bg-bone p-5 transition-colors hover:bg-warmIvory"
+                className="flex min-h-[14rem] flex-col justify-between border border-espresso/10 bg-bone p-3 transition-colors hover:bg-warmIvory sm:min-h-[20rem] sm:p-5"
               >
                 <div className="flex items-center gap-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full border border-mutedRose/30 bg-warmIvory font-heading text-sm text-espresso">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full border border-mutedRose/30 bg-warmIvory font-heading text-xs text-espresso sm:h-9 sm:w-9 sm:text-sm">
                     MR
                   </div>
-                  <div className="text-sm font-semibold text-espresso">{handle}</div>
+                  <div className="truncate text-xs font-semibold text-espresso sm:text-sm">{handle}</div>
                 </div>
                 <div>
-                  <div className="font-heading text-3xl text-charcoal">
+                  <div className="font-heading text-xl leading-tight text-charcoal sm:text-3xl">
                     Editorial leather moments
                   </div>
-                  <p className="mt-3 text-sm leading-6 text-mutedBrown">
+                  <p className="mt-3 hidden text-sm leading-6 text-mutedBrown sm:block">
                     Add Instagram links in CMS to turn this space into a live social gallery.
                   </p>
                 </div>

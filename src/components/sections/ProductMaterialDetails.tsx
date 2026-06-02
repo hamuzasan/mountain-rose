@@ -4,6 +4,24 @@ type ProductMaterialDetailsProps = {
   product: Pick<Product, "leatherType" | "color" | "category">;
 };
 
+const DETAILS = ["Material", "Texture", "Durability", "Care"];
+
+function DetailMark({ index }: { index: number }) {
+  return (
+    <div className="relative h-12 w-12 rounded-full border border-antiqueGold/30 bg-warmIvory sm:h-14 sm:w-14">
+      <div className="absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full border border-espresso/20" />
+      <div
+        className={[
+          "absolute bg-mutedRose/70",
+          index % 2 === 0
+            ? "left-2 top-1/2 h-px w-8 -translate-y-1/2"
+            : "left-1/2 top-2 h-8 w-px -translate-x-1/2",
+        ].join(" ")}
+      />
+    </div>
+  );
+}
+
 export default function ProductMaterialDetails({
   product,
 }: ProductMaterialDetailsProps) {
@@ -22,44 +40,27 @@ export default function ProductMaterialDetails({
               Characterful Leather, Quiet Details
             </h2>
             <p className="mt-4 text-sm leading-7 text-mutedBrown">
-              Every part is shaped to feel comfortable, look refined, and stay ready for years of daily movement.
+              {leather} · {color}
             </p>
           </div>
 
           <div className="lg:col-span-8">
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="rounded-soft border border-espresso/10 bg-bone p-5">
-                <div className="text-xs font-semibold uppercase text-mutedRose">
-                  Material
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              {DETAILS.map((detail, index) => (
+                <div
+                  key={detail}
+                  className="relative overflow-hidden rounded-soft border border-espresso/10 bg-bone p-4 sm:p-5"
+                >
+                  <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full border border-antiqueGold/20" />
+                  <DetailMark index={index} />
+                  <div className="mt-5 text-xs font-semibold uppercase tracking-[0.14em] text-mutedRose">
+                    0{index + 1}
+                  </div>
+                  <div className="mt-2 font-heading text-lg leading-snug text-espresso">
+                    {detail}
+                  </div>
                 </div>
-                <div className="mt-3 text-sm leading-7 text-mutedBrown">
-                  Made from <span className="font-semibold text-espresso">{leather}</span>, selected for durability, structure, and mature character.
-                </div>
-              </div>
-              <div className="rounded-soft border border-espresso/10 bg-bone p-5">
-                <div className="text-xs font-semibold uppercase text-mutedRose">
-                  Texture
-                </div>
-                <div className="mt-3 text-sm leading-7 text-mutedBrown">
-                  Natural grain gives every bag a distinct character, supported by a <span className="font-semibold text-espresso">{color}</span> finish.
-                </div>
-              </div>
-              <div className="rounded-soft border border-espresso/10 bg-bone p-5">
-                <div className="text-xs font-semibold uppercase text-mutedRose">
-                  Durability
-                </div>
-                <div className="mt-3 text-sm leading-7 text-mutedBrown">
-                  Genuine cow leather can age beautifully. With mindful use, the bag stays strong and becomes more personal over time.
-                </div>
-              </div>
-              <div className="rounded-soft border border-espresso/10 bg-bone p-5">
-                <div className="text-xs font-semibold uppercase text-mutedRose">
-                  Care
-                </div>
-                <div className="mt-3 text-sm leading-7 text-mutedBrown">
-                  Store in a dry place, wipe gently, and use leather conditioner sparingly so the patina develops with care.
-                </div>
-              </div>
+              ))}
             </div>
             <div className="mt-4 text-xs font-semibold uppercase text-mutedBrown">
               Category: {product.category || "Collection"}

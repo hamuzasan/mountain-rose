@@ -76,7 +76,7 @@ export default function ProductCard({
           ].join(" ")}
         >
           {imgUrl ? (
-            <div className="absolute inset-5 sm:inset-7">
+            <div className="absolute inset-3 sm:inset-7">
               <Image
                 src={imgUrl}
                 alt={alt}
@@ -101,7 +101,7 @@ export default function ProductCard({
               </div>
             </div>
           )}
-          <div className="absolute left-4 top-4 rounded-soft border border-espresso/10 bg-bone/90 px-3 py-2 text-xs font-semibold uppercase text-mutedRose">
+          <div className="absolute left-2 top-2 max-w-[calc(100%-1rem)] rounded-soft border border-espresso/10 bg-bone/90 px-2 py-1 text-[0.6rem] font-semibold uppercase leading-tight text-mutedRose sm:left-4 sm:top-4 sm:px-3 sm:py-2 sm:text-xs">
             {subLabel}
           </div>
         </div>
@@ -109,22 +109,22 @@ export default function ProductCard({
 
       <div
         className={[
-          "flex flex-col gap-3 px-4 py-4",
+          "flex flex-col gap-2 px-3 py-3 sm:gap-3 sm:px-4 sm:py-4",
           isFeature ? "justify-between sm:px-6 sm:py-6" : "",
         ].join(" ")}
       >
-        <div className="flex items-start justify-between gap-4">
-          <div>
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+          <div className="min-w-0">
             <Link
               href={`/collections/${product.slug}`}
               className={[
-                "font-heading leading-6 text-espresso transition-colors hover:text-darkLeather",
-                isFeature ? "text-2xl sm:text-3xl" : "text-base",
+                "block font-heading leading-snug text-espresso transition-colors hover:text-darkLeather",
+                isFeature ? "text-xl sm:text-3xl" : "text-sm sm:text-base",
               ].join(" ")}
             >
               {product.name}
             </Link>
-            <div className="mt-2 text-xs font-medium uppercase text-mutedRose">
+            <div className="mt-1 line-clamp-1 text-[0.6rem] font-medium uppercase text-mutedRose sm:mt-2 sm:text-xs">
               {product.material || product.leatherType || "Genuine cow leather"}
             </div>
             {(product.isAvailable ?? true) ? null : (
@@ -134,7 +134,7 @@ export default function ProductCard({
             )}
           </div>
           {priceLabel ? (
-            <div className="whitespace-nowrap text-sm font-semibold text-espresso">
+            <div className="whitespace-nowrap text-xs font-semibold text-espresso sm:text-sm">
               {priceLabel}
             </div>
           ) : (
@@ -147,7 +147,7 @@ export default function ProductCard({
         {product.shortDescription ? (
           <p
             className={[
-              "text-sm leading-7 text-mutedBrown",
+              "hidden text-sm leading-7 text-mutedBrown sm:block",
               isFeature ? "max-w-md sm:text-base sm:leading-8" : "",
             ].join(" ")}
           >
@@ -155,10 +155,10 @@ export default function ProductCard({
           </p>
         ) : null}
 
-        <div className="flex items-center gap-3 pt-1">
+        <div className="grid gap-2 pt-1 sm:flex sm:items-center sm:gap-3">
           <Link
             href={`/collections/${product.slug}`}
-            className="inline-flex h-10 items-center justify-center rounded-soft border border-espresso/15 bg-warmIvory px-4 text-sm font-medium text-espresso transition-colors hover:bg-bone focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
+            className="inline-flex h-10 items-center justify-center rounded-soft border border-espresso/15 bg-warmIvory px-3 text-xs font-medium text-espresso transition-colors hover:bg-bone focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70 sm:px-4 sm:text-sm"
           >
             View Detail
           </Link>
@@ -168,7 +168,7 @@ export default function ProductCard({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Consult about ${product.name} via WhatsApp`}
-              className="inline-flex h-10 items-center justify-center rounded-soft border border-brass/40 bg-espresso px-4 text-sm font-medium text-warmIvory transition-colors hover:bg-darkLeather focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
+              className="hidden h-10 items-center justify-center rounded-soft border border-brass/40 bg-espresso px-4 text-sm font-medium text-warmIvory transition-colors hover:bg-darkLeather focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70 sm:inline-flex"
             >
               WhatsApp
             </a>

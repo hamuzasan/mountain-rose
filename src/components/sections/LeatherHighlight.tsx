@@ -3,22 +3,18 @@ import SectionHeading from "./SectionHeading";
 const ITEMS = [
   {
     title: "High-quality genuine cowhide",
-    text: "Selected for structure, durability, and the natural grain that gives every bag a mature character.",
     icon: "grain",
   },
   {
     title: "Handmade by local craftsmen",
-    text: "Handmade production keeps the stitching, finishing, and proportions careful and personal.",
     icon: "hand",
   },
   {
     title: "Exclusive and durable design",
-    text: "Timeless silhouettes are shaped for daily rhythm, travel, and years of refined use.",
     icon: "shield",
   },
   {
     title: "Quality and after-sales support",
-    text: "A calm ownership experience, supported by trusted quality and thoughtful service.",
     icon: "care",
   },
 ];
@@ -71,25 +67,28 @@ export default function LeatherHighlight() {
         <SectionHeading
           eyebrow="Material"
           title="Crafted from Material with Character"
-          description="Genuine cowhide, handmade production, and respect for local craftsmanship form the foundation of every Mountain Rose bag."
         />
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {ITEMS.map((item) => (
+        <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+          {ITEMS.map((item, index) => (
             <div
               key={item.title}
-              className="rounded-soft border border-espresso/10 bg-bone p-5"
+              className="relative min-h-[10rem] overflow-hidden rounded-soft border border-espresso/10 bg-bone p-4 transition-colors hover:border-antiqueGold/40 sm:min-h-[12rem] sm:p-5"
             >
-              <div className="flex h-16 w-16 items-center justify-center rounded-full border border-antiqueGold/25 bg-warmIvory">
+              <div className="pointer-events-none absolute -right-7 -top-7 text-espresso opacity-[0.06]">
+                <div className="scale-[2.4]">
+                  <MaterialIcon type={item.icon} />
+                </div>
+              </div>
+              <div className="relative flex h-12 w-12 items-center justify-center rounded-full border border-antiqueGold/25 bg-warmIvory sm:h-16 sm:w-16">
                 <MaterialIcon type={item.icon} />
               </div>
-              <div className="mt-5 text-xs font-semibold uppercase tracking-[0.12em] text-mutedRose">
-                Material Note
+              <div className="relative mt-5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-mutedRose sm:text-xs">
+                0{index + 1}
               </div>
-              <div className="mt-3 font-heading text-lg leading-snug text-espresso">
+              <div className="relative mt-2 font-heading text-base leading-snug text-espresso sm:text-lg">
                 {item.title}
               </div>
-              <p className="mt-3 text-sm leading-7 text-mutedBrown">{item.text}</p>
             </div>
           ))}
         </div>

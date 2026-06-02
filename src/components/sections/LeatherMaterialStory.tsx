@@ -3,6 +3,13 @@ type LeatherMaterialStoryProps = {
   text: string;
 };
 
+const MATERIAL_POINTS = [
+  "Natural texture",
+  "Durability",
+  "Aging character",
+  "Daily use",
+];
+
 export default function LeatherMaterialStory({
   title,
   text,
@@ -23,39 +30,21 @@ export default function LeatherMaterialStory({
             <p className="text-sm leading-7 text-mutedBrown sm:text-base">
               {text}
             </p>
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              <div className="rounded-soft border border-espresso/10 bg-warmIvory p-5">
-                <div className="text-xs font-semibold uppercase text-mutedRose">
-                  Natural texture
+            <div className="mt-8 grid grid-cols-2 gap-3 sm:gap-4">
+              {MATERIAL_POINTS.map((point, index) => (
+                <div
+                  key={point}
+                  className="relative min-h-[8rem] overflow-hidden rounded-soft border border-espresso/10 bg-warmIvory p-4 sm:min-h-[9rem] sm:p-5"
+                >
+                  <div className="absolute -right-7 -top-7 h-20 w-20 rounded-full border border-antiqueGold/25" />
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full border border-mutedRose/25 bg-bone font-heading text-sm text-espresso">
+                    0{index + 1}
+                  </div>
+                  <div className="mt-5 font-heading text-base leading-snug text-espresso sm:text-lg">
+                    {point}
+                  </div>
                 </div>
-                <p className="mt-3 text-sm leading-7 text-mutedBrown">
-                  Natural grain gives each bag a unique, warm, and mature character.
-                </p>
-              </div>
-              <div className="rounded-soft border border-espresso/10 bg-warmIvory p-5">
-                <div className="text-xs font-semibold uppercase text-mutedRose">
-                  Durability
-                </div>
-                <p className="mt-3 text-sm leading-7 text-mutedBrown">
-                  Chosen for durability and structure, ready for everyday moments.
-                </p>
-              </div>
-              <div className="rounded-soft border border-espresso/10 bg-warmIvory p-5">
-                <div className="text-xs font-semibold uppercase text-mutedRose">
-                  Aging character
-                </div>
-                <p className="mt-3 text-sm leading-7 text-mutedBrown">
-                  With proper care, leather develops a richer patina over time.
-                </p>
-              </div>
-              <div className="rounded-soft border border-espresso/10 bg-warmIvory p-5">
-                <div className="text-xs font-semibold uppercase text-mutedRose">
-                  Daily use
-                </div>
-                <p className="mt-3 text-sm leading-7 text-mutedBrown">
-                  Easy to wear, easy to style, and premium without being excessive.
-                </p>
-              </div>
+              ))}
             </div>
           </div>
         </div>
