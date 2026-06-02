@@ -19,6 +19,10 @@ function normalizeCategory(category?: string): ProductCategory | "All" {
   return value as ProductCategory;
 }
 
+function productPriceValue(product: Product) {
+  return product.price ?? product.priceAmount ?? 0;
+}
+
 function applyFilters(products: Product[], filters: ProductFiltersValue) {
   let next = products;
 
@@ -36,9 +40,9 @@ function applyFilters(products: Product[], filters: ProductFiltersValue) {
   }
 
   if (filters.sort === "PriceLow") {
-    next = [...next].sort((a, b) => (a.price ?? 0) - (b.price ?? 0));
+    next = [...next].sort((a, b) => productPriceValue(a) - productPriceValue(b));
   } else if (filters.sort === "PriceHigh") {
-    next = [...next].sort((a, b) => (b.price ?? 0) - (a.price ?? 0));
+    next = [...next].sort((a, b) => productPriceValue(b) - productPriceValue(a));
   } else if (filters.sort === "Featured") {
     next = [...next].sort(
       (a, b) => Number(b.isFeatured ?? false) - Number(a.isFeatured ?? false),

@@ -24,6 +24,7 @@ type PageProps = {
     edit?: string;
     saved?: string;
     status?: string;
+    error?: string;
   }>;
 };
 
@@ -227,7 +228,7 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
     requireAdmin(),
     searchParams ? searchParams : Promise.resolve({}),
   ]);
-  const params = rawParams as { edit?: string; saved?: string; status?: string };
+  const params = rawParams as { edit?: string; saved?: string; status?: string; error?: string };
   const { products, error } = await getAdminProducts();
   const activeProduct = params.edit
     ? (products.find((product) => product.slug === params.edit) as AdminProduct | undefined)
@@ -316,6 +317,17 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
         {params.saved ? (
           <div className="mt-6 rounded-soft border border-antiqueGold/30 bg-bone px-4 py-3 text-sm text-espresso">
             Produk berhasil disimpan.
+          </div>
+        ) : null}
+        {params.status ? (
+          <div className="mt-6 rounded-soft border border-antiqueGold/30 bg-bone px-4 py-3 text-sm text-espresso">
+            Status produk berhasil diubah menjadi{" "}
+            <strong>{params.status === "published" ? "Published" : "Draft"}</strong>.
+          </div>
+        ) : null}
+        {params.error ? (
+          <div className="mt-6 rounded-soft border border-mutedRose/30 bg-dustyRose/10 px-4 py-3 text-sm text-deepRose">
+            {params.error}
           </div>
         ) : null}
         {error ? (

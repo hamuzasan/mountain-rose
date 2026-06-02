@@ -5,7 +5,6 @@ import type { SiteSettings } from "@/types/site";
 
 import { formatProductPrice } from "@/lib/format";
 import { getDisplayProductImage, getProductImageUrl } from "@/lib/product-images";
-import SectionHeading from "./SectionHeading";
 import ProductCard from "../ui/ProductCard";
 
 type ProductLike = Parameters<typeof ProductCard>[0]["product"];
@@ -16,22 +15,32 @@ type FeaturedProductsProps = {
 };
 
 export default function FeaturedProducts({ products, siteSettings }: FeaturedProductsProps) {
-  const limited = products.slice(0, 4);
-  const [heroProduct, ...rest] = limited;
+  const editorialProducts = products.slice(0, 3);
+  const remainingProducts = products.slice(3, 9);
 
   return (
     <section className="bg-warmIvory">
-      <div className="mx-auto w-full max-w-6xl px-4 py-9 sm:px-6 sm:py-16">
-        <div className="mb-6 flex items-center gap-4 lg:hidden">
-          <div className="h-px flex-1 bg-mutedRose/70" />
-          <h2 className="text-center text-sm font-semibold uppercase text-deepRose">
-            Catalogue Picks
-          </h2>
-          <div className="h-px flex-1 bg-mutedRose/70" />
+      <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+        <div className="mb-8 flex flex-col gap-4 border-b border-espresso/10 pb-6 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-mutedRose">
+              Premium Leather Lookbook
+            </p>
+            <h2 className="mt-3 max-w-2xl font-heading text-4xl leading-tight text-charcoal sm:text-5xl">
+              Catalogue pieces with stronger visual presence.
+            </h2>
+          </div>
+          <Link
+            href="/collections"
+            className="inline-flex min-h-11 w-max items-center justify-center rounded-soft border border-espresso/15 bg-bone px-5 text-sm font-semibold text-espresso transition-colors hover:bg-warmIvory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
+          >
+            View All Collections
+          </Link>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 lg:hidden">
-          {limited.map((product) => {
+        {editorialProducts.length ? (
+          <div className="space-y-6 lg:hidden">
+            {editorialProducts.map((product, index) => {
             const image = getDisplayProductImage(product.images);
             const imageUrl = getProductImageUrl(image);
 
@@ -39,72 +48,134 @@ export default function FeaturedProducts({ products, siteSettings }: FeaturedPro
               <Link
                 key={product.slug}
                 href={`/collections/${product.slug}`}
-                className="group overflow-hidden border border-espresso/10 bg-bone shadow-soft"
+                className="group block"
               >
-                <div className="relative aspect-[4/5] bg-warmIvory">
-                  {imageUrl ? (
-                    <Image
-                      src={imageUrl}
-                      alt={image?.alt || `${product.name} - Mountain Rose cow leather bag`}
-                      fill
-                      sizes="50vw"
-                      className="object-contain p-4 transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                    />
-                  ) : (
-                    <div className="absolute inset-4 border border-antiqueGold/25 bg-sand/25" />
-                  )}
-                </div>
-                <div className="border-t border-espresso/10 bg-bone px-3 py-3 text-center">
-                  <div className="line-clamp-2 min-h-10 font-semibold leading-5 text-espresso">
-                    {product.name}
+                <article className="relative min-h-[22rem] overflow-hidden border border-espresso/10 bg-bone shadow-soft">
+                  <div className="absolute inset-x-0 top-0 h-[74%] bg-sand/45">
+                    {imageUrl ? (
+                      <Image
+                        src={imageUrl}
+                        alt={image?.alt || `${product.name} - Mountain Rose cow leather bag`}
+                        fill
+                        sizes="100vw"
+                        className="object-contain p-5 transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                        priority={index === 0}
+                      />
+                    ) : (
+                      <div className="absolute inset-8 border border-antiqueGold/25 bg-warmIvory/45" />
+                    )}
                   </div>
-                  <div className="mt-2 text-sm font-medium text-mutedBrown">
-                    {formatProductPrice(product)}
+                  <div
+                    className={[
+                      "absolute bottom-5 w-[72%] border p-4 shadow-soft",
+                      index === 0
+                        ? "right-5 border-espresso/10 bg-warmIvory text-espresso"
+                        : index === 1
+                          ? "left-5 border-deepRose bg-deepRose text-warmIvory"
+                          : "right-5 border-darkLeather bg-darkLeather text-warmIvory",
+                    ].join(" ")}
+                  >
+                    <p
+                      className={[
+                        "text-[0.65rem] font-semibold uppercase tracking-[0.16em]",
+                        index === 0 ? "text-mutedRose" : "text-dustyRose",
+                      ].join(" ")}
+                    >
+                      {product.category || "Leather Bag"}
+                    </p>
+                    <h3 className="mt-2 font-heading text-xl leading-tight">
+                      {product.name}
+                    </h3>
+                    <p className="mt-2 text-sm font-semibold">
+                      {formatProductPrice(product)}
+                    </p>
                   </div>
-                </div>
+                </article>
               </Link>
             );
-          })}
-        </div>
-
-        <div className="mt-6 text-center lg:hidden">
-          <Link
-            href="/collections"
-            className="inline-flex h-11 items-center justify-center rounded-full bg-espresso px-6 text-sm font-semibold text-warmIvory transition-colors hover:bg-darkLeather focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
-          >
-            View All Collections
-          </Link>
-        </div>
-
-        <div className="hidden lg:block">
-          <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
-          <SectionHeading
-            eyebrow="Catalogue Picks"
-            title="Featured Pieces from the Mountain Rose Catalogue"
-            description="Genuine cow leather bags presented with larger visual space so the shape, texture, and material character can be seen clearly."
-          />
-          <Link
-            href="/collections"
-            className="inline-flex h-10 items-center justify-center rounded-soft border border-espresso/15 bg-bone px-4 text-sm font-semibold text-espresso transition-colors hover:bg-warmIvory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
-          >
-            View All Collections
-          </Link>
+            })}
           </div>
+        ) : null}
 
-          <div className="mt-10 grid gap-6">
-          {heroProduct ? (
-            <ProductCard
-              product={heroProduct}
-              siteSettings={siteSettings}
-              showWhatsAppCta
-              variant="feature"
-              priority
-            />
-          ) : null}
+        {editorialProducts.length ? (
+          <div className="hidden lg:grid lg:grid-cols-12 lg:gap-7">
+            {editorialProducts.map((product, index) => {
+              const image = getDisplayProductImage(product.images);
+              const imageUrl = getProductImageUrl(image);
+              const isPrimary = index === 0;
 
-          {rest.length ? (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {rest.map((p) => (
+              return (
+                <Link
+                  key={product.slug}
+                  href={`/collections/${product.slug}`}
+                  className={[
+                    "group relative block overflow-visible",
+                    isPrimary ? "col-span-5 row-span-2 min-h-[36rem]" : "col-span-7 min-h-[17.5rem]",
+                    index === 2 ? "col-start-7" : "",
+                  ].join(" ")}
+                >
+                  <article
+                    className={[
+                      "relative h-full overflow-hidden border border-espresso/10 bg-sand/45 shadow-soft",
+                      isPrimary ? "mr-10" : index === 1 ? "ml-16" : "mr-16",
+                    ].join(" ")}
+                  >
+                    {imageUrl ? (
+                      <Image
+                        src={imageUrl}
+                        alt={image?.alt || `${product.name} - Mountain Rose cow leather bag`}
+                        fill
+                        sizes={isPrimary ? "40vw" : "55vw"}
+                        className="object-contain p-8 transition-transform duration-700 ease-out group-hover:scale-[1.035]"
+                        priority={index === 0}
+                      />
+                    ) : (
+                      <div className="absolute inset-10 border border-antiqueGold/25 bg-warmIvory/45" />
+                    )}
+                  </article>
+
+                  <div
+                    className={[
+                      "absolute z-10 w-56 border p-5 shadow-soft transition-transform duration-300 group-hover:-translate-y-1",
+                      isPrimary
+                        ? "right-0 top-14 border-espresso/10 bg-warmIvory text-espresso"
+                        : index === 1
+                          ? "left-0 top-12 border-deepRose bg-deepRose text-warmIvory"
+                          : "right-0 top-10 border-darkLeather bg-darkLeather text-warmIvory",
+                    ].join(" ")}
+                  >
+                    <p
+                      className={[
+                        "text-xs font-semibold uppercase tracking-[0.16em]",
+                        isPrimary ? "text-mutedRose" : "text-dustyRose",
+                      ].join(" ")}
+                    >
+                      {product.category || "Leather Bag"}
+                    </p>
+                    <h3 className="mt-3 font-heading text-2xl leading-tight">
+                      {product.name}
+                    </h3>
+                    <p className="mt-2 text-sm text-current/80">
+                      {product.material || product.leatherType || "Genuine cow leather"}
+                    </p>
+                    <p className="mt-4 text-sm font-semibold">
+                      {formatProductPrice(product)}
+                    </p>
+                    {isPrimary ? (
+                      <span className="mt-8 inline-flex min-h-9 items-center bg-bone px-4 text-xs font-semibold text-espresso">
+                        View Details
+                      </span>
+                    ) : null}
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        ) : null}
+
+        {remainingProducts.length ? (
+          <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-3">
+            {remainingProducts.map((p) => (
                 <ProductCard
                   key={p.slug}
                   product={p}
@@ -112,10 +183,8 @@ export default function FeaturedProducts({ products, siteSettings }: FeaturedPro
                   showWhatsAppCta
                 />
               ))}
-            </div>
-          ) : null}
           </div>
-        </div>
+        ) : null}
       </div>
     </section>
   );

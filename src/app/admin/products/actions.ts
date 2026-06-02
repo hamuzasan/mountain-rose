@@ -40,6 +40,10 @@ function normalizeSlug(value: string) {
     .replace(/^-+|-+$/g, "");
 }
 
+function adminProductsErrorUrl(message: string) {
+  return `/admin/products?error=${encodeURIComponent(message)}`;
+}
+
 function imageExtension(file: File) {
   const nameMatch = file.name.match(/\.(png|jpe?g|webp)$/i);
   if (nameMatch) return nameMatch[1].replace("jpeg", "jpg").toLowerCase();
@@ -188,14 +192,20 @@ export async function saveProductAction(formData: FormData) {
 
 export async function setProductStatusAction(formData: FormData) {
   const session = await requireAdmin();
-  if (!session.profile) throw new Error("Akun ini belum terdaftar sebagai admin CMS.");
+  if (!session.profile) {
+    redirect(adminProductsErrorUrl("Akun ini belum terdaftar sebagai admin CMS."));
+  }
 
   const { client } = getSupabaseAdminClient();
-  if (!client) throw new Error("Supabase admin client is not configured.");
+  if (!client) {
+    redirect(adminProductsErrorUrl("Supabase admin client belum terkonfigurasi."));
+  }
 
   const productId = text(formData, "productId");
   const status = text(formData, "status") === "published" ? "published" : "draft";
-  if (!productId) throw new Error("Product ID is missing.");
+  if (!productId) {
+    redirect(adminProductsErrorUrl("Product ID tidak ditemukan."));
+  }
 
   const { data, error } = await client
     .from("products")
@@ -204,7 +214,9 @@ export async function setProductStatusAction(formData: FormData) {
     .select("slug")
     .maybeSingle();
 
-  if (error || !data) throw new Error(error?.message || "Status produk gagal diubah.");
+  if (error || !data) {
+    redirect(adminProductsErrorUrl(error?.message || "Status produk gagal diubah."));
+  }
 
   revalidatePath("/");
   revalidatePath("/collections");

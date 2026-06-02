@@ -9,12 +9,15 @@ import ProductOrderCTA from "@/components/sections/ProductOrderCTA";
 import ProductTryOnSection from "@/components/sections/ProductTryOnSection";
 import { FALLBACK_SITE_SETTINGS } from "@/data/fallbackSiteSettings";
 import { createProductJsonLd } from "@/lib/structuredData";
-import { getAllProducts, getProductBySlug } from "@/data-access/products";
+import { getProductBySlug } from "@/data-access/products";
 import { getSiteSettings } from "@/data-access/siteSettings";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
@@ -32,18 +35,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       product.shortDescription ||
       "A handmade genuine cow leather bag from Mountain Rose with refined rose-inspired elegance.",
   };
-}
-
-export async function generateStaticParams() {
-  const cms = await getAllProducts();
-  const cmsSlugs = (cms || [])
-    .map((p) => p.slug)
-    .filter((s): s is string => Boolean(s))
-    .map((slug) => ({ slug }));
-
-  const map = new Map<string, { slug: string }>();
-  [...cmsSlugs].forEach((p) => map.set(p.slug, p));
-  return [...map.values()];
 }
 
 export default async function ProductDetailPage({ params }: PageProps) {

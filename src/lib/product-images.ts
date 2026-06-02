@@ -2,11 +2,7 @@ import type { ProductImage } from "@/types/product";
 
 export function getOrderedProductImages(images?: ProductImage[] | null): ProductImage[] {
   return [...(images || [])]
-    .filter((image) => {
-      const path = image.storagePath?.trim();
-      const url = image.publicUrl?.trim();
-      return Boolean(url) && (!path || path.startsWith("products/"));
-    })
+    .filter((image) => Boolean(image.publicUrl?.trim()))
     .sort((a, b) => {
       const order = (a.sortOrder ?? 0) - (b.sortOrder ?? 0);
       if (order !== 0) return order;

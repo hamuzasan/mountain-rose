@@ -2,6 +2,7 @@ import { FALLBACK_FEATURED_PRODUCTS } from "@/data/fallbackHomepage";
 import { FALLBACK_PRODUCTS } from "@/data/fallbackProducts";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 import type { Product, ProductImage } from "@/types/product";
+import { unstable_noStore as noStore } from "next/cache";
 
 type ProductRow = {
   id: string;
@@ -37,9 +38,7 @@ function mapProductImageRows(rows: ProductImageRow[]): Map<string, ProductImage[
   const map = new Map<string, ProductImage[]>();
 
   for (const row of rows) {
-    if (row.storage_path && !row.storage_path.startsWith("products/")) {
-      continue;
-    }
+    if (!row.public_url?.trim()) continue;
 
     const list = map.get(row.product_id) || [];
     list.push({
@@ -79,6 +78,8 @@ function mapProductRow(row: ProductRow, images: ProductImage[] = []): Product {
 }
 
 async function fetchPublishedProducts(): Promise<Product[]> {
+  noStore();
+
   const { client } = getSupabaseServerClient();
   if (!client) return FALLBACK_PRODUCTS;
 
@@ -119,6 +120,8 @@ export async function getAllProducts(): Promise<Product[]> {
 }
 
 export async function getFeaturedProducts(): Promise<Product[]> {
+  noStore();
+
   const { client } = getSupabaseServerClient();
   if (!client) {
     return FALLBACK_FEATURED_PRODUCTS;
@@ -159,6 +162,8 @@ export async function getFeaturedProducts(): Promise<Product[]> {
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
+  noStore();
+
   const normalized = (slug || "").trim().toLowerCase();
   if (!normalized) return null;
 

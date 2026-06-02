@@ -12,6 +12,9 @@ export const metadata: Metadata = {
     "Explore Mountain Rose genuine cow leather bags with timeless design, handmade details, and premium material character.",
 };
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function CollectionsPage() {
   const [cmsProducts, cmsSiteSettings] = await Promise.all([
     getAllProducts(),

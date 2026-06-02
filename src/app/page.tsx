@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 
 import FeaturedProducts from "@/components/sections/FeaturedProducts";
-import HomeCategoryShowcase from "@/components/sections/HomeCategoryShowcase";
 import HeroSection from "@/components/sections/HeroSection";
 import HomeCTASection from "@/components/sections/HomeCTASection";
 import HomeLookbookSection from "@/components/sections/HomeLookbookSection";
 import InstagramShowcase from "@/components/sections/InstagramShowcase";
 import LeatherHighlight from "@/components/sections/LeatherHighlight";
+import OfflineStoreSection from "@/components/sections/OfflineStoreSection";
 import RoseEditorialSection from "@/components/sections/RoseEditorialSection";
 import { FALLBACK_HOMEPAGE, FALLBACK_FEATURED_PRODUCTS } from "@/data/fallbackHomepage";
 import { FALLBACK_SITE_SETTINGS } from "@/data/fallbackSiteSettings";
@@ -46,6 +46,9 @@ export const metadata: Metadata = {
   description:
     "Premium handmade genuine cow leather bags from Indonesia with timeless rose-inspired elegance.",
 };
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function Home() {
   const [cmsHomepage, cmsFeatured, allProducts, cmsSiteSettings, instagramEmbeds] = await Promise.all([
@@ -91,12 +94,12 @@ export default async function Home() {
         siteSettings={siteSettings}
         products={featuredProducts}
       />
-      <HomeCategoryShowcase products={visualProducts} />
-      <FeaturedProducts products={featuredProducts} siteSettings={siteSettings} />
+      <FeaturedProducts products={visualProducts} siteSettings={siteSettings} />
       <InstagramShowcase embeds={instagramEmbeds} siteSettings={siteSettings} />
       <LeatherHighlight />
       <HomeLookbookSection products={visualProducts} />
       <RoseEditorialSection />
+      <OfflineStoreSection siteSettings={siteSettings} />
       <HomeCTASection title={ctaTitle} text={ctaText} siteSettings={siteSettings} />
     </>
   );
