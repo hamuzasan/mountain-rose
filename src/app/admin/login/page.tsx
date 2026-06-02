@@ -12,8 +12,16 @@ export const metadata: Metadata = {
   description: "Login admin CMS Mountain Rose.",
 };
 
-export default async function AdminLoginPage() {
-  const session = await getAdminSession();
+type PageProps = {
+  searchParams?: Promise<{ error?: string; next?: string }>;
+};
+
+export default async function AdminLoginPage({ searchParams }: PageProps) {
+  const [session, rawParams] = await Promise.all([
+    getAdminSession(),
+    searchParams ? searchParams : Promise.resolve({}),
+  ]);
+  const params = rawParams as { error?: string; next?: string };
   if (session.user && session.profile) redirect("/admin/products");
 
   return (
@@ -23,17 +31,17 @@ export default async function AdminLoginPage() {
           Mountain Rose CMS
         </p>
         <h1 className="mt-4 font-heading text-4xl leading-tight text-charcoal">
-          Masuk untuk mengelola katalog
+          Sign in to manage the catalogue
         </h1>
         <p className="mt-4 text-sm leading-7 text-mutedBrown">
-          Gunakan akun Supabase Auth yang sudah dimasukkan ke tabel admin_profiles.
+          Use the Supabase Auth account connected to the admin_profiles table.
         </p>
         <p className="mt-3 text-xs leading-6 text-mutedBrown">
-          Jika lupa password, reset dari Supabase Dashboard. Jika email-mu ada di
-          <code> ADMIN_EMAILS </code>, profil admin akan dibuat otomatis saat login. Kalau mau
-          bootstrap manual, tetap bisa pakai <code>npm run grant:admin -- emailkamu@domain.com</code>.
+          If the email is listed in <code> ADMIN_EMAILS </code>, the admin profile is
+          created automatically on login. You can also bootstrap manually with{" "}
+          <code>npm run grant:admin -- your@email.com</code>.
         </p>
-        <AdminLoginForm />
+        <AdminLoginForm error={params.error} next={params.next} />
       </div>
     </div>
   );

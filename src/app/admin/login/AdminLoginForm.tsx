@@ -1,52 +1,17 @@
-"use client";
+import { loginAdminAction } from "./actions";
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+type AdminLoginFormProps = {
+  error?: string;
+  next?: string;
+};
 
-import { getSupabaseBrowserClient } from "@/lib/supabase/client";
-
-export default function AdminLoginForm() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setLoading(true);
-    setError("");
-
-    const formData = new FormData(event.currentTarget);
-    const email = String(formData.get("email") || "");
-    const password = String(formData.get("password") || "");
-    const { client, error: configError } = getSupabaseBrowserClient();
-
-    if (!client) {
-      setError(configError || "Supabase belum dikonfigurasi.");
-      setLoading(false);
-      return;
-    }
-
-    const { error: signInError } = await client.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (signInError) {
-      setError(signInError.message);
-      setLoading(false);
-      return;
-    }
-
-    router.replace(searchParams.get("next") || "/admin/products");
-    router.refresh();
-  }
-
+export default function AdminLoginForm({ error, next }: AdminLoginFormProps) {
   return (
-    <form onSubmit={onSubmit} className="mt-8 space-y-5">
+    <form action={loginAdminAction} className="mt-8 space-y-5">
+      <input type="hidden" name="next" value={next || "/admin/products"} />
       <div>
         <label className="block text-sm font-semibold text-espresso" htmlFor="email">
-          Email admin
+          Admin email
         </label>
         <input
           id="email"
@@ -79,10 +44,9 @@ export default function AdminLoginForm() {
 
       <button
         type="submit"
-        disabled={loading}
-        className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-espresso px-6 text-sm font-semibold text-warmIvory transition-colors hover:bg-darkLeather disabled:cursor-not-allowed disabled:opacity-60"
+        className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-espresso px-6 text-sm font-semibold text-warmIvory transition-colors hover:bg-darkLeather focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
       >
-        {loading ? "Masuk..." : "Masuk ke CMS"}
+        Sign in to CMS
       </button>
     </form>
   );
