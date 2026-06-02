@@ -1,10 +1,11 @@
 import Link from "next/link";
-import Image from "next/image";
 
 import { FALLBACK_SITE_SETTINGS } from "@/data/fallbackSiteSettings";
 import { NAVIGATION } from "@/data/navigation";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 import type { SiteSettings } from "@/types/site";
+
+import { BrandLogo } from "./BrandLogo";
 
 type FooterProps = {
   siteSettings?: Partial<SiteSettings> | null;
@@ -28,17 +29,11 @@ export default function Footer({ siteSettings }: FooterProps) {
       <div className="mx-auto w-full max-w-7xl px-5 py-12 sm:px-6 lg:py-14">
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-5">
-            {settings.logoUrl ? (
-              <Image
-                src={settings.logoUrl}
-                alt={`${settings.brandName} logo`}
-                width={200}
-                height={80}
-                className="h-14 w-auto object-contain"
-              />
-            ) : (
-              <div className="font-heading text-2xl text-bone">{settings.brandName}</div>
-            )}
+            <BrandLogo
+              siteSettings={settings}
+              variant="light"
+              className="max-h-20 max-w-[210px]"
+            />
             <p className="mt-3 max-w-md text-sm leading-7 text-bone/80">
               {settings.tagline}
             </p>

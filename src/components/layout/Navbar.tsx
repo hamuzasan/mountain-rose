@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useId, useMemo, useState } from "react";
@@ -9,6 +8,7 @@ import { FALLBACK_SITE_SETTINGS } from "@/data/fallbackSiteSettings";
 import { NAVIGATION } from "@/data/navigation";
 import type { SiteSettings } from "@/types/site";
 
+import { BrandLogo } from "./BrandLogo";
 import { WhatsAppButton } from "../ui/WhatsAppButton";
 
 type NavbarProps = {
@@ -53,26 +53,15 @@ export default function Navbar({ siteSettings }: NavbarProps) {
 
         <Link
           href="/"
-          className="flex flex-col items-center text-center text-espresso hover:text-darkLeather md:flex-row md:items-baseline md:gap-3 md:text-left"
+          className="flex items-center justify-center text-espresso transition-opacity hover:opacity-85"
           onClick={() => setIsOpen(false)}
+          aria-label={`${settings.brandName} home`}
         >
-          {settings.logoUrl ? (
-            <Image
-              src={settings.logoUrl}
-              alt={`${settings.brandName} logo`}
-              width={180}
-              height={72}
-              className="h-12 w-auto object-contain md:h-10"
-              priority
-            />
-          ) : (
-            <span className="font-heading text-xl leading-none md:text-lg">
-              {settings.brandName}
-            </span>
-          )}
-          <span className="hidden text-xs font-medium text-mutedBrown sm:inline md:inline">
-            Handmade Cow Leather
-          </span>
+          <BrandLogo
+            siteSettings={settings}
+            className="max-h-16 max-w-[170px] sm:max-w-[190px] md:max-h-14 md:max-w-[180px]"
+            priority
+          />
         </Link>
 
         <div className="hidden items-center gap-8 md:flex">
