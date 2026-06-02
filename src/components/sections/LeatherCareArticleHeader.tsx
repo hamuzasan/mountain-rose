@@ -70,6 +70,7 @@ export default function LeatherCareArticleHeader({
                   fill
                   sizes="(min-width: 1024px) 960px, 100vw"
                   className="object-cover"
+                  quality={75}
                   priority
                 />
               </div>

@@ -92,7 +92,7 @@ export default async function Home() {
         title={heroTitle}
         subtitle={heroSubtitle}
         siteSettings={siteSettings}
-        products={featuredProducts}
+        products={visualProducts}
       />
       <FeaturedProducts products={visualProducts} siteSettings={siteSettings} />
       <InstagramShowcase embeds={instagramEmbeds} siteSettings={siteSettings} />

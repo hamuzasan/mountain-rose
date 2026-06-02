@@ -63,6 +63,7 @@ export default function HomeCategoryShowcase({ products }: HomeCategoryShowcaseP
                     fill
                     sizes="50vw"
                     className="object-contain p-5 transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    quality={65}
                   />
                 ) : (
                   <div className="absolute inset-4 border border-antiqueGold/25 bg-sand/25" />
@@ -134,6 +135,7 @@ export default function HomeCategoryShowcase({ products }: HomeCategoryShowcaseP
                           index === 1 ? "rotate-2" : "",
                           index === 2 ? "-rotate-1" : "",
                         ].join(" ")}
+                        quality={65}
                       />
                     ) : null}
                   </div>

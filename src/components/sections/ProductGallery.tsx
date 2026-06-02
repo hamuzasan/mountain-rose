@@ -32,7 +32,8 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
               alt={alt}
               fill
               sizes="(min-width: 1024px) 520px, 100vw"
-              className="object-contain"
+              className="hero-product-in object-contain"
+              quality={75}
               priority
             />
           </div>
@@ -75,6 +76,7 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
                     fill
                     sizes="64px"
                     className="object-contain p-2"
+                    quality={45}
                   />
                 ) : (
                   <div className="absolute inset-0 bg-warmIvory" />

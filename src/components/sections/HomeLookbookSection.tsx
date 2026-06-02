@@ -73,6 +73,7 @@ export default function HomeLookbookSection({ products }: HomeLookbookSectionPro
                           fill
                           sizes="(min-width: 1024px) 180px, 50vw"
                           className="object-contain transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+                          quality={65}
                         />
                       ) : null}
                     </div>

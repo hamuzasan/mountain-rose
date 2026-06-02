@@ -66,6 +66,7 @@ export default function StoryHero({ story }: StoryHeroProps) {
                   fill
                   sizes="(min-width: 1024px) 560px, 100vw"
                   className="object-cover"
+                  quality={75}
                   priority
                 />
               </div>

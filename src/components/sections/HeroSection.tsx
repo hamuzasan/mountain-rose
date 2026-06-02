@@ -89,7 +89,7 @@ function ProductMiniStrip({
 
   return (
     <div className="mt-5 flex items-center gap-3 overflow-x-auto pb-1">
-      {products.slice(0, 5).map((product, index) => {
+      {products.map((product, index) => {
         const image = product.heroImages[0] || null;
         const imageUrl = getProductImageUrl(image);
         const active = index === activeIndex;
@@ -113,6 +113,7 @@ function ProductMiniStrip({
                 fill
                 sizes="64px"
                 className="object-contain p-2"
+                quality={45}
               />
             ) : (
               <span className="absolute inset-3 border border-antiqueGold/20" />
@@ -137,8 +138,7 @@ export default function HeroSection({
           ...product,
           heroImages: getOrderedProductImages(product.images),
         }))
-        .filter((product) => product.heroImages.length > 0)
-        .slice(0, 6),
+        .filter((product) => product.heroImages.length > 0),
     [products],
   );
 
@@ -176,6 +176,8 @@ export default function HeroSection({
   const imageAlt =
     image?.alt ||
     (product ? `${product.name} - Mountain Rose cow leather bag` : "Mountain Rose cow leather bag");
+  const heroImageKey = `${product?.slug || "product"}-${image?.storagePath || imageUrl || imageIndex}`;
+  const catalogueCount = products.length || heroProducts.length || 0;
 
   return (
     <section className="overflow-hidden bg-warmIvory">
@@ -199,15 +201,15 @@ export default function HeroSection({
               className="absolute inset-x-10 bottom-0 top-14 rotate-[-3deg] bg-sand/35 transition-transform duration-700 group-hover:rotate-[-1deg]"
               style={{ clipPath: "polygon(8% 4%, 96% 12%, 88% 95%, 12% 100%)" }}
             />
-            <div className="hero-product-in relative z-10 h-full">
+            <div key={`mobile-${heroImageKey}`} className="hero-product-in relative z-10 h-full">
               {imageUrl ? (
                 <Image
-                  key={`mobile-${product?.slug || "product"}-${image?.storagePath || imageUrl}`}
                   src={imageUrl}
                   alt={imageAlt}
                   fill
-                  sizes="100vw"
+                  sizes="(max-width: 1023px) 100vw, 640px"
                   className="object-contain drop-shadow-[0_26px_34px_rgba(43,26,18,0.22)] transition-transform duration-700 group-hover:scale-[1.02]"
+                  quality={75}
                   priority
                 />
               ) : (
@@ -228,7 +230,7 @@ export default function HeroSection({
           </div>
 
           <div className="absolute bottom-9 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2">
-            {(heroProducts.length ? heroProducts : [null, null, null, null]).slice(0, 6).map(
+            {(heroProducts.length ? heroProducts : [null, null, null, null]).map(
               (item, index) => {
                 const active = heroProducts.length ? index === safeActiveIndex : index === 0;
 
@@ -237,7 +239,10 @@ export default function HeroSection({
                     key={item ? item.slug : `placeholder-${index}`}
                     type="button"
                     onClick={() => {
-                      if (heroProducts.length) setActiveIndex(index);
+                      if (heroProducts.length) {
+                        setActiveIndex(index);
+                        setImageIndex(0);
+                      }
                     }}
                     aria-label={
                       item ? `Show ${item.name}` : `Product slide ${index + 1}`
@@ -300,7 +305,7 @@ export default function HeroSection({
               </div>
             </div>
             <div>
-              <div className="font-heading text-2xl text-espresso">9</div>
+              <div className="font-heading text-2xl text-espresso">{catalogueCount}</div>
               <div className="mt-1 text-xs font-semibold uppercase text-mutedBrown">
                 Catalogue Styles
               </div>
@@ -348,15 +353,15 @@ export default function HeroSection({
                 <br />
                 Cowhide
               </div>
-              <div className="hero-product-in relative z-10 h-[25rem] sm:h-[34rem] lg:h-[38rem]">
+              <div key={`desktop-${heroImageKey}`} className="hero-product-in relative z-10 h-[25rem] sm:h-[34rem] lg:h-[38rem]">
                 {imageUrl ? (
                   <Image
-                    key={`${product?.slug || "product"}-${image?.storagePath || imageUrl}`}
                     src={imageUrl}
                     alt={imageAlt}
                     fill
                     sizes="(min-width: 1024px) 640px, 100vw"
                     className="object-contain drop-shadow-[0_28px_36px_rgba(43,26,18,0.2)] transition-transform duration-700 group-hover:scale-[1.02]"
+                    quality={75}
                     priority
                   />
                 ) : (

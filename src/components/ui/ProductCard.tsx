@@ -84,10 +84,11 @@ export default function ProductCard({
                 sizes={
                   isFeature
                     ? "(min-width: 1024px) 520px, 100vw"
-                    : "(min-width: 1024px) 320px, (min-width: 640px) 50vw, 100vw"
+                    : "(max-width: 639px) 50vw, (min-width: 1024px) 320px, 50vw"
                 }
                 className="object-contain transition-transform duration-700 ease-out group-hover:scale-[1.045]"
                 priority={priority}
+                quality={priority ? 75 : 65}
               />
             </div>
           ) : (

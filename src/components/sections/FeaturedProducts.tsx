@@ -16,7 +16,7 @@ type FeaturedProductsProps = {
 
 export default function FeaturedProducts({ products, siteSettings }: FeaturedProductsProps) {
   const editorialProducts = products.slice(0, 3);
-  const remainingProducts = products.slice(3, 9);
+  const remainingProducts = products.slice(3);
 
   return (
     <section className="bg-warmIvory">
@@ -60,6 +60,7 @@ export default function FeaturedProducts({ products, siteSettings }: FeaturedPro
                         sizes="100vw"
                         className="object-contain p-5 transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                         priority={index === 0}
+                        quality={index === 0 ? 75 : 65}
                       />
                     ) : (
                       <div className="absolute inset-8 border border-antiqueGold/25 bg-warmIvory/45" />
@@ -128,6 +129,7 @@ export default function FeaturedProducts({ products, siteSettings }: FeaturedPro
                         sizes={isPrimary ? "40vw" : "55vw"}
                         className="object-contain p-8 transition-transform duration-700 ease-out group-hover:scale-[1.035]"
                         priority={index === 0}
+                        quality={index === 0 ? 75 : 65}
                       />
                     ) : (
                       <div className="absolute inset-10 border border-antiqueGold/25 bg-warmIvory/45" />
