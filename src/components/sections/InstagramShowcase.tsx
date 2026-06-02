@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import { getInstagramMediaImageUrl } from "@/lib/instagram";
 import type { InstagramEmbed, SiteSettings } from "@/types/site";
 
 type InstagramShowcaseProps = {
@@ -27,8 +26,10 @@ function InstagramFrame({
   index: number;
   handle: string;
 }) {
-  const imageUrl = embed.thumbnailUrl || getInstagramMediaImageUrl(embed.instagramUrl);
   const title = embed.title || `Mountain Rose Journal ${index + 1}`;
+  const previewUrl = `/api/instagram-preview?url=${encodeURIComponent(
+    embed.instagramUrl,
+  )}&title=${encodeURIComponent(title)}`;
 
   return (
     <article className="group overflow-hidden border border-espresso/10 bg-bone">
@@ -44,46 +45,26 @@ function InstagramFrame({
         </div>
       </div>
 
-      {imageUrl ? (
-        <Link
-          href={embed.instagramUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Open ${title} on Instagram`}
-          className="relative block aspect-[4/5] overflow-hidden bg-warmIvory"
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={imageUrl}
-            alt={`${title} Instagram post`}
-            className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-            loading="lazy"
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-espresso/80 via-espresso/25 to-transparent p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100 sm:p-4">
-            <span className="inline-flex rounded-full bg-warmIvory px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-espresso sm:text-xs">
-              Open Post
-            </span>
-          </div>
-        </Link>
-      ) : (
-        <Link
-          href={embed.instagramUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex aspect-[4/5] flex-col items-center justify-center bg-warmIvory px-3 text-center transition-colors hover:bg-bone md:px-6"
-        >
-          <span className="text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-mutedRose sm:text-xs">
-            Instagram
+      <Link
+        href={embed.instagramUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Open ${title} on Instagram`}
+        className="relative block aspect-[4/5] overflow-hidden bg-warmIvory"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={previewUrl}
+          alt={`${title} Instagram post`}
+          className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+          loading="lazy"
+        />
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-espresso/80 via-espresso/25 to-transparent p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100 sm:p-4">
+          <span className="inline-flex rounded-full bg-warmIvory px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-espresso sm:text-xs">
+            Open Post
           </span>
-          <span className="mt-3 font-heading text-xl leading-tight text-espresso sm:mt-4 sm:text-3xl">
-            Open on Instagram
-          </span>
-          <span className="mt-4 hidden max-w-xs text-sm leading-6 text-mutedBrown sm:block">
-            Stories and some private content cannot be embedded directly, but this card is ready for the link you add in CMS.
-          </span>
-        </Link>
-      )}
+        </div>
+      </Link>
 
       {embed.caption ? (
         <div className="hidden border-t border-espresso/10 px-4 py-4 text-sm leading-6 text-mutedBrown lg:block">
