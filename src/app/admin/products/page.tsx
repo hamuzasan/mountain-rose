@@ -249,6 +249,7 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
           </p>
           <Link
             href="/admin/logout"
+            prefetch={false}
             className="mt-6 inline-flex min-h-11 items-center rounded-full bg-espresso px-6 text-sm font-semibold text-warmIvory"
           >
             Keluar
@@ -277,18 +278,21 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
           <div className="flex flex-wrap gap-3">
             <Link
               href="/admin/settings"
+              prefetch={false}
               className="inline-flex min-h-11 items-center rounded-full border border-espresso/15 bg-bone px-5 text-sm font-semibold text-espresso"
             >
               Site Settings
             </Link>
             <Link
               href="/admin/instagram"
+              prefetch={false}
               className="inline-flex min-h-11 items-center rounded-full border border-espresso/15 bg-bone px-5 text-sm font-semibold text-espresso"
             >
               Instagram Cards
             </Link>
             <Link
               href="/admin/whatsapp-debug"
+              prefetch={false}
               className="inline-flex min-h-11 items-center rounded-full border border-espresso/15 bg-bone px-5 text-sm font-semibold text-espresso"
             >
               Debug WhatsApp
@@ -301,6 +305,7 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
             </Link>
             <Link
               href="/admin/logout"
+              prefetch={false}
               className="inline-flex min-h-11 items-center rounded-full bg-espresso px-5 text-sm font-semibold text-warmIvory"
             >
               Keluar
@@ -325,6 +330,7 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
               <h2 className="font-heading text-2xl text-charcoal">Daftar Produk</h2>
               <Link
                 href="/admin/products"
+                prefetch={false}
                 className="text-sm font-semibold text-mutedRose hover:text-deepRose"
               >
                 Produk baru
@@ -362,6 +368,7 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
                       <div className="flex flex-wrap gap-2 md:justify-end">
                         <Link
                           href={`/admin/products?edit=${product.slug}`}
+                          prefetch={false}
                           className="inline-flex min-h-10 items-center rounded-full border border-espresso/15 bg-warmIvory px-4 text-sm font-semibold text-espresso"
                         >
                           Edit
@@ -422,6 +429,7 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
               </p>
               <Link
                 href="/admin/whatsapp-debug"
+                prefetch={false}
                 className="mt-4 inline-flex min-h-11 items-center rounded-full border border-antiqueGold/30 bg-warmIvory/10 px-5 text-sm font-semibold text-warmIvory"
               >
                 Lihat debug webhook

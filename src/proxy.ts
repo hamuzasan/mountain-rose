@@ -3,6 +3,11 @@ import { NextResponse, type NextRequest } from "next/server";
 
 import type { Database } from "@/lib/supabase/database.types";
 
+function noStore(response: NextResponse) {
+  response.headers.set("Cache-Control", "no-store, no-cache, must-revalidate");
+  return response;
+}
+
 export async function proxy(request: NextRequest) {
   let response = NextResponse.next({
     request,
@@ -11,7 +16,7 @@ export async function proxy(request: NextRequest) {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-  if (!url || !anonKey) return response;
+  if (!url || !anonKey) return noStore(response);
 
   const supabase = createServerClient<Database>(url, anonKey, {
     cookies: {
@@ -42,17 +47,17 @@ export async function proxy(request: NextRequest) {
     const loginUrl = request.nextUrl.clone();
     loginUrl.pathname = "/admin/login";
     loginUrl.searchParams.set("next", `${pathname}${request.nextUrl.search}`);
-    return NextResponse.redirect(loginUrl);
+    return noStore(NextResponse.redirect(loginUrl));
   }
 
   if (isLoginRoute && user) {
     const adminUrl = request.nextUrl.clone();
     adminUrl.pathname = "/admin/products";
     adminUrl.search = "";
-    return NextResponse.redirect(adminUrl);
+    return noStore(NextResponse.redirect(adminUrl));
   }
 
-  return response;
+  return noStore(response);
 }
 
 export const config = {

@@ -149,6 +149,7 @@ export default async function AdminInstagramPage({ searchParams }: PageProps) {
           </h1>
           <Link
             href="/admin/logout"
+            prefetch={false}
             className="mt-6 inline-flex min-h-11 items-center rounded-full bg-espresso px-6 text-sm font-semibold text-warmIvory"
           >
             Sign out
@@ -176,12 +177,14 @@ export default async function AdminInstagramPage({ searchParams }: PageProps) {
           <div className="flex flex-wrap gap-3">
             <Link
               href="/admin/settings"
+              prefetch={false}
               className="inline-flex min-h-11 items-center rounded-full border border-espresso/15 bg-bone px-5 text-sm font-semibold text-espresso"
             >
               Site Settings
             </Link>
             <Link
               href="/admin/products"
+              prefetch={false}
               className="inline-flex min-h-11 items-center rounded-full bg-espresso px-5 text-sm font-semibold text-warmIvory"
             >
               Products
@@ -222,6 +225,7 @@ export default async function AdminInstagramPage({ searchParams }: PageProps) {
               <h2 className="font-heading text-2xl text-charcoal">Embed List</h2>
               <Link
                 href="/admin/instagram"
+                prefetch={false}
                 className="text-sm font-semibold text-mutedRose hover:text-deepRose"
               >
                 New card
@@ -256,6 +260,7 @@ export default async function AdminInstagramPage({ searchParams }: PageProps) {
                       <div className="flex flex-wrap gap-2 md:justify-end">
                         <Link
                           href={`/admin/instagram?edit=${embed.id}`}
+                          prefetch={false}
                           className="inline-flex min-h-10 items-center rounded-full border border-espresso/15 bg-warmIvory px-4 text-sm font-semibold text-espresso"
                         >
                           Edit

@@ -96,6 +96,7 @@ export default async function AdminSettingsPage({ searchParams }: PageProps) {
           </h1>
           <Link
             href="/admin/logout"
+            prefetch={false}
             className="mt-6 inline-flex min-h-11 items-center rounded-full bg-espresso px-6 text-sm font-semibold text-warmIvory"
           >
             Sign out
@@ -123,12 +124,14 @@ export default async function AdminSettingsPage({ searchParams }: PageProps) {
           <div className="flex flex-wrap gap-3">
             <Link
               href="/admin/instagram"
+              prefetch={false}
               className="inline-flex min-h-11 items-center rounded-full border border-espresso/15 bg-bone px-5 text-sm font-semibold text-espresso"
             >
               Instagram Cards
             </Link>
             <Link
               href="/admin/products"
+              prefetch={false}
               className="inline-flex min-h-11 items-center rounded-full bg-espresso px-5 text-sm font-semibold text-warmIvory"
             >
               Products

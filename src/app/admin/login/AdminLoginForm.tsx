@@ -1,4 +1,8 @@
-import { loginAdminAction } from "./actions";
+"use client";
+
+import { useState, useTransition } from "react";
+
+import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 
 type AdminLoginFormProps = {
   error?: string;
@@ -6,9 +10,43 @@ type AdminLoginFormProps = {
 };
 
 export default function AdminLoginForm({ error, next }: AdminLoginFormProps) {
+  const [formError, setFormError] = useState(error || "");
+  const [isPending, startTransition] = useTransition();
+  const nextPath = next?.startsWith("/admin") ? next : "/admin/products";
+
+  function handleSubmit(formData: FormData) {
+    startTransition(async () => {
+      setFormError("");
+
+      const email = String(formData.get("email") || "").trim();
+      const password = String(formData.get("password") || "").trim();
+      if (!email || !password) {
+        setFormError("Email and password are required.");
+        return;
+      }
+
+      const { client, error: configError } = getSupabaseBrowserClient();
+      if (!client) {
+        setFormError(configError || "Supabase is not configured.");
+        return;
+      }
+
+      const { error: signInError } = await client.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (signInError) {
+        setFormError(signInError.message);
+        return;
+      }
+
+      window.location.replace(nextPath);
+    });
+  }
+
   return (
-    <form action={loginAdminAction} className="mt-8 space-y-5">
-      <input type="hidden" name="next" value={next || "/admin/products"} />
+    <form action={handleSubmit} className="mt-8 space-y-5">
       <div>
         <label className="block text-sm font-semibold text-espresso" htmlFor="email">
           Admin email
@@ -36,17 +74,18 @@ export default function AdminLoginForm({ error, next }: AdminLoginFormProps) {
         />
       </div>
 
-      {error ? (
+      {formError ? (
         <p className="rounded-soft border border-mutedRose/30 bg-dustyRose/10 px-4 py-3 text-sm text-deepRose">
-          {error}
+          {formError}
         </p>
       ) : null}
 
       <button
         type="submit"
+        disabled={isPending}
         className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-espresso px-6 text-sm font-semibold text-warmIvory transition-colors hover:bg-darkLeather focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
       >
-        Sign in to CMS
+        {isPending ? "Signing in..." : "Sign in to CMS"}
       </button>
     </form>
   );

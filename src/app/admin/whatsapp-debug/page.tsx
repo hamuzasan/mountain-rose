@@ -61,6 +61,7 @@ export default async function AdminWhatsAppDebugPage() {
           <div className="flex flex-wrap gap-3">
             <Link
               href="/admin/products"
+              prefetch={false}
               className="inline-flex min-h-11 items-center rounded-full border border-espresso/15 bg-bone px-5 text-sm font-semibold text-espresso"
             >
               Kembali ke Produk
@@ -106,6 +107,7 @@ export default async function AdminWhatsAppDebugPage() {
             </div>
             <Link
               href="/admin/whatsapp-debug"
+              prefetch={false}
               className="inline-flex min-h-11 items-center rounded-full bg-espresso px-5 text-sm font-semibold text-warmIvory"
             >
               Refresh Log
