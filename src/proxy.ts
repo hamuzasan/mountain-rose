@@ -30,7 +30,27 @@ export async function proxy(request: NextRequest) {
     },
   });
 
-  await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const pathname = request.nextUrl.pathname;
+  const isLoginRoute = pathname === "/admin/login";
+  const isLogoutRoute = pathname === "/admin/logout";
+
+  if (pathname.startsWith("/admin") && !isLoginRoute && !isLogoutRoute && !user) {
+    const loginUrl = request.nextUrl.clone();
+    loginUrl.pathname = "/admin/login";
+    loginUrl.searchParams.set("next", `${pathname}${request.nextUrl.search}`);
+    return NextResponse.redirect(loginUrl);
+  }
+
+  if (isLoginRoute && user) {
+    const adminUrl = request.nextUrl.clone();
+    adminUrl.pathname = "/admin/products";
+    adminUrl.search = "";
+    return NextResponse.redirect(adminUrl);
+  }
 
   return response;
 }
