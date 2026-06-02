@@ -62,33 +62,35 @@ function InstagramFrame({
 
       {embedUrl ? (
         <>
-          <Link
-            href={embed.instagramUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative flex h-[18rem] flex-col justify-between overflow-hidden bg-warmIvory p-3 transition-colors hover:bg-bone md:hidden"
+          <div
+            className="relative overflow-hidden bg-warmIvory md:hidden"
+            style={{
+              height:
+                "clamp(18rem, calc(600px * ((100vw - 2.5rem) / 652)), 34rem)",
+            }}
           >
-            <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full border border-mutedRose/20" />
-            <div className="absolute bottom-8 left-5 h-px w-24 rotate-[-12deg] bg-antiqueGold/35" />
-            <div className="relative">
-              <span className="text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-mutedRose">
-                Instagram
-              </span>
-              <h3 className="mt-3 line-clamp-3 font-heading text-xl leading-tight text-espresso">
-                {title}
-              </h3>
-            </div>
-            <div className="relative">
-              {embed.caption ? (
-                <p className="line-clamp-3 text-xs leading-5 text-mutedBrown">
-                  {embed.caption}
-                </p>
-              ) : null}
-              <span className="mt-4 inline-flex min-h-9 items-center rounded-full bg-espresso px-4 text-xs font-semibold text-warmIvory">
-                Open Post
-              </span>
-            </div>
-          </Link>
+            <iframe
+              title={`${title} Instagram embed mobile`}
+              src={embedUrl}
+              className="absolute left-0 top-0 h-[600px] w-[326px] border-0 bg-warmIvory"
+              loading="lazy"
+              scrolling="no"
+              style={{
+                overflow: "hidden",
+                transform: "scale(calc((100vw - 2.5rem) / 652))",
+                transformOrigin: "top left",
+              }}
+            />
+            <Link
+              href={embed.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Open ${title} on Instagram`}
+              className="absolute inset-0"
+            >
+              <span className="sr-only">Open Instagram post</span>
+            </Link>
+          </div>
           <div className="hidden h-[32rem] overflow-hidden bg-warmIvory md:block">
             <iframe
               title={`${title} Instagram embed`}
@@ -120,7 +122,7 @@ function InstagramFrame({
       )}
 
       {embed.caption ? (
-        <div className="hidden border-t border-espresso/10 px-4 py-4 text-sm leading-6 text-mutedBrown sm:block">
+        <div className="hidden border-t border-espresso/10 px-4 py-4 text-sm leading-6 text-mutedBrown md:block">
           {embed.caption}
         </div>
       ) : null}
@@ -155,13 +157,13 @@ export default function InstagramShowcase({ embeds, siteSettings }: InstagramSho
         </div>
 
         {visibleEmbeds.length ? (
-          <div className="grid grid-cols-2 gap-0 overflow-hidden border border-espresso/10 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid grid-cols-2 gap-0 overflow-hidden md:grid-cols-2 xl:grid-cols-3">
             {visibleEmbeds.map((embed, index) => (
               <InstagramFrame key={embed.id} embed={embed} index={index} handle={handle} />
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-0 overflow-hidden border border-espresso/10 md:grid-cols-3">
+          <div className="grid grid-cols-2 gap-0 overflow-hidden md:grid-cols-3">
             {[0, 1, 2].map((index) => (
               <Link
                 key={index}
