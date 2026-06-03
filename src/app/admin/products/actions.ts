@@ -119,7 +119,7 @@ function productPayload(formData: FormData): ProductInsert {
   const category = text(formData, "category");
 
   if (!name || !slug || !category) {
-    throw new Error("Nama, slug, dan kategori produk wajib diisi.");
+    throw new Error("Product name, slug, and category are required.");
   }
 
   return {
@@ -146,7 +146,7 @@ function productPayload(formData: FormData): ProductInsert {
 
 export async function saveProductAction(formData: FormData) {
   const session = await requireAdmin();
-  if (!session.profile) throw new Error("Akun ini belum terdaftar sebagai admin CMS.");
+  if (!session.profile) throw new Error("This account is not registered as a CMS admin.");
 
   const { client } = getSupabaseAdminClient();
   if (!client) throw new Error("Supabase admin client is not configured.");
@@ -165,7 +165,7 @@ export async function saveProductAction(formData: FormData) {
       .select("id,slug,name")
       .maybeSingle();
 
-    if (error || !data) throw new Error(error?.message || "Produk gagal diupdate.");
+    if (error || !data) throw new Error(error?.message || "Product update failed.");
     saved = data;
   } else {
     const { data, error } = await client
@@ -174,7 +174,7 @@ export async function saveProductAction(formData: FormData) {
       .select("id,slug,name")
       .maybeSingle();
 
-    if (error || !data) throw new Error(error?.message || "Produk gagal disimpan.");
+    if (error || !data) throw new Error(error?.message || "Product save failed.");
     saved = data;
   }
 
@@ -193,18 +193,18 @@ export async function saveProductAction(formData: FormData) {
 export async function setProductStatusAction(formData: FormData) {
   const session = await requireAdmin();
   if (!session.profile) {
-    redirect(adminProductsErrorUrl("Akun ini belum terdaftar sebagai admin CMS."));
+    redirect(adminProductsErrorUrl("This account is not registered as a CMS admin."));
   }
 
   const { client } = getSupabaseAdminClient();
   if (!client) {
-    redirect(adminProductsErrorUrl("Supabase admin client belum terkonfigurasi."));
+    redirect(adminProductsErrorUrl("Supabase admin client is not configured."));
   }
 
   const productId = text(formData, "productId");
   const status = text(formData, "status") === "published" ? "published" : "draft";
   if (!productId) {
-    redirect(adminProductsErrorUrl("Product ID tidak ditemukan."));
+    redirect(adminProductsErrorUrl("Product ID was not found."));
   }
 
   const { data, error } = await client
@@ -215,7 +215,7 @@ export async function setProductStatusAction(formData: FormData) {
     .maybeSingle();
 
   if (error || !data) {
-    redirect(adminProductsErrorUrl(error?.message || "Status produk gagal diubah."));
+    redirect(adminProductsErrorUrl(error?.message || "Product status update failed."));
   }
 
   revalidatePath("/");

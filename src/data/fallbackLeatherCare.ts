@@ -31,7 +31,7 @@ export const FALLBACK_LEATHER_CARE_ARTICLES: LeatherCareArticle[] = [
   {
     _id: "fallback-lc-1",
     title: "How to Keep a Cow Leather Bag Elegant",
-    slug: "cara-merawat-tas-kulit-sapi",
+    slug: "how-to-care-for-cow-leather-bags",
     excerpt:
       "A simple care guide to keep genuine cow leather clean, supple, and naturally beautiful.",
     content: sectionsToPortableText("Basic care:", [
@@ -46,7 +46,7 @@ export const FALLBACK_LEATHER_CARE_ARTICLES: LeatherCareArticle[] = [
   {
     _id: "fallback-lc-2",
     title: "What to Avoid with Genuine Leather Bags",
-    slug: "hal-yang-harus-dihindari-pada-tas-kulit-asli",
+    slug: "what-to-avoid-with-genuine-leather-bags",
     excerpt:
       "A few simple habits can help leather bags stay beautiful for longer.",
     content: sectionsToPortableText("Things to avoid:", [
@@ -61,7 +61,7 @@ export const FALLBACK_LEATHER_CARE_ARTICLES: LeatherCareArticle[] = [
   {
     _id: "fallback-lc-3",
     title: "Why Cow Leather Develops Character Over Time",
-    slug: "kenapa-kulit-sapi-berubah-karakter",
+    slug: "why-cow-leather-develops-character",
     excerpt:
       "Genuine cow leather naturally develops a richer character through use and care.",
     content: sectionsToPortableText("Why it changes:", [
@@ -76,7 +76,7 @@ export const FALLBACK_LEATHER_CARE_ARTICLES: LeatherCareArticle[] = [
   {
     _id: "fallback-lc-4",
     title: "How to Store a Leather Bag When Not in Use",
-    slug: "tips-menyimpan-tas-kulit",
+    slug: "how-to-store-leather-bags",
     excerpt:
       "Proper storage helps preserve the shape, color, and quality of genuine cow leather.",
     content: sectionsToPortableText("Storage tips:", [

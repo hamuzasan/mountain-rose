@@ -6,7 +6,6 @@ import ProductGallery from "@/components/sections/ProductGallery";
 import ProductInfo from "@/components/sections/ProductInfo";
 import ProductMaterialDetails from "@/components/sections/ProductMaterialDetails";
 import ProductOrderCTA from "@/components/sections/ProductOrderCTA";
-import ProductTryOnSection from "@/components/sections/ProductTryOnSection";
 import { FALLBACK_SITE_SETTINGS } from "@/data/fallbackSiteSettings";
 import { createProductJsonLd } from "@/lib/structuredData";
 import { getProductBySlug } from "@/data-access/products";
@@ -76,10 +75,6 @@ export default async function ProductDetailPage({ params }: PageProps) {
         </div>
       </section>
       <ProductMaterialDetails product={product} />
-      <ProductTryOnSection
-        productSlug={product.slug}
-        isEnabled={process.env.AI_TRY_ON_ENABLED === "true"}
-      />
       <ProductOrderCTA product={product} siteSettings={siteSettings} />
     </div>
   );

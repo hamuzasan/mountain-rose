@@ -8,10 +8,10 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Debug WhatsApp CMS",
-  description: "Pantau webhook Fonnte dan AI CMS Mountain Rose.",
+  description: "Monitor the Mountain Rose Fonnte webhook and AI CMS.",
 };
 
-const wibFormatter = new Intl.DateTimeFormat("id-ID", {
+const wibFormatter = new Intl.DateTimeFormat("en-US", {
   timeZone: "Asia/Jakarta",
   dateStyle: "short",
   timeStyle: "medium",
@@ -30,7 +30,7 @@ function StatusBadge({
         {label}
       </p>
       <p className={`mt-2 text-sm font-semibold ${ok ? "text-espresso" : "text-deepRose"}`}>
-        {ok ? "Siap" : "Belum"}
+        {ok ? "Ready" : "Missing"}
       </p>
     </div>
   );
@@ -53,9 +53,9 @@ export default async function AdminWhatsAppDebugPage() {
               Debug WhatsApp
             </h1>
             <p className="mt-3 max-w-3xl text-sm leading-7 text-mutedBrown">
-              Halaman ini membantu kita melihat apakah webhook dari Fonnte benar-benar masuk,
-              apakah nomor pengirim terdeteksi, apakah command terbaca, dan apakah balasan
-              gagal terkirim.
+              This page helps confirm whether Fonnte webhooks are reaching the server,
+              whether the sender number is detected, whether commands are parsed, and
+              whether replies fail to send.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
@@ -64,19 +64,19 @@ export default async function AdminWhatsAppDebugPage() {
               prefetch={false}
               className="inline-flex min-h-11 items-center rounded-full border border-espresso/15 bg-bone px-5 text-sm font-semibold text-espresso"
             >
-              Kembali ke Produk
+              Back to Products
             </Link>
           </div>
         </div>
 
         <section className="mt-8 border border-espresso/10 bg-bone p-5 shadow-soft">
-          <h2 className="font-heading text-2xl text-charcoal">Status Konfigurasi</h2>
+          <h2 className="font-heading text-2xl text-charcoal">Configuration Status</h2>
           <p className="mt-2 text-sm leading-6 text-mutedBrown">
-            Ini tidak menampilkan nilai rahasia, hanya mengecek apakah environment variable
-            penting sudah terbaca di server.
+            This does not show secret values. It only checks whether important environment
+            variables are available on the server.
           </p>
           <div className="mt-4 rounded-soft border border-espresso/10 bg-warmIvory px-4 py-3 text-xs uppercase tracking-[0.12em] text-mutedBrown">
-            Rendered at: {wibFormatter.format(new Date(renderedAt))} WIB · Deployment: {deploymentId}
+            Rendered at: {wibFormatter.format(new Date(renderedAt))} WIB - Deployment: {deploymentId}
           </div>
           <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <StatusBadge ok={env.whatsappAiCmsEnabled} label="WHATSAPP_AI_CMS_ENABLED" />
@@ -92,17 +92,17 @@ export default async function AdminWhatsAppDebugPage() {
         <section className="mt-8 border border-espresso/10 bg-bone p-5 shadow-soft">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h2 className="font-heading text-2xl text-charcoal">50 Log Terakhir</h2>
+              <h2 className="font-heading text-2xl text-charcoal">Latest 50 Logs</h2>
               <p className="mt-2 text-sm leading-6 text-mutedBrown">
-                Setelah kamu kirim <span className="font-semibold text-espresso">HELP</span> ke
-                nomor device Fonnte, refresh halaman ini. Kalau log kosong, berarti webhook
-                belum sampai ke Vercel.
+                After sending <span className="font-semibold text-espresso">HELP</span> to
+                the Fonnte device number, refresh this page. If the log is empty, the webhook
+                has not reached Vercel yet.
               </p>
               <p className="mt-2 text-xs uppercase tracking-[0.12em] text-mutedBrown">
-                Urutan log: terbaru ke lama.
+                Log order: newest to oldest.
               </p>
               <p className="mt-2 text-xs uppercase tracking-[0.12em] text-mutedBrown">
-                Log terbaru: {latestLogAt ? `${wibFormatter.format(new Date(latestLogAt))} WIB` : "belum ada"}
+                Latest log: {latestLogAt ? `${wibFormatter.format(new Date(latestLogAt))} WIB` : "none yet"}
               </p>
             </div>
             <Link
@@ -110,7 +110,7 @@ export default async function AdminWhatsAppDebugPage() {
               prefetch={false}
               className="inline-flex min-h-11 items-center rounded-full bg-espresso px-5 text-sm font-semibold text-warmIvory"
             >
-              Refresh Log
+              Refresh Logs
             </Link>
           </div>
 
@@ -122,9 +122,9 @@ export default async function AdminWhatsAppDebugPage() {
 
           {!error && latestLogAt && new Date(latestLogAt).getTime() < new Date(renderedAt).getTime() - 60_000 ? (
             <div className="mt-5 rounded-soft border border-antiqueGold/30 bg-antiqueGold/10 px-4 py-3 text-sm text-espresso">
-              Belum ada request webhook baru yang tercatat setelah deployment/refresh ini. Kalau kamu barusan
-              kirim <span className="font-semibold">HELP</span> tapi log tetap berhenti di jam lama, berarti
-              Fonnte belum mengirim request baru ke endpoint Vercel.
+              No new webhook request has been recorded after this deployment/refresh. If you
+              just sent <span className="font-semibold">HELP</span> but the log still stops at
+              an older time, Fonnte has not sent a new request to the Vercel endpoint yet.
             </div>
           ) : null}
 
@@ -156,10 +156,10 @@ export default async function AdminWhatsAppDebugPage() {
                             </span>
                           </div>
                           <p className="mt-2 text-sm leading-6 text-mutedBrown">
-                            {log.detail || "Tanpa detail tambahan."}
+                            {log.detail || "No additional detail."}
                           </p>
                           <p className="mt-2 text-xs uppercase tracking-[0.12em] text-mutedBrown">
-                            Sender: {log.sender || "-"} {log.command ? `• Command: ${log.command}` : ""}
+                            Sender: {log.sender || "-"} {log.command ? `- Command: ${log.command}` : ""}
                           </p>
                         </div>
                         <p className="shrink-0 text-xs uppercase tracking-[0.12em] text-mutedBrown">
@@ -190,11 +190,11 @@ export default async function AdminWhatsAppDebugPage() {
               </div>
             ) : (
               <div className="p-6 text-sm leading-7 text-mutedBrown">
-                Belum ada log webhook. Pastikan webhook Fonnte mengarah ke
+                No webhook logs yet. Make sure the Fonnte webhook points to
                 <span className="mx-1 font-semibold text-espresso">
                   /api/webhooks/whatsapp/fonnte
                 </span>
-                di Vercel, lalu kirim pesan dari nomor admin.
+                on Vercel, then send a message from the admin number.
               </div>
             )}
           </div>

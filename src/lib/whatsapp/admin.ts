@@ -27,11 +27,11 @@ export function createHelpMessage() {
     "",
     "HELP",
     "ADD_PRODUCT",
-    "PUBLISH_PRODUCT slug-produk",
-    "UPDATE_PRODUCT slug-produk",
+    "PUBLISH_PRODUCT product-slug",
+    "UPDATE_PRODUCT product-slug",
     "",
-    "Produk AI dibuat sebagai draft terlebih dahulu. Review di /admin/products sebelum publish.",
-    "Jika GEMINI_API_KEY belum aktif, pakai format field berlabel seperti Nama:, Harga:, Kategori:, dan Deskripsi singkat:.",
+    "AI products are created as drafts first. Review them in /admin/products before publishing.",
+    "If GEMINI_API_KEY is not active yet, use labeled fields such as Name:, Price:, Category:, and Short description:.",
   ].join("\n");
 }
 

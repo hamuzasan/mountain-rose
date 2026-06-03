@@ -7,8 +7,10 @@ export type SiteSettings = {
   brandName: string;
   tagline: string;
   whatsappNumber: string;
+  additionalWhatsAppNumbers?: string[];
   instagramUrl: string;
   email: string;
+  additionalEmails?: string[];
   address: string;
   logoUrl?: string | null;
   logo?: {

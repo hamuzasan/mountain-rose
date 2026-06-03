@@ -24,11 +24,11 @@ export const runtime = "nodejs";
 
 const BOT_REPLY_PREFIXES = [
   "Mountain Rose AI CMS commands:",
-  "Draft produk Mountain Rose berhasil dibuat.",
-  "Produk belum bisa dibuat.",
-  "Produk belum bisa diupdate.",
-  "Draft produk",
-  "Produk ",
+  "Mountain Rose product draft was created.",
+  "Product could not be created.",
+  "Product could not be updated.",
+  "Product draft",
+  "Product ",
 ];
 
 function getCommand(text: string): { action: AiCmsAction; arg?: string } {
@@ -54,7 +54,7 @@ async function reply(sender: string, message: string) {
     stage: "reply_sent",
     status: result.ok ? "success" : "error",
     sender,
-    detail: result.ok ? "Balasan berhasil dikirim ke Fonnte." : result.error,
+    detail: result.ok ? "Reply was sent to Fonnte." : result.error,
     parsed: result,
   });
 }
@@ -93,7 +93,7 @@ export async function GET() {
     endpoint: "whatsapp-webhook",
     method: "POST",
     message:
-      "Endpoint webhook aktif. Browser memakai GET, sedangkan Fonnte harus mengirim POST ke URL ini.",
+      "Webhook endpoint is active. Browsers use GET, while Fonnte must send POST to this URL.",
     checks: {
       whatsappAiCmsEnabled: process.env.WHATSAPP_AI_CMS_ENABLED === "true",
       adminWhatsAppNumbersConfigured: Boolean(process.env.ADMIN_WHATSAPP_NUMBERS),
@@ -109,7 +109,7 @@ export async function POST(request: Request) {
       provider: "fonnte",
       stage: "invalid_secret",
       status: "error",
-      detail: "Webhook secret tidak cocok.",
+      detail: "Webhook secret does not match.",
     });
     return jsonResponse({ ok: false, error: "Invalid webhook secret." }, 401);
   }
@@ -122,7 +122,7 @@ export async function POST(request: Request) {
       provider: "fonnte",
       stage: "malformed_payload",
       status: "error",
-      detail: error instanceof Error ? error.message : "Payload tidak bisa diparse.",
+      detail: error instanceof Error ? error.message : "Payload could not be parsed.",
     });
     return jsonResponse({ ok: false, error: "Malformed JSON payload." }, 400);
   }
@@ -136,7 +136,7 @@ export async function POST(request: Request) {
     status: "info",
     sender: inbound.sender,
     command: command.action,
-    detail: "Webhook masuk ke endpoint Fonnte.",
+    detail: "Webhook reached the Fonnte endpoint.",
     payload,
     parsed: {
       sender: inbound.sender,
@@ -162,7 +162,7 @@ export async function POST(request: Request) {
       status: "warning",
       sender: inbound.sender,
       command: command.action,
-      detail: "Pesan terdeteksi sebagai balasan bot/outgoing message dan diabaikan untuk mencegah loop.",
+      detail: "Message was detected as a bot reply/outgoing message and ignored to prevent loops.",
       payload,
       parsed: {
         isSelfMessage: inbound.isSelfMessage,
@@ -183,10 +183,10 @@ export async function POST(request: Request) {
       command: command.action,
       detail:
         inbound.eventType === "message_status"
-          ? "Payload status pesan diterima dan diabaikan."
+          ? "Message status payload was received and ignored."
           : inbound.eventType === "device_status"
-            ? "Payload status device diterima dan diabaikan."
-            : "Payload tidak terlihat seperti pesan chat masuk, jadi diabaikan.",
+            ? "Device status payload was received and ignored."
+            : "Payload does not look like an inbound chat message, so it was ignored.",
       payload,
       parsed: {
         eventType: inbound.eventType,
@@ -204,7 +204,7 @@ export async function POST(request: Request) {
       status: "warning",
       sender: inbound.sender,
       command: command.action,
-      detail: "WHATSAPP_AI_CMS_ENABLED masih false.",
+      detail: "WHATSAPP_AI_CMS_ENABLED is still false.",
       payload,
     });
     return jsonResponse({
@@ -220,7 +220,7 @@ export async function POST(request: Request) {
       status: "warning",
       sender: inbound.sender,
       command: command.action,
-      detail: "Nomor pengirim tidak ada di ADMIN_WHATSAPP_NUMBERS.",
+      detail: "Sender number is not listed in ADMIN_WHATSAPP_NUMBERS.",
       payload,
     });
     return jsonResponse({ ok: true, ignored: "sender_not_allowlisted" });
@@ -236,8 +236,8 @@ export async function POST(request: Request) {
       command: command.action,
       detail:
         command.action === "HELP"
-          ? "Command HELP diproses."
-          : "Command tidak dikenal, help message dikirim.",
+          ? "HELP command was processed."
+          : "Unknown command, help message was sent.",
       payload,
     });
     return jsonResponse({ ok: true, action: command.action });
@@ -261,13 +261,13 @@ export async function POST(request: Request) {
         status: "error",
         sender: inbound.sender,
         command: command.action,
-        detail: parsed.error || "AI parser belum siap.",
+        detail: parsed.error || "AI parser is not ready.",
         payload,
         parsed,
       });
       await reply(
         inbound.sender,
-        `Produk belum bisa dibuat. ${parsed.error || "AI parser belum siap."}`,
+        `Product could not be created. ${parsed.error || "AI parser is not ready."}`,
       );
       return jsonResponse({ ok: false, action: command.action, error: parsed.error });
     }
@@ -280,7 +280,7 @@ export async function POST(request: Request) {
         status: "error",
         sender: inbound.sender,
         command: command.action,
-        detail: created.error || "Cek konfigurasi Supabase.",
+        detail: created.error || "Check the Supabase configuration.",
         payload,
         parsed: {
           parsedProduct: parsed.data,
@@ -289,7 +289,7 @@ export async function POST(request: Request) {
       });
       await reply(
         inbound.sender,
-        `Draft produk belum berhasil dibuat. ${created.error || "Cek konfigurasi Supabase."}`,
+        `Product draft could not be created. ${created.error || "Check the Supabase configuration."}`,
       );
       return jsonResponse({ ok: false, action: command.action, error: created.error });
     }
@@ -297,16 +297,16 @@ export async function POST(request: Request) {
     await reply(
       inbound.sender,
       [
-        "Draft produk Mountain Rose berhasil dibuat.",
+        "Mountain Rose product draft was created.",
         "",
-        `Nama: ${parsed.data.name || "-"}`,
+        `Name: ${parsed.data.name || "-"}`,
         `Slug: ${created.data.slug}`,
-        `Kategori: ${parsed.data.category || "-"}`,
-        `Harga: ${parsed.data.price ?? parsed.data.priceAmount ?? "-"}`,
-        created.data.imageUploads ? `Gambar terunggah: ${created.data.imageUploads}` : "",
+        `Category: ${parsed.data.category || "-"}`,
+        `Price: ${parsed.data.price ?? parsed.data.priceAmount ?? "-"}`,
+        created.data.imageUploads ? `Uploaded images: ${created.data.imageUploads}` : "",
         "",
-        "Review di /admin/products sebelum publish.",
-        `Jika sudah disetujui, kirim: PUBLISH_PRODUCT ${created.data.slug}`,
+        "Review it in /admin/products before publishing.",
+        `When approved, send: PUBLISH_PRODUCT ${created.data.slug}`,
       ]
         .filter(Boolean)
         .join("\n"),
@@ -318,7 +318,7 @@ export async function POST(request: Request) {
       status: "success",
       sender: inbound.sender,
       command: command.action,
-      detail: `Draft produk ${created.data.slug} berhasil dibuat.`,
+      detail: `Product draft ${created.data.slug} was created.`,
       payload,
       parsed: {
         parsedProduct: parsed.data,
@@ -341,10 +341,10 @@ export async function POST(request: Request) {
         status: "warning",
         sender: inbound.sender,
         command: command.action,
-        detail: "Slug produk belum diberikan.",
+        detail: "Product slug was not provided.",
         payload,
       });
-      await reply(inbound.sender, "Gunakan format: PUBLISH_PRODUCT slug-produk");
+      await reply(inbound.sender, "Use this format: PUBLISH_PRODUCT product-slug");
       return jsonResponse({
         ok: false,
         action: command.action,
@@ -360,16 +360,16 @@ export async function POST(request: Request) {
       sender: inbound.sender,
       command: command.action,
       detail: published.ok
-        ? `Produk ${command.arg} berhasil dipublish.`
-        : published.error || "Cek /admin/products.",
+        ? `Product ${command.arg} was published.`
+        : published.error || "Check /admin/products.",
       payload,
       parsed: published,
     });
     await reply(
       inbound.sender,
       published.ok
-        ? `Produk ${command.arg} berhasil dipublish setelah konfirmasi owner.`
-        : `Produk belum bisa dipublish. ${published.error || "Cek /admin/products."}`,
+        ? `Product ${command.arg} was published after owner confirmation.`
+        : `Product could not be published. ${published.error || "Check /admin/products."}`,
     );
 
     return jsonResponse({
@@ -388,10 +388,10 @@ export async function POST(request: Request) {
         status: "warning",
         sender: inbound.sender,
         command: command.action,
-        detail: "Slug produk belum diberikan.",
+        detail: "Product slug was not provided.",
         payload,
       });
-      await reply(inbound.sender, "Gunakan format: UPDATE_PRODUCT slug-produk");
+      await reply(inbound.sender, "Use this format: UPDATE_PRODUCT product-slug");
       return jsonResponse({
         ok: false,
         action: command.action,
@@ -416,13 +416,13 @@ export async function POST(request: Request) {
         status: "error",
         sender: inbound.sender,
         command: command.action,
-        detail: parsed.error || "AI parser belum siap.",
+        detail: parsed.error || "AI parser is not ready.",
         payload,
         parsed,
       });
       await reply(
         inbound.sender,
-        `Produk belum bisa diupdate. ${parsed.error || "AI parser belum siap."}`,
+        `Product could not be updated. ${parsed.error || "AI parser is not ready."}`,
       );
       return jsonResponse({ ok: false, action: command.action, error: parsed.error });
     }
@@ -435,8 +435,8 @@ export async function POST(request: Request) {
       sender: inbound.sender,
       command: command.action,
       detail: updated.ok
-        ? `Draft produk ${command.arg} berhasil diupdate.`
-        : updated.error || "Cek /admin/products.",
+        ? `Product draft ${command.arg} was updated.`
+        : updated.error || "Check /admin/products.",
       payload,
       parsed: {
         parsedProduct: parsed.data,
@@ -446,8 +446,8 @@ export async function POST(request: Request) {
     await reply(
       inbound.sender,
       updated.ok
-        ? `Draft produk ${command.arg} berhasil diupdate. Review di /admin/products sebelum publish.`
-        : `Produk belum bisa diupdate. ${updated.error || "Cek /admin/products."}`,
+        ? `Product draft ${command.arg} was updated. Review it in /admin/products before publishing.`
+        : `Product could not be updated. ${updated.error || "Check /admin/products."}`,
     );
     return jsonResponse({
       ok: updated.ok,

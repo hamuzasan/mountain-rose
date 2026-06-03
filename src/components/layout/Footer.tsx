@@ -20,9 +20,21 @@ function resolveSiteSettings(
   };
 }
 
+function formatPhone(number: string) {
+  const cleaned = number.replace(/[^\d]/g, "");
+  if (!cleaned) return number;
+  if (cleaned.startsWith("0")) return cleaned;
+  return `+${cleaned}`;
+}
+
 export default function Footer({ siteSettings }: FooterProps) {
   const settings = resolveSiteSettings(siteSettings);
   const waHref = buildWhatsAppLink(settings.whatsappNumber);
+  const whatsAppContacts = [
+    settings.whatsappNumber,
+    ...(settings.additionalWhatsAppNumbers || []),
+  ].filter(Boolean);
+  const emailContacts = [settings.email, ...(settings.additionalEmails || [])].filter(Boolean);
 
   return (
     <footer className="border-t border-warmIvory/10 bg-darkLeather text-warmIvory">
@@ -71,6 +83,11 @@ export default function Footer({ siteSettings }: FooterProps) {
               >
                 Consult via WhatsApp
               </a>
+              <div className="flex flex-col gap-1 text-bone/75">
+                {whatsAppContacts.map((number) => (
+                  <span key={number}>{formatPhone(number)}</span>
+                ))}
+              </div>
               <a
                 href={settings.instagramUrl}
                 target="_blank"
@@ -79,12 +96,15 @@ export default function Footer({ siteSettings }: FooterProps) {
               >
                 Instagram
               </a>
-              <a
-                href={`mailto:${settings.email}`}
-                className="transition-colors hover:text-warmIvory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
-              >
-                {settings.email}
-              </a>
+              {emailContacts.map((email) => (
+                <a
+                  key={email}
+                  href={`mailto:${email}`}
+                  className="transition-colors hover:text-warmIvory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
+                >
+                  {email}
+                </a>
+              ))}
               <div className="pt-2 text-sm leading-7 text-bone/75">
                 {settings.address}
               </div>

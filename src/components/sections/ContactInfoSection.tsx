@@ -5,19 +5,34 @@ import { buildWhatsAppLink } from "@/lib/whatsapp";
 type ContactInfoSectionProps = {
   siteSettings: Pick<
     SiteSettings,
-    "brandName" | "tagline" | "whatsappNumber" | "instagramUrl" | "email" | "address"
+    | "brandName"
+    | "tagline"
+    | "whatsappNumber"
+    | "additionalWhatsAppNumbers"
+    | "instagramUrl"
+    | "email"
+    | "additionalEmails"
+    | "address"
   >;
 };
 
 function prettyPhone(number: string) {
   const cleaned = (number || "").replace(/[^\d]/g, "");
   if (!cleaned) return "";
+  if (cleaned.startsWith("0")) return cleaned;
   return `+${cleaned}`;
 }
 
 export default function ContactInfoSection({ siteSettings }: ContactInfoSectionProps) {
-  const waHref = buildWhatsAppLink(siteSettings.whatsappNumber);
-  const waLabel = prettyPhone(siteSettings.whatsappNumber) || "WhatsApp";
+  const whatsAppContacts = [
+    siteSettings.whatsappNumber,
+    ...(siteSettings.additionalWhatsAppNumbers || []),
+  ].filter(Boolean);
+  const emailContacts = [
+    siteSettings.email,
+    ...(siteSettings.additionalEmails || []),
+  ].filter(Boolean);
+  const primaryWaHref = buildWhatsAppLink(whatsAppContacts[0] || siteSettings.whatsappNumber);
 
   return (
     <section className="bg-warmIvory">
@@ -41,7 +56,7 @@ export default function ContactInfoSection({ siteSettings }: ContactInfoSectionP
           <div className="lg:col-span-7">
             <div className="grid gap-4 sm:grid-cols-2">
               <a
-                href={waHref}
+                href={primaryWaHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="rounded-soft border border-espresso/10 bg-bone p-5 transition-colors hover:border-espresso/20"
@@ -50,7 +65,11 @@ export default function ContactInfoSection({ siteSettings }: ContactInfoSectionP
                 <div className="text-xs font-semibold uppercase text-mutedRose">
                   WhatsApp
                 </div>
-                <div className="mt-3 text-sm font-medium text-espresso">{waLabel}</div>
+                <div className="mt-3 flex flex-col gap-1 text-sm font-medium text-espresso">
+                  {whatsAppContacts.map((number) => (
+                    <span key={number}>{prettyPhone(number) || "WhatsApp"}</span>
+                  ))}
+                </div>
                 <div className="mt-2 text-sm text-mutedBrown">
                   A calm and personal consultation.
                 </div>
@@ -75,14 +94,18 @@ export default function ContactInfoSection({ siteSettings }: ContactInfoSectionP
               </a>
 
               <a
-                href={`mailto:${siteSettings.email}`}
+                href={`mailto:${emailContacts[0] || siteSettings.email}`}
                 className="rounded-soft border border-espresso/10 bg-bone p-5 transition-colors hover:border-espresso/20"
                 aria-label="Send an email to Mountain Rose"
               >
                 <div className="text-xs font-semibold uppercase text-mutedRose">
                   Email
                 </div>
-                <div className="mt-3 text-sm font-medium text-espresso">{siteSettings.email}</div>
+                <div className="mt-3 flex flex-col gap-1 text-sm font-medium text-espresso">
+                  {emailContacts.map((email) => (
+                    <span key={email}>{email}</span>
+                  ))}
+                </div>
                 <div className="mt-2 text-sm text-mutedBrown">
                   For detailed questions or special requests.
                 </div>

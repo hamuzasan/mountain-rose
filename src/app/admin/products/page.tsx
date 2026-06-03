@@ -13,8 +13,8 @@ import { saveProductAction, setProductStatusAction } from "./actions";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Produk CMS",
-  description: "Kelola produk katalog Mountain Rose.",
+  title: "Product CMS",
+  description: "Manage the Mountain Rose product catalogue.",
 };
 
 type AdminProduct = Product & { status?: string | null };
@@ -116,32 +116,32 @@ function ProductForm({ product }: { product?: AdminProduct }) {
       <input type="hidden" name="productId" value={product?._id || ""} />
 
       <div className="grid gap-4 md:grid-cols-2">
-        <TextInput label="Nama produk" name="name" defaultValue={product?.name} required />
+        <TextInput label="Product name" name="name" defaultValue={product?.name} required />
         <TextInput label="Slug URL" name="slug" defaultValue={product?.slug} required />
-        <TextInput label="Kategori" name="category" defaultValue={product?.category} required />
+        <TextInput label="Category" name="category" defaultValue={product?.category} required />
         <TextInput label="Material" name="material" defaultValue={product?.material} />
-        <TextInput label="Jenis kulit" name="leatherType" defaultValue={product?.leatherType} />
-        <TextInput label="Warna" name="color" defaultValue={product?.color} />
-        <TextInput label="Ukuran" name="size" defaultValue={product?.size} />
+        <TextInput label="Leather type" name="leatherType" defaultValue={product?.leatherType} />
+        <TextInput label="Color" name="color" defaultValue={product?.color} />
+        <TextInput label="Size" name="size" defaultValue={product?.size} />
         <TextInput
-          label="Harga IDR"
+          label="IDR price"
           name="price"
           type="number"
           defaultValue={product?.price}
         />
         <TextInput
-          label="Harga katalog"
+          label="Catalogue price"
           name="priceAmount"
           type="number"
           defaultValue={product?.priceAmount}
         />
         <TextInput
-          label="Mata uang"
+          label="Currency"
           name="priceCurrency"
           defaultValue={product?.priceCurrency || "USD"}
         />
         <TextInput
-          label="Halaman PDF"
+          label="PDF page"
           name="sourcePdfPage"
           type="number"
           defaultValue={product?.sourcePdfPage}
@@ -162,15 +162,15 @@ function ProductForm({ product }: { product?: AdminProduct }) {
       </div>
 
       <TextArea
-        label="Deskripsi singkat"
+        label="Short description"
         name="shortDescription"
         defaultValue={product?.shortDescription}
         rows={3}
       />
-      <TextArea label="Deskripsi lengkap" name="description" defaultValue={product?.description} />
-      <TextArea label="Catatan harga" name="priceNote" defaultValue={product?.priceNote} rows={2} />
+      <TextArea label="Full description" name="description" defaultValue={product?.description} />
+      <TextArea label="Price note" name="priceNote" defaultValue={product?.priceNote} rows={2} />
       <TextArea
-        label="Pesan WhatsApp produk"
+        label="Product WhatsApp message"
         name="whatsAppMessage"
         defaultValue={product?.whatsAppMessage}
         rows={2}
@@ -184,7 +184,7 @@ function ProductForm({ product }: { product?: AdminProduct }) {
             defaultChecked={Boolean(product?.isFeatured)}
             className="h-4 w-4 accent-deepRose"
           />
-          Tampilkan sebagai featured
+          Show as featured
         </label>
         <label className="flex items-center gap-3 text-sm font-semibold text-espresso">
           <input
@@ -193,13 +193,13 @@ function ProductForm({ product }: { product?: AdminProduct }) {
             defaultChecked={product?.isAvailable !== false}
             className="h-4 w-4 accent-deepRose"
           />
-          Produk tersedia
+          Product available
         </label>
       </div>
 
       <label className="block rounded-soft border border-dashed border-espresso/25 bg-bone p-4">
         <span className="text-xs font-semibold uppercase tracking-[0.12em] text-mutedBrown">
-          Upload gambar produk
+          Upload product images
         </span>
         <input
           name="images"
@@ -209,7 +209,7 @@ function ProductForm({ product }: { product?: AdminProduct }) {
           className="mt-3 block w-full text-sm text-mutedBrown file:mr-4 file:rounded-full file:border-0 file:bg-espresso file:px-4 file:py-2 file:text-sm file:font-semibold file:text-warmIvory"
         />
         <span className="mt-2 block text-xs leading-5 text-mutedBrown">
-          Gambar akan disimpan ke Supabase Storage: product-images/products/[slug]/.
+          Images will be saved to Supabase Storage: product-images/products/[slug]/.
         </span>
       </label>
 
@@ -217,7 +217,7 @@ function ProductForm({ product }: { product?: AdminProduct }) {
         type="submit"
         className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-espresso px-7 text-sm font-semibold text-warmIvory transition-colors hover:bg-darkLeather md:w-auto"
       >
-        Simpan Produk
+        Save Product
       </button>
     </form>
   );
@@ -239,21 +239,21 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
       <div className="bg-warmIvory px-5 py-16">
         <div className="mx-auto max-w-2xl border border-mutedRose/25 bg-bone p-8 shadow-soft">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-mutedRose">
-            Admin belum aktif
+            Admin inactive
           </p>
           <h1 className="mt-4 font-heading text-4xl text-charcoal">
-            Akun ini belum masuk admin_profiles
+            This account is not listed in admin_profiles
           </h1>
           <p className="mt-4 leading-7 text-mutedBrown">
-            Buat user di Supabase Auth, lalu masukkan user ID dan email ke tabel
-            admin_profiles. Setelah itu halaman CMS produk bisa dipakai.
+            Create the user in Supabase Auth, then add the user ID and email to the
+            admin_profiles table. After that, the product CMS page can be used.
           </p>
           <Link
             href="/admin/logout"
             prefetch={false}
             className="mt-6 inline-flex min-h-11 items-center rounded-full bg-espresso px-6 text-sm font-semibold text-warmIvory"
           >
-            Keluar
+            Sign Out
           </Link>
         </div>
       </div>
@@ -269,11 +269,11 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
               Mountain Rose CMS
             </p>
             <h1 className="mt-3 font-heading text-4xl text-charcoal sm:text-5xl">
-              Produk Katalog
+              Product Catalogue
             </h1>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-mutedBrown">
-              Tambah, edit, upload gambar, dan publish produk katalog. WhatsApp AI CMS juga
-              menulis ke data yang sama, jadi hasil AI tetap mudah direview di sini.
+              Add, edit, upload images, and publish catalogue products. WhatsApp AI CMS
+              writes to the same data, so AI results stay easy to review here.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
@@ -302,26 +302,26 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
               href="/collections"
               className="inline-flex min-h-11 items-center rounded-full border border-espresso/15 bg-bone px-5 text-sm font-semibold text-espresso"
             >
-              Lihat katalog
+              View Catalogue
             </Link>
             <Link
               href="/admin/logout"
               prefetch={false}
               className="inline-flex min-h-11 items-center rounded-full bg-espresso px-5 text-sm font-semibold text-warmIvory"
             >
-              Keluar
+              Sign Out
             </Link>
           </div>
         </div>
 
         {params.saved ? (
           <div className="mt-6 rounded-soft border border-antiqueGold/30 bg-bone px-4 py-3 text-sm text-espresso">
-            Produk berhasil disimpan.
+            Product saved successfully.
           </div>
         ) : null}
         {params.status ? (
           <div className="mt-6 rounded-soft border border-antiqueGold/30 bg-bone px-4 py-3 text-sm text-espresso">
-            Status produk berhasil diubah menjadi{" "}
+            Product status changed to{" "}
             <strong>{params.status === "published" ? "Published" : "Draft"}</strong>.
           </div>
         ) : null}
@@ -339,13 +339,13 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
         <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_25rem]">
           <section className="min-w-0">
             <div className="mb-4 flex items-center justify-between">
-              <h2 className="font-heading text-2xl text-charcoal">Daftar Produk</h2>
+              <h2 className="font-heading text-2xl text-charcoal">Product List</h2>
               <Link
                 href="/admin/products"
                 prefetch={false}
                 className="text-sm font-semibold text-mutedRose hover:text-deepRose"
               >
-                Produk baru
+                New Product
               </Link>
             </div>
 
@@ -371,10 +371,10 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
                           ) : null}
                         </div>
                         <p className="mt-1 text-sm text-mutedBrown">
-                          {product.category || "-"} · {formatProductPrice(product)}
+                          {product.category || "-"} - {formatProductPrice(product)}
                         </p>
                         <p className="mt-1 line-clamp-2 text-sm leading-6 text-mutedBrown">
-                          {product.shortDescription || "Belum ada deskripsi singkat."}
+                          {product.shortDescription || "No short description yet."}
                         </p>
                       </div>
                       <div className="flex flex-wrap gap-2 md:justify-end">
@@ -411,7 +411,7 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
                 </div>
               ) : (
                 <div className="p-8 text-sm text-mutedBrown">
-                  Belum ada produk. Gunakan form di samping atau kirim ADD_PRODUCT via WhatsApp.
+                  No products yet. Use the form beside this list or send ADD_PRODUCT via WhatsApp.
                 </div>
               )}
             </div>
@@ -420,10 +420,10 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
           <aside className="space-y-6">
             <section className="border border-espresso/10 bg-bone p-5 shadow-soft">
               <h2 className="font-heading text-2xl text-charcoal">
-                {activeProduct ? "Edit Produk" : "Produk Baru"}
+                {activeProduct ? "Edit Product" : "New Product"}
               </h2>
               <p className="mt-2 text-sm leading-6 text-mutedBrown">
-                Form ini CMS utama untuk katalog. Semua field ini juga dipakai oleh AI WhatsApp.
+                This form is the main CMS for the catalogue. All fields are also used by WhatsApp AI.
               </p>
               <div className="mt-5">
                 <ProductForm product={activeProduct} />
@@ -434,26 +434,26 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-antiqueGold">
                 WhatsApp AI CMS
               </p>
-              <h2 className="mt-3 font-heading text-2xl">Siap untuk Fonnte</h2>
+              <h2 className="mt-3 font-heading text-2xl">Ready for Fonnte</h2>
               <p className="mt-3 text-sm leading-6 text-bone/80">
-                Set webhook ke /api/webhooks/whatsapp/fonnte, isi FONNTE_TOKEN,
-                ADMIN_WHATSAPP_NUMBERS, dan aktifkan WHATSAPP_AI_CMS_ENABLED=true.
+                Set the webhook to /api/webhooks/whatsapp/fonnte, fill FONNTE_TOKEN,
+                ADMIN_WHATSAPP_NUMBERS, and enable WHATSAPP_AI_CMS_ENABLED=true.
               </p>
               <Link
                 href="/admin/whatsapp-debug"
                 prefetch={false}
                 className="mt-4 inline-flex min-h-11 items-center rounded-full border border-antiqueGold/30 bg-warmIvory/10 px-5 text-sm font-semibold text-warmIvory"
               >
-                Lihat debug webhook
+                View webhook debug
               </Link>
               <pre className="mt-4 overflow-x-auto rounded-soft bg-darkLeather p-4 text-xs leading-5 text-bone">
 {`ADD_PRODUCT
-Nama: Sundaland Beauty Rose
-Harga: USD 75
-Kategori: Clutch & Sling Bag
-Warna: Black
+Name: Sundaland Beauty Rose
+Price: USD 75
+Category: Clutch & Sling Bag
+Color: Black
 Material: Genuine Cow Leather
-Deskripsi singkat: Tas kulit sapi asli dengan detail rose.`}
+Short description: Genuine cow leather bag with a refined rose detail.`}
               </pre>
             </section>
           </aside>

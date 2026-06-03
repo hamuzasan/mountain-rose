@@ -43,7 +43,7 @@ export async function getWhatsAppDebugState() {
       env,
       renderedAt,
       deploymentId,
-      error: error || "Supabase admin client belum siap.",
+      error: error || "Supabase admin client is not ready.",
     };
   }
 

@@ -36,11 +36,11 @@ export const mountainRoseCatalogueProducts: CatalogueImportProduct[] = [
     isFeatured: true,
     isAvailable: true,
     shortDescription:
-      "Tas clutch dan sling kulit sapi asli dengan siluet rapi dan nuansa hangat untuk tampilan yang elegan.",
+      "A genuine cow leather clutch and sling bag with a refined silhouette and warm character for an elegant look.",
     description:
-      "Sundaland Beauty Rose menghadirkan bentuk ringkas dengan kesan feminin yang tenang. Material genuine cow leather memberi karakter alami, sementara proporsinya cocok untuk momen harian maupun acara yang lebih istimewa.",
+      "Sundaland Beauty Rose brings a compact shape with calm feminine elegance. Genuine cow leather gives it natural character, while its proportions suit everyday moments and more special occasions.",
     whatsAppMessage:
-      "Halo Mountain Rose, saya tertarik dengan Sundaland Beauty Rose. Apakah masih tersedia?",
+      "Hello Mountain Rose, I am interested in Sundaland Beauty Rose. Is it still available?",
   },
   {
     name: "Sundaland Beauty Moon",
@@ -57,11 +57,11 @@ export const mountainRoseCatalogueProducts: CatalogueImportProduct[] = [
     isFeatured: true,
     isAvailable: true,
     shortDescription:
-      "Sling bag kulit sapi asli dengan struktur ringan dan tampilan matang untuk perjalanan sehari-hari.",
+      "A genuine cow leather sling bag with a light structure and mature look for daily travel.",
     description:
-      "Sundaland Beauty Moon dirancang untuk membawa kebutuhan penting dengan cara yang lebih ringkas dan refined. Kulit sapi asli memberi tekstur yang kuat sekaligus menjaga kesan premium yang tidak berlebihan.",
+      "Sundaland Beauty Moon is designed to carry essentials in a compact and refined way. Genuine cow leather adds strong texture while keeping the premium impression quiet and balanced.",
     whatsAppMessage:
-      "Halo Mountain Rose, saya tertarik dengan Sundaland Beauty Moon. Apakah masih tersedia?",
+      "Hello Mountain Rose, I am interested in Sundaland Beauty Moon. Is it still available?",
   },
   {
     name: "Sundaland Beauty Pouch",
@@ -78,11 +78,11 @@ export const mountainRoseCatalogueProducts: CatalogueImportProduct[] = [
     isFeatured: true,
     isAvailable: true,
     shortDescription:
-      "Pouch kulit sapi asli dengan ukuran praktis, tekstur hangat, dan karakter yang tetap elegan.",
+      "A genuine cow leather pouch with practical proportions, warm texture, and elegant character.",
     description:
-      "Sundaland Beauty Pouch cocok untuk penyimpanan esensial yang tetap terasa rapi saat dibawa. Bentuknya sederhana, namun material kulit sapi asli membuat tampilannya tetap berkelas dan nyaman dipadukan dengan berbagai gaya.",
+      "Sundaland Beauty Pouch is made for essential storage that still feels neat when carried. Its shape is simple, while genuine cow leather keeps the look polished and easy to pair with different styles.",
     whatsAppMessage:
-      "Halo Mountain Rose, saya tertarik dengan Sundaland Beauty Pouch. Apakah masih tersedia?",
+      "Hello Mountain Rose, I am interested in Sundaland Beauty Pouch. Is it still available?",
   },
   {
     name: "Papandayan Messenger",
@@ -99,11 +99,11 @@ export const mountainRoseCatalogueProducts: CatalogueImportProduct[] = [
     isFeatured: true,
     isAvailable: true,
     shortDescription:
-      "Messenger bag kulit sapi asli dengan siluet tegas dan ruang yang cukup untuk aktivitas harian.",
+      "A genuine cow leather messenger bag with a confident silhouette and enough space for daily use.",
     description:
-      "Papandayan Messenger dibuat untuk pengguna yang membutuhkan tas kerja atau perjalanan ringan dengan kesan dewasa. Material genuine cow leather membantu menjaga struktur tas tetap rapi sambil menghadirkan karakter yang kuat.",
+      "Papandayan Messenger is made for workdays and light travel with a mature impression. Genuine cow leather helps the bag keep its structure while bringing strong natural character.",
     whatsAppMessage:
-      "Halo Mountain Rose, saya tertarik dengan Papandayan Messenger. Apakah masih tersedia?",
+      "Hello Mountain Rose, I am interested in Papandayan Messenger. Is it still available?",
   },
   {
     name: "Papandayan Backpack",
@@ -120,11 +120,11 @@ export const mountainRoseCatalogueProducts: CatalogueImportProduct[] = [
     isFeatured: false,
     isAvailable: true,
     shortDescription:
-      "Backpack kulit sapi asli dengan karakter hangat dan keseimbangan antara fungsi serta tampilan premium.",
+      "A genuine cow leather backpack with warm character and a balanced mix of function and premium style.",
     description:
-      "Papandayan Backpack menawarkan ruang yang lebih lega untuk aktivitas yang dinamis tanpa meninggalkan kesan refined. Handmade construction dan material kulit sapi asli membuatnya terasa kuat, nyaman, dan tetap elegan saat digunakan sehari-hari.",
+      "Papandayan Backpack offers more generous space for dynamic days without losing its refined impression. Handmade construction and genuine cow leather make it feel strong, comfortable, and elegant for everyday use.",
     whatsAppMessage:
-      "Halo Mountain Rose, saya tertarik dengan Papandayan Backpack. Apakah masih tersedia?",
+      "Hello Mountain Rose, I am interested in Papandayan Backpack. Is it still available?",
   },
   {
     name: "Guntur Backpack",
@@ -141,11 +141,11 @@ export const mountainRoseCatalogueProducts: CatalogueImportProduct[] = [
     isFeatured: false,
     isAvailable: true,
     shortDescription:
-      "Backpack kulit sapi asli dengan ukuran lebih tinggi, cocok untuk membawa kebutuhan yang lebih lengkap.",
+      "A taller genuine cow leather backpack made to carry fuller daily essentials.",
     description:
-      "Guntur Backpack dirancang untuk pengguna yang memerlukan kapasitas tambahan dengan gaya yang tetap tenang. Karakter genuine cow leather memberi kesan autentik dan matang, sementara dimensinya mendukung penggunaan harian yang lebih fleksibel.",
+      "Guntur Backpack is designed for those who need added capacity with a calm sense of style. Genuine cow leather gives it an authentic, mature character, while its dimensions support more flexible daily use.",
     whatsAppMessage:
-      "Halo Mountain Rose, saya tertarik dengan Guntur Backpack. Apakah masih tersedia?",
+      "Hello Mountain Rose, I am interested in Guntur Backpack. Is it still available?",
   },
   {
     name: "Schatzi",
@@ -162,11 +162,11 @@ export const mountainRoseCatalogueProducts: CatalogueImportProduct[] = [
     isFeatured: false,
     isAvailable: true,
     shortDescription:
-      "Handbag kulit sapi asli dengan ukuran ringkas dan proporsi yang terasa anggun untuk berbagai momen.",
+      "A compact genuine cow leather handbag with graceful proportions for many occasions.",
     description:
-      "Schatzi membawa kesan elegan yang lebih intim melalui bentuk yang terukur dan material yang matang. Tas ini cocok untuk pelanggan yang mengutamakan keindahan detail, kemudahan dibawa, dan karakter kulit asli yang tetap terasa premium.",
+      "Schatzi carries an intimate elegance through measured form and mature material. This bag suits customers who value beautiful details, easy carry, and the premium character of genuine leather.",
     whatsAppMessage:
-      "Halo Mountain Rose, saya tertarik dengan Schatzi. Apakah masih tersedia?",
+      "Hello Mountain Rose, I am interested in Schatzi. Is it still available?",
   },
   {
     name: "Panjalu Messenger",
@@ -183,11 +183,11 @@ export const mountainRoseCatalogueProducts: CatalogueImportProduct[] = [
     isFeatured: false,
     isAvailable: true,
     shortDescription:
-      "Messenger bag kulit sapi asli dengan ukuran medium dan nuansa hangat yang mudah dipadukan.",
+      "A medium genuine cow leather messenger bag with warm tones that pair easily with daily style.",
     description:
-      "Panjalu Messenger menghadirkan gaya yang lebih santai namun tetap refined. Bentuknya praktis untuk mobilitas harian, sementara genuine cow leather memberi tekstur alami dan kesan yang semakin indah seiring waktu.",
+      "Panjalu Messenger brings a more relaxed style while staying refined. Its shape is practical for daily mobility, while genuine cow leather adds natural texture and a character that grows richer over time.",
     whatsAppMessage:
-      "Halo Mountain Rose, saya tertarik dengan Panjalu Messenger. Apakah masih tersedia?",
+      "Hello Mountain Rose, I am interested in Panjalu Messenger. Is it still available?",
   },
   {
     name: "Adler",
@@ -204,11 +204,11 @@ export const mountainRoseCatalogueProducts: CatalogueImportProduct[] = [
     isFeatured: false,
     isAvailable: true,
     shortDescription:
-      "Sling bag kulit sapi crazy horse dengan karakter kuat dan tampilan kasual yang tetap matang.",
+      "A crazy horse cow leather sling bag with strong character and a mature casual look.",
     description:
-      "Adler menonjolkan karakter genuine cow leather crazy horse yang lebih ekspresif tanpa kehilangan kesan premium. Ukurannya ringkas, nyaman dibawa, dan cocok untuk pelanggan yang menyukai tekstur alami dengan nuansa yang lebih rugged.",
+      "Adler highlights the more expressive character of crazy horse genuine cow leather without losing its premium feel. It is compact, comfortable to carry, and suited to customers who enjoy natural texture with a more rugged mood.",
     whatsAppMessage:
-      "Halo Mountain Rose, saya tertarik dengan Adler. Apakah masih tersedia?",
+      "Hello Mountain Rose, I am interested in Adler. Is it still available?",
   },
 ];
 
