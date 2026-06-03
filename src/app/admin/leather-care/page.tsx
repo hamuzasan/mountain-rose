@@ -15,8 +15,8 @@ import {
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Leather Care CMS",
-  description: "Manage Mountain Rose leather care articles.",
+  title: "Article CMS",
+  description: "Manage Mountain Rose articles.",
 };
 
 type PageProps = {
@@ -101,6 +101,17 @@ function ArticleForm({ article }: { article?: AdminArticle }) {
         <TextInput label="Article title" name="title" defaultValue={article?.title} required />
         <TextInput label="Slug" name="slug" defaultValue={article?.slug} required />
         <TextInput label="Cover image URL" name="coverImageUrl" defaultValue={article?.coverImageUrl} />
+        <label className="block">
+          <span className="text-xs font-semibold uppercase tracking-[0.12em] text-mutedBrown">
+            Cover image file
+          </span>
+          <input
+            name="coverImage"
+            type="file"
+            accept="image/*"
+            className="mt-2 block w-full rounded-soft border border-espresso/15 bg-warmIvory px-3 py-2 text-sm text-mutedBrown file:mr-4 file:rounded-full file:border-0 file:bg-espresso file:px-4 file:py-2 file:text-sm file:font-semibold file:text-warmIvory"
+          />
+        </label>
         <TextInput
           label="Published at"
           name="publishedAt"
@@ -206,13 +217,20 @@ export default async function AdminLeatherCarePage({ searchParams }: PageProps) 
               Mountain Rose CMS
             </p>
             <h1 className="mt-3 font-heading text-4xl text-charcoal sm:text-5xl">
-              Leather Care Articles
+              Articles
             </h1>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-mutedBrown">
-              Add, edit, publish, and remove article content for the leather care section.
+              Add, edit, publish, and remove article content for the article section.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
+            <Link
+              href="/admin/leather-care"
+              prefetch={false}
+              className="inline-flex min-h-11 items-center rounded-full border border-espresso/15 bg-bone px-5 text-sm font-semibold text-espresso"
+            >
+              Articles
+            </Link>
             <Link
               href="/admin/products"
               prefetch={false}
@@ -356,4 +374,3 @@ export default async function AdminLeatherCarePage({ searchParams }: PageProps) 
     </div>
   );
 }
-

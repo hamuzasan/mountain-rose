@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { requireAdmin } from "@/lib/admin/auth";
+import { uploadLeatherCareCoverImage } from "@/lib/admin/leather-care";
 import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 import type { Database } from "@/lib/supabase/database.types";
 
@@ -18,6 +19,11 @@ function text(formData: FormData, key: string) {
 function nullableText(formData: FormData, key: string) {
   const value = text(formData, key);
   return value ? value : null;
+}
+
+function uploadedFile(formData: FormData, key: string) {
+  const value = formData.get(key);
+  return value instanceof File && value.size > 0 ? value : null;
 }
 
 function normalizeSlug(value: string) {
@@ -61,6 +67,11 @@ export async function saveLeatherCareArticleAction(formData: FormData) {
 
   const articleId = text(formData, "articleId");
   const payload = articlePayload(formData);
+  const coverImageFile = uploadedFile(formData, "coverImage");
+
+  if (coverImageFile) {
+    payload.cover_image_url = await uploadLeatherCareCoverImage(payload.slug, coverImageFile);
+  }
 
   if (payload.status === "published" && !payload.published_at) {
     payload.published_at = new Date().toISOString();
@@ -162,4 +173,3 @@ export async function deleteLeatherCareArticleAction(formData: FormData) {
   revalidatePath("/admin/leather-care");
   redirect("/admin/leather-care?deleted=1");
 }
-

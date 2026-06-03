@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 import FeaturedProducts from "@/components/sections/FeaturedProducts";
 import HeroSection from "@/components/sections/HeroSection";
@@ -50,7 +51,25 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-export default async function Home() {
+type HomePageProps = {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+};
+
+export default async function Home({ searchParams }: HomePageProps) {
+  const params = searchParams ? await searchParams : {};
+  const hasAuthCallbackParams =
+    typeof params.code === "string" ||
+    typeof params.token_hash === "string" ||
+    typeof params.type === "string";
+
+  if (hasAuthCallbackParams) {
+    const url = new URLSearchParams();
+    for (const [key, value] of Object.entries(params)) {
+      if (typeof value === "string") url.set(key, value);
+    }
+    redirect(`/auth/callback?${url.toString()}`);
+  }
+
   const [cmsHomepage, cmsFeatured, allProducts, cmsSiteSettings, instagramEmbeds] = await Promise.all([
     getHomepage(),
     getFeaturedProducts(),

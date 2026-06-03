@@ -85,16 +85,6 @@ export default function ProductInfo({ product }: ProductInfoProps) {
             </div>
           </div>
         ) : null}
-        {product.sourcePdfPage ? (
-          <div className="rounded-soft border border-espresso/10 bg-warmIvory px-4 py-3">
-            <div className="text-xs font-semibold uppercase text-mutedBrown">
-              Source
-            </div>
-            <div className="mt-2 text-sm font-medium text-espresso">
-              PDF catalogue page {product.sourcePdfPage}
-            </div>
-          </div>
-        ) : null}
       </div>
 
       {product.shortDescription ? (

@@ -1,5 +1,7 @@
 import "server-only";
 
+import { randomUUID } from "node:crypto";
+
 import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 import type { Database } from "@/lib/supabase/database.types";
 import type { LeatherCareArticle } from "@/types/leatherCare";
@@ -14,6 +16,43 @@ function parseContent(value: string | null): unknown[] | null {
     _type: "block",
     children: [{ _type: "span", text: paragraph.trim() }],
   }));
+}
+
+function imageExtension(file: File) {
+  const nameMatch = file.name.match(/\.(png|jpe?g|webp)$/i);
+  if (nameMatch) return nameMatch[1].replace("jpeg", "jpg").toLowerCase();
+  if (file.type.includes("png")) return "png";
+  if (file.type.includes("webp")) return "webp";
+  return "jpg";
+}
+
+export async function uploadLeatherCareCoverImage(
+  slug: string,
+  file: File,
+): Promise<string> {
+  const { client } = getSupabaseAdminClient();
+  if (!client) {
+    throw new Error("Supabase admin client is not configured.");
+  }
+
+  const safeSlug = slug
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  const ext = imageExtension(file);
+  const path = `leather-care/${safeSlug}/${randomUUID()}.${ext}`;
+  const bytes = Buffer.from(await file.arrayBuffer());
+
+  const { error: uploadError } = await client.storage.from("product-images").upload(path, bytes, {
+    contentType: file.type || "image/jpeg",
+    upsert: true,
+  });
+
+  if (uploadError) throw new Error(uploadError.message);
+
+  const { data } = client.storage.from("product-images").getPublicUrl(path);
+  return data.publicUrl;
 }
 
 export function mapAdminLeatherCareArticle(row: LeatherCareArticleRow): LeatherCareArticle {
