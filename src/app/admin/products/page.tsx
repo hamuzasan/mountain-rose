@@ -278,6 +278,13 @@ export default async function AdminProductsPage({ searchParams }: PageProps) {
           </div>
           <div className="flex flex-wrap gap-3">
             <Link
+              href="/admin/leather-care"
+              prefetch={false}
+              className="inline-flex min-h-11 items-center rounded-full border border-espresso/15 bg-bone px-5 text-sm font-semibold text-espresso"
+            >
+              Leather Care
+            </Link>
+            <Link
               href="/admin/settings"
               prefetch={false}
               className="inline-flex min-h-11 items-center rounded-full border border-espresso/15 bg-bone px-5 text-sm font-semibold text-espresso"
