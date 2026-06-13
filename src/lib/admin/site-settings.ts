@@ -21,11 +21,13 @@ function mapRow(row: SiteSettingsRow): SiteSettings & { id: string } {
     brandName: row.brand_name || FALLBACK_SITE_SETTINGS.brandName,
     tagline: row.tagline || FALLBACK_SITE_SETTINGS.tagline,
     whatsappNumber: row.whatsapp_number || FALLBACK_SITE_SETTINGS.whatsappNumber,
+    additionalWhatsAppNumbers: FALLBACK_SITE_SETTINGS.additionalWhatsAppNumbers,
     instagramUrl: row.instagram_url || FALLBACK_SITE_SETTINGS.instagramUrl,
     email: row.email || FALLBACK_SITE_SETTINGS.email,
+    additionalEmails: FALLBACK_SITE_SETTINGS.additionalEmails,
     address: row.address || FALLBACK_SITE_SETTINGS.address,
-    logoUrl: row.logo_url,
-    logo: row.logo_url ? { alt: "Mountain Rose logo" } : undefined,
+    logoUrl: row.logo_url || FALLBACK_SITE_SETTINGS.logoUrl || null,
+    logo: (row.logo_url || FALLBACK_SITE_SETTINGS.logoUrl) ? { alt: "Mountain Rose logo" } : undefined,
   };
 }
 

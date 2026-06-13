@@ -2,7 +2,7 @@ import SectionHeading from "./SectionHeading";
 
 const ITEMS = [
   {
-    title: "High-quality genuine cowhide",
+    title: "High-quality genuine cow leather",
     icon: "grain",
   },
   {

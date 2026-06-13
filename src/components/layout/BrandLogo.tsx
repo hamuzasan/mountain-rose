@@ -9,8 +9,8 @@ type BrandLogoProps = {
   priority?: boolean;
 };
 
-const DEFAULT_LOGO = "/mountain-rose-logo.svg";
-const DEFAULT_LIGHT_LOGO = "/mountain-rose-logo-light.svg";
+const DEFAULT_LOGO = "/mountain-rose-logo-transparent.png";
+const DEFAULT_LIGHT_LOGO = "/mountain-rose-logo-transparent.png";
 
 function isSvgSource(src: string) {
   return src.split("?")[0]?.toLowerCase().endsWith(".svg") ?? false;
@@ -29,8 +29,8 @@ export function BrandLogo({
     <Image
       src={logoSrc}
       alt={`${siteSettings.brandName} logo`}
-      width={360}
-      height={220}
+      width={384}
+      height={352}
       className={["h-auto w-auto object-contain", className].join(" ")}
       priority={priority}
       unoptimized={isSvgSource(logoSrc)}
