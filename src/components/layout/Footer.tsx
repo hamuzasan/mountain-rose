@@ -3,6 +3,12 @@ import Link from "next/link";
 import { FALLBACK_SITE_SETTINGS } from "@/data/fallbackSiteSettings";
 import { NAVIGATION } from "@/data/navigation";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
+import {
+  formatPhoneDisplay,
+  getInstagramHandle,
+  getOrderedEmailContacts,
+  getOrderedWhatsAppContacts,
+} from "@/lib/site-contacts";
 import type { SiteSettings } from "@/types/site";
 
 import { BrandLogo } from "./BrandLogo";
@@ -20,21 +26,12 @@ function resolveSiteSettings(
   };
 }
 
-function formatPhone(number: string) {
-  const cleaned = number.replace(/[^\d]/g, "");
-  if (!cleaned) return number;
-  if (cleaned.startsWith("0")) return cleaned;
-  return `+${cleaned}`;
-}
-
 export default function Footer({ siteSettings }: FooterProps) {
   const settings = resolveSiteSettings(siteSettings);
   const waHref = buildWhatsAppLink(settings.whatsappNumber);
-  const whatsAppContacts = [
-    settings.whatsappNumber,
-    ...(settings.additionalWhatsAppNumbers || []),
-  ].filter(Boolean);
-  const emailContacts = [settings.email, ...(settings.additionalEmails || [])].filter(Boolean);
+  const whatsAppContacts = getOrderedWhatsAppContacts(settings);
+  const emailContacts = getOrderedEmailContacts(settings);
+  const instagramHandle = getInstagramHandle(settings.instagramUrl);
 
   return (
     <footer className="border-t border-warmIvory/10 bg-darkLeather text-warmIvory">
@@ -85,7 +82,7 @@ export default function Footer({ siteSettings }: FooterProps) {
               </a>
               <div className="flex flex-col gap-1 text-bone/75">
                 {whatsAppContacts.map((number) => (
-                  <span key={number}>{formatPhone(number)}</span>
+                  <span key={number}>{formatPhoneDisplay(number)}</span>
                 ))}
               </div>
               <a
@@ -94,7 +91,7 @@ export default function Footer({ siteSettings }: FooterProps) {
                 rel="noopener noreferrer"
                 className="transition-colors hover:text-warmIvory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-antiqueGold/70"
               >
-                Instagram
+                {instagramHandle}
               </a>
               {emailContacts.map((email) => (
                 <a

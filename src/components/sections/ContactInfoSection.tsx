@@ -1,6 +1,12 @@
 import type { SiteSettings } from "@/types/site";
 
 import { buildWhatsAppLink } from "@/lib/whatsapp";
+import {
+  formatPhoneDisplay,
+  getInstagramHandle,
+  getOrderedEmailContacts,
+  getOrderedWhatsAppContacts,
+} from "@/lib/site-contacts";
 
 type ContactInfoSectionProps = {
   siteSettings: Pick<
@@ -16,23 +22,11 @@ type ContactInfoSectionProps = {
   >;
 };
 
-function prettyPhone(number: string) {
-  const cleaned = (number || "").replace(/[^\d]/g, "");
-  if (!cleaned) return "";
-  if (cleaned.startsWith("0")) return cleaned;
-  return `+${cleaned}`;
-}
-
 export default function ContactInfoSection({ siteSettings }: ContactInfoSectionProps) {
-  const whatsAppContacts = [
-    siteSettings.whatsappNumber,
-    ...(siteSettings.additionalWhatsAppNumbers || []),
-  ].filter(Boolean);
-  const emailContacts = [
-    siteSettings.email,
-    ...(siteSettings.additionalEmails || []),
-  ].filter(Boolean);
-  const primaryWaHref = buildWhatsAppLink(whatsAppContacts[0] || siteSettings.whatsappNumber);
+  const whatsAppContacts = getOrderedWhatsAppContacts(siteSettings);
+  const emailContacts = getOrderedEmailContacts(siteSettings);
+  const instagramHandle = getInstagramHandle(siteSettings.instagramUrl);
+  const primaryWaHref = buildWhatsAppLink(siteSettings.whatsappNumber);
 
   return (
     <section className="bg-warmIvory">
@@ -67,7 +61,7 @@ export default function ContactInfoSection({ siteSettings }: ContactInfoSectionP
                 </div>
                 <div className="mt-3 flex flex-col gap-1 text-sm font-medium text-espresso">
                   {whatsAppContacts.map((number) => (
-                    <span key={number}>{prettyPhone(number) || "WhatsApp"}</span>
+                    <span key={number}>{formatPhoneDisplay(number) || "WhatsApp"}</span>
                   ))}
                 </div>
                 <div className="mt-2 text-sm text-mutedBrown">
@@ -86,7 +80,7 @@ export default function ContactInfoSection({ siteSettings }: ContactInfoSectionP
                   Instagram
                 </div>
                 <div className="mt-3 text-sm font-medium text-espresso">
-                  {siteSettings.instagramUrl.replace(/^https?:\/\//, "")}
+                  {instagramHandle}
                 </div>
                 <div className="mt-2 text-sm text-mutedBrown">
                   See editorial moments and the latest updates.

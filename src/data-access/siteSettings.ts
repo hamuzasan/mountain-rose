@@ -19,10 +19,12 @@ export async function getSiteSettings(): Promise<SiteSettingsUi> {
     brandName: data.brand_name || FALLBACK_SITE_SETTINGS.brandName,
     tagline: data.tagline || FALLBACK_SITE_SETTINGS.tagline,
     whatsappNumber: data.whatsapp_number || FALLBACK_SITE_SETTINGS.whatsappNumber,
+    additionalWhatsAppNumbers: FALLBACK_SITE_SETTINGS.additionalWhatsAppNumbers,
     instagramUrl: data.instagram_url || FALLBACK_SITE_SETTINGS.instagramUrl,
     email: data.email || FALLBACK_SITE_SETTINGS.email,
+    additionalEmails: FALLBACK_SITE_SETTINGS.additionalEmails,
     address: data.address || FALLBACK_SITE_SETTINGS.address,
-    logoUrl: data.logo_url || null,
-    logo: data.logo_url ? { alt: "Mountain Rose logo" } : undefined,
+    logoUrl: data.logo_url || FALLBACK_SITE_SETTINGS.logoUrl || null,
+    logo: (data.logo_url || FALLBACK_SITE_SETTINGS.logoUrl) ? { alt: "Mountain Rose logo" } : undefined,
   };
 }

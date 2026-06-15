@@ -189,7 +189,7 @@ export default function HeroSection({
             <div className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-mutedRose">
               Mountain Rose
             </div>
-            <div className="mt-1 text-xs text-mutedBrown">Handmade cow leather</div>
+            <div className="mt-1 text-xs text-mutedBrown">Handmade genuine cow leather</div>
           </div>
 
           <Link
@@ -278,6 +278,10 @@ export default function HeroSection({
           <p className="mt-6 max-w-[23rem] text-base leading-8 text-mutedBrown sm:max-w-xl sm:text-lg">
             {subtitle}
           </p>
+          <p className="mt-4 max-w-xl text-sm leading-7 text-mutedBrown sm:text-base sm:leading-8">
+            Every purchase supports independent Indonesian artisans and helps preserve
+            traditional craftsmanship.
+          </p>
 
           <div className="mt-8 flex max-w-[23rem] flex-col gap-3 sm:max-w-none sm:flex-row">
             <Link
@@ -351,7 +355,7 @@ export default function HeroSection({
               <div className="absolute left-0 top-28 z-20 flex h-20 w-20 items-center justify-center rounded-full border border-espresso/15 bg-warmIvory/95 text-center text-xs leading-4 text-espresso shadow-soft sm:left-12 lg:left-20 lg:h-24 lg:w-24">
                 Genuine
                 <br />
-                Cowhide
+                Cow Leather
               </div>
               <div key={`desktop-${heroImageKey}`} className="hero-product-in relative z-10 h-[25rem] sm:h-[34rem] lg:h-[38rem]">
                 {imageUrl ? (

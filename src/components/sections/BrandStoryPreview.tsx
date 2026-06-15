@@ -20,7 +20,7 @@ export default function BrandStoryPreview({ title, text }: BrandStoryPreviewProp
             />
             <p className="mt-6 max-w-2xl text-sm leading-7 text-mutedBrown sm:text-base">
               Mountain Rose is an Indonesian leather goods brand focused on authenticity,
-              durability, and aesthetics. Each bag is made from genuine cowhide through a
+              durability, and aesthetics. Each bag is made from genuine cow leather through a
               handmade process so it feels functional, characterful, and lasting.
             </p>
           </div>

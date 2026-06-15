@@ -37,7 +37,7 @@ export const FALLBACK_HOMEPAGE: HomepageFallback = {
     "Mountain Rose creates handmade genuine cow leather bags from Indonesia, shaped with lasting character, careful detail, and quiet elegance.",
   storySectionTitle: "Authentic, Durable, and Full of Character",
   storySectionText:
-    "Rooted in mountain calm and mature rose-inspired elegance, each piece is made from genuine cowhide by local craftsmen.",
+    "Rooted in mountain calm and mature rose-inspired elegance, each piece is made from genuine cow leather by local craftsmen.",
   ctaTitle: "Find the Leather Bag That Carries Your Story",
   ctaText:
     "Consult with Mountain Rose to choose the shape, size, and character that fits your daily rhythm.",
