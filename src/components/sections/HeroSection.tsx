@@ -278,7 +278,7 @@ export default function HeroSection({
           <p className="mt-6 max-w-[23rem] text-base leading-8 text-mutedBrown sm:max-w-xl sm:text-lg">
             {subtitle}
           </p>
-          <p className="mt-4 max-w-xl text-sm leading-7 text-mutedBrown sm:text-base sm:leading-8">
+          <p className="mt-4 max-w-[23rem] text-base leading-8 text-mutedBrown sm:max-w-xl sm:text-lg">
             Every purchase supports independent Indonesian artisans and helps preserve
             traditional craftsmanship.
           </p>
